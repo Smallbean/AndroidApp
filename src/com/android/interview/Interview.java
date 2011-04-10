@@ -18,4 +18,16 @@ public class Interview extends Activity {
     	Intent intent= new Intent(this, Camera.class);
     	startActivity(intent);
     }
+    
+    public void takeNotes(View view) {
+        // TODO: Call Notepad activity with intent
+        Intent takeNotes = new Intent(this, Notepad.class);
+        startActivityForResult(takeNotes, 0);
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        // TODO: Implement behavior for completion of video/photo/text recording activity
+    }
 }
