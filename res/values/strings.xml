@@ -2,4 +2,6 @@
 <resources>
     <string name="hello">Hello World, Interview!</string>
     <string name="app_name">Interview</string>
+    <string name="notepad_title">Interview Notes</string>
+    <string name="notepad_save">Save</string>
 </resources>
