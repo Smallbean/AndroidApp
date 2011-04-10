@@ -1,0 +1,6 @@
+#Ignore the following files...
+.DS_Store
+*~
+*.swp
+bin/
+gen/
