@@ -12,8 +12,11 @@ public class Interview extends Activity {
         setContentView(R.layout.main);
     }
     
-    public void takePhoto(View view)
-    {
-    	
+    public void takePhoto(View view) {
+        // TODO: Call Camera activity with intent
+    }
+    
+    public void takeNotes(View view) {
+        // TODO: Call Notepad activity with intent
     }
 }
