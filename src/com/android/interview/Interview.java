@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 
 public class Interview extends Activity {
+    private static final int TAKE_NOTES = 0;
+    
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,7 +24,7 @@ public class Interview extends Activity {
     public void takeNotes(View view) {
         // TODO: Call Notepad activity with intent
         Intent takeNotes = new Intent(this, Notepad.class);
-        startActivityForResult(takeNotes, 0);
+        startActivityForResult(takeNotes, TAKE_NOTES);
     }
     
     @Override
