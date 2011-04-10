@@ -23,8 +23,11 @@ public class Notepad extends Activity {
         
         saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                // TODO: Save notes
+                Bundle extras = new Bundle();
+                extras.putString("notes", notes.getText().toString());
+
                 Intent exit = new Intent();
+                exit.putExtras(extras);
                 setResult(RESULT_OK, exit);
                 finish();
             }

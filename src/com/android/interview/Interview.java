@@ -7,6 +7,9 @@ import android.view.View;
 
 public class Interview extends Activity {
     private static final int TAKE_NOTES = 0;
+    private static final int TAKE_PHOTO = 1;
+    private static final int RECORD_AUDIO = 2;
+    private static final int RECORD_VIDEO = 3;
     
     /** Called when the activity is first created. */
     @Override
@@ -15,14 +18,12 @@ public class Interview extends Activity {
         setContentView(R.layout.main);
     }
     
-    public void takePhoto(View view)
-    {
+    public void takePhoto(View view) {
     	Intent intent= new Intent(this, Camera.class);    
     	startActivityForResult(intent, 0);
     }
     
     public void takeNotes(View view) {
-        // TODO: Call Notepad activity with intent
         Intent takeNotes = new Intent(this, Notepad.class);
         startActivityForResult(takeNotes, TAKE_NOTES);
     }
@@ -30,6 +31,18 @@ public class Interview extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-        // TODO: Implement behavior for completion of video/photo/text recording activity
+
+        Bundle extras = intent.getExtras();
+        switch(requestCode) {
+            case TAKE_NOTES:
+                String notes = extras.getString("notes");
+                break;
+            case TAKE_PHOTO:
+                break;
+            case RECORD_AUDIO:
+                break;
+            case RECORD_VIDEO:
+                break;
+        }
     }
 }
