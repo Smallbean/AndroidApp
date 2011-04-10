@@ -13,8 +13,10 @@ public class Interview extends Activity {
         setContentView(R.layout.main);
     }
     
-    public void takePhoto(View view) {
-        // TODO: Call Camera activity with intent
+    public void takePhoto(View view)
+    {
+    	Intent intent= new Intent(this, Camera.class);    
+    	startActivityForResult(intent, 0);
     }
     
     public void takeNotes(View view) {
