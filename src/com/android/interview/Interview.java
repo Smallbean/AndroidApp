@@ -1,9 +1,14 @@
 package com.android.interview;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 public class Interview extends Activity {
     private static final int TAKE_NOTES = 0;
@@ -16,6 +21,27 @@ public class Interview extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+        ArrayAdapter<CharSequence> listAdapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.interview_list,
+            android.R.layout.simple_spinner_item
+        );
+        listAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        
+        Spinner spinner = (Spinner)findViewById(R.id.archive_dropdown);
+        spinner.setAdapter(listAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Context context = parent.getContext();
+                String message = "TODO: Show " + parent.getItemAtPosition(position).toString() + "'s interview details";
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+            
+            public void onNothingSelected(AdapterView parent) {
+                // Do nothing
+            }
+        });
     }
     
     public void takeNotes(View view) {

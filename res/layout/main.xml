@@ -4,24 +4,45 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
     
-    <Button
+    <TextView
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="Take Notes"
-        android:onClick="takeNotes" />
-    <Button
+        android:layout_marginTop="25dip"
+        android:text="@string/new_interview" />
+    <LinearLayout
+	    android:orientation="horizontal"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content">
+	    <Button
+	        android:layout_height="wrap_content"
+	        android:layout_width="wrap_content"
+	        android:text="Text"
+	        android:onClick="takeNotes" />
+	    <Button
+	        android:layout_height="wrap_content"
+	        android:layout_width="wrap_content"
+	        android:text="Photo"
+	        android:onClick="takePhoto" />
+	    <Button
+	        android:layout_height="wrap_content"
+	        android:layout_width="wrap_content"
+	        android:text="Audio"
+	        android:onClick="recordAudio" />
+	    <Button
+	        android:layout_height="wrap_content"
+	        android:layout_width="wrap_content"
+	        android:text="Video"
+	        android:onClick="recordVideo" />
+	</LinearLayout>
+        
+    <TextView
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="Take Photo"
-        android:onClick="takePhoto" />
-    <Button
+        android:layout_marginTop="25dip"
+        android:text="@string/old_interviews" />
+    <Spinner
+        android:id="@+id/archive_dropdown"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="Record Audio"
-        android:onClick="recordAudio" />
-    <Button
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="Record Video"
-        android:onClick="recordVideo" />
+        android:prompt="@string/archive_prompt" />
  </LinearLayout>

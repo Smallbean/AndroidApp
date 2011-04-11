@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, Interview!</string>
     <string name="app_name">Interview</string>
+    <string name="new_interview">New Interview:</string>
+    <string name="old_interviews">Archive:</string>
+    <string name="archive_prompt">Select Interview</string>
+    <string-array name="interview_list">
+        <item>Kenya</item>
+        <item>Mongolia</item>
+        <item>Uganda</item>
+        <item>Egypt</item>
+        <item>Iceland</item>
+        <item>Greenland</item>
+        <item>Amazon Forest</item>
+        <item>Arctic Circle</item>
+    </string-array>    
+
     <string name="notepad_title">Interview Notes</string>
     <string name="notepad_save">Save</string>
 </resources>
