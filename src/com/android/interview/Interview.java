@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -45,11 +46,19 @@ public class Interview extends Activity {
     }
     
     public void takeNotes(View view) {
-        Intent takeNotes = new Intent(this, Notepad.class);
-        startActivityForResult(takeNotes, TAKE_NOTES);
+        EditText interviewTitle = (EditText)findViewById(R.id.new_interview_title);
+        
+        if (interviewTitle.length() > 0) {
+            Intent takeNotes = new Intent(this, Notepad.class);
+            // TODO: Bundle up interviewTitle.getText().toString()
+            startActivityForResult(takeNotes, TAKE_NOTES);
+        } else {
+            Toast.makeText(this.getApplicationContext(), "Please enter a title.", Toast.LENGTH_SHORT).show();
+        }
     }
     
     public void takePhoto(View view) {
+        // TODO: Check for interviewTitle (see above)
     	Intent intent = new Intent(this, CameraSurface.class);    
     	startActivityForResult(intent, TAKE_PHOTO);
     }

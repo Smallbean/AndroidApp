@@ -3,12 +3,24 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    
-    <TextView
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dip"
-        android:text="@string/new_interview" />
+        android:layout_marginTop="25dip">
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/new_interview" />
+	    <EditText 
+	        android:id="@+id/new_interview_title" 
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content" 
+	        android:layout_weight="0"
+	        android:layout_marginLeft="10dip"
+	        android:layout_marginRight="10dip" />
+	</LinearLayout>
     <LinearLayout
 	    android:orientation="horizontal"
 	    android:layout_width="fill_parent"

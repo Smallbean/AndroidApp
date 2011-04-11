@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-    
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
     <EditText 
         android:id="@+id/notepad_notes" 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:layout_weight="1">
-    </EditText>
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dip"
+        android:layout_weight="0" />
     <Button
         android:id="@+id/notepad_save" 
         android:text="@string/notepad_save"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </Button>
+        android:layout_height="wrap_content" />
 </LinearLayout>
