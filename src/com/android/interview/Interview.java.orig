@@ -18,15 +18,14 @@ public class Interview extends Activity {
         setContentView(R.layout.main);
     }
     
-<<<<<<< HEAD
-    public void takePhoto(View view)
-    {
-    	Intent intent= new Intent(this, CameraSurface.class);    
-=======
     public void takePhoto(View view) {
-    	Intent intent= new Intent(this, Camera.class);    
->>>>>>> 393f75d0b659aab95c90464be9dd5a17c523f588
+<<<<<<< HEAD
+    	Intent intent= new Intent(this, CameraSurface.class);    
     	startActivityForResult(intent, 0);
+=======
+    	Intent intent = new Intent(this, Camera.class);    
+    	startActivityForResult(intent, TAKE_PHOTO);
+>>>>>>> 094aaa795e6dfef8b84646944c1529254c4b0545
     }
     
     public void takeNotes(View view) {
@@ -37,15 +36,10 @@ public class Interview extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-<<<<<<< HEAD
-        // TODO: Implement behavior for completion of video/photo/text recording activity
-        
-=======
 
         Bundle extras = intent.getExtras();
         switch(requestCode) {
             case TAKE_NOTES:
-                String notes = extras.getString("notes");
                 break;
             case TAKE_PHOTO:
                 break;
@@ -54,6 +48,6 @@ public class Interview extends Activity {
             case RECORD_VIDEO:
                 break;
         }
->>>>>>> 393f75d0b659aab95c90464be9dd5a17c523f588
+
     }
 }
