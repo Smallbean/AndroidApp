@@ -19,8 +19,8 @@ public class Interview extends Activity {
     }
     
     public void takePhoto(View view) {
-    	Intent intent= new Intent(this, Camera.class);    
-    	startActivityForResult(intent, 0);
+    	Intent intent = new Intent(this, Camera.class);    
+    	startActivityForResult(intent, TAKE_PHOTO);
     }
     
     public void takeNotes(View view) {
@@ -35,7 +35,6 @@ public class Interview extends Activity {
         Bundle extras = intent.getExtras();
         switch(requestCode) {
             case TAKE_NOTES:
-                String notes = extras.getString("notes");
                 break;
             case TAKE_PHOTO:
                 break;
