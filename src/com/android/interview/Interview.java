@@ -19,13 +19,8 @@ public class Interview extends Activity {
     }
     
     public void takePhoto(View view) {
-<<<<<<< HEAD
-    	Intent intent= new Intent(this, CameraSurface.class);    
-    	startActivityForResult(intent, 0);
-=======
-    	Intent intent = new Intent(this, Camera.class);    
+    	Intent intent = new Intent(this, CameraSurface.class);    
     	startActivityForResult(intent, TAKE_PHOTO);
->>>>>>> 094aaa795e6dfef8b84646944c1529254c4b0545
     }
     
     public void takeNotes(View view) {
