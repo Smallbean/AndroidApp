@@ -4,11 +4,9 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-	<SurfaceView android:id="@+id/surface_camera"
-		android:layout_width="fill_parent" 
-		android:layout_height="10dip"
-		android:layout_weight="1">
-	</SurfaceView>
-
-
+	<ImageView   
+		android:id="@+id/image"
+  		android:layout_width="fill_parent"
+  		android:layout_height="fill_parent"  		
+  	/>
 </LinearLayout>

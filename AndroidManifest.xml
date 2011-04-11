@@ -13,8 +13,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Camera"/>
-        <activity android:name=".Notepad"/>
-		<uses-permission android:name="android.permission.CAMERA"/>
+        <activity android:name=".CameraSurface"/>
+        <activity android:name=".Notepad"/>		
     </application>
+    <uses-permission android:name="android.permission.CAMERA"/>
 </manifest>

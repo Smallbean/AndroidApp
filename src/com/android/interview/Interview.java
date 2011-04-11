@@ -15,7 +15,7 @@ public class Interview extends Activity {
     
     public void takePhoto(View view)
     {
-    	Intent intent= new Intent(this, Camera.class);    
+    	Intent intent= new Intent(this, CameraSurface.class);    
     	startActivityForResult(intent, 0);
     }
     
@@ -29,5 +29,6 @@ public class Interview extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         // TODO: Implement behavior for completion of video/photo/text recording activity
+        
     }
 }
