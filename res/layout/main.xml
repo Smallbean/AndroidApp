@@ -7,11 +7,21 @@
     <Button
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="Take A Photo"
+        android:text="Take Notes"
+        android:onClick="takeNotes" />
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Take Photo"
         android:onClick="takePhoto" />
     <Button
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="Take Notes"
-        android:onClick="takeNotes" />
+        android:text="Record Audio"
+        android:onClick="recordAudio" />
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Record Video"
+        android:onClick="recordVideo" />
  </LinearLayout>

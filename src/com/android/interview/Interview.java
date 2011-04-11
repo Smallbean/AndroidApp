@@ -18,14 +18,22 @@ public class Interview extends Activity {
         setContentView(R.layout.main);
     }
     
+    public void takeNotes(View view) {
+        Intent takeNotes = new Intent(this, Notepad.class);
+        startActivityForResult(takeNotes, TAKE_NOTES);
+    }
+    
     public void takePhoto(View view) {
     	Intent intent = new Intent(this, CameraSurface.class);    
     	startActivityForResult(intent, TAKE_PHOTO);
     }
     
-    public void takeNotes(View view) {
-        Intent takeNotes = new Intent(this, Notepad.class);
-        startActivityForResult(takeNotes, TAKE_NOTES);
+    public void recordAudio(View view) {
+        // TODO: Invoke audio recording activity
+    }
+    
+    public void recordVideo(View view) {
+        // TODO: Invoke video recording activity
     }
     
     @Override
@@ -43,6 +51,5 @@ public class Interview extends Activity {
             case RECORD_VIDEO:
                 break;
         }
-
     }
 }
