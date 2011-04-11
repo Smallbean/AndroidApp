@@ -1,19 +1,12 @@
 package com.android.interview;
 
 
-import java.io.File;
-
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
