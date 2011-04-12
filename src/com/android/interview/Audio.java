@@ -1,20 +1,20 @@
 package com.android.interview;
 
-import android.app.Activity;
-import android.widget.LinearLayout;
-import android.os.Bundle;
-import android.os.Environment;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.content.Context;
-import android.util.Log;
-import android.media.MediaRecorder;
-import android.media.MediaPlayer;
-import android.widget.TextView;
 
 import java.io.IOException;
+
+import android.app.Activity;
+import android.content.Context;
+import android.media.MediaPlayer;
+import android.media.MediaRecorder;
+import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+
 
 public class Audio extends Activity {
     private static final String LOG_TAG = "AudioRecordTest";
@@ -23,8 +23,8 @@ public class Audio extends Activity {
     private RecordButton mRecordButton = null;
     private MediaRecorder mRecorder = null;
 
-    private PlayButton   mPlayButton = null;
-    private MediaPlayer   mPlayer = null;
+    private PlayButton mPlayButton = null;
+    private MediaPlayer mPlayer = null;
 
     private void onRecord(boolean start) {
         if (start) {
@@ -130,14 +130,14 @@ public class Audio extends Activity {
 
     public void AudioRecordTest() {
         mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-    	mFileName += "/audiorecordtest.3gp";
-    	//mFileName = "c:";
-    	//mFileName += "/audiorecordtest.3gp";
+        mFileName += "/audiorecordtest.3gp";
+        //mFileName = "c:";
+        //mFileName += "/audiorecordtest.3gp";
     }
-    
+        
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         LinearLayout ll = new LinearLayout(this);
         mRecordButton = new RecordButton(this);
@@ -167,5 +167,5 @@ public class Audio extends Activity {
             mPlayer.release();
             mPlayer = null;
         }
-    }
+    }    
 }
