@@ -77,7 +77,10 @@ public class Interview extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-
+        Bundle extras;
+        if(intent!=null){
+        	extras = intent.getExtras();
+        }
         // Bundle extras = intent.getExtras();
         switch(requestCode) {
             case TAKE_NOTES:

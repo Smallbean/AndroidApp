@@ -1,11 +1,17 @@
 package com.android.interview;
 
 
+import java.io.File;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.view.Display;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -13,25 +19,77 @@ import android.widget.Toast;
 public class CameraSurface extends Activity {	
 	private ImageView img;
 	private Intent cameraIntent;
+	private int CAMERA_RESULT = 0;
+	private int displayWidth;
+	private int displayHeight;
+	private String imageFilePath;
+	
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera);
-                
-        this.img =  (ImageView)findViewById(R.id.image);
         
-        cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE); 
-                       
-        //cameraIntent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(cameraIntent,0);
         
+        
+
+        imageFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/image.jpg";
+        
+        showToast(this,imageFilePath);
+       
+               	
+        File imageFile = new File(this.imageFilePath);
+        Uri imageFileUri = Uri.fromFile(imageFile);
+        
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageFileUri);
+        startActivityForResult(intent, this.CAMERA_RESULT);
+      
     }
+
 	
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);                       
-        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-        img.setImageBitmap(thumbnail);       
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+        	showImage();	
+        }
+        
+    }
+    
+    private void showImage()
+    {
+    	
+		Display currentDisplay = getWindowManager().getDefaultDisplay();
+		this.displayWidth = currentDisplay.getWidth();
+		this.displayHeight = currentDisplay.getHeight();
+			
+        this.img =  (ImageView)findViewById(R.id.image);  
+        
+        
+    	BitmapFactory.Options bmpFactoryOptions = new BitmapFactory.Options();
+    	bmpFactoryOptions.inJustDecodeBounds = true;
+    	
+    
+		Bitmap bmp = BitmapFactory.decodeFile(imageFilePath, bmpFactoryOptions);
+    	
+    	int heightRatio = (int)Math.ceil(bmpFactoryOptions.outHeight/(float)displayHeight);
+    	int widthRatio = (int)Math.ceil(bmpFactoryOptions.outWidth/(float)displayWidth);
+    	
+    	if(heightRatio > 1 && widthRatio > 1)
+    	{
+    		if(heightRatio > widthRatio)
+    		{
+    			bmpFactoryOptions.inSampleSize = heightRatio;
+    		} else
+    		{
+    			bmpFactoryOptions.inSampleSize = widthRatio;
+    		}
+    	}
+    	
+    	bmpFactoryOptions.inJustDecodeBounds = false;
+    	bmp = BitmapFactory.decodeFile(imageFilePath, bmpFactoryOptions);
+    	
+    	img.setImageBitmap(bmp);
     }
     
     private void showToast(Context mContext, String text) {

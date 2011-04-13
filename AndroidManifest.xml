@@ -17,5 +17,4 @@
         <activity android:name=".Notepad" />	
       	<activity android:name=".Audio" />
     </application>
-    <uses-permission android:name="android.permission.CAMERA" />
 </manifest>
