@@ -32,7 +32,11 @@ public class Interview extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
 
-        Bundle extras = intent.getExtras();
+        Bundle extras;
+        if(intent!=null){
+        	extras = intent.getExtras();
+        }
+        	
         switch(requestCode) {
             case TAKE_NOTES:
                 break;
