@@ -22,21 +22,22 @@ public class Interview extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        
-        ArrayAdapter<CharSequence> listAdapter = ArrayAdapter.createFromResource(
+
+        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(
             this,
-            R.array.interview_list,
-            android.R.layout.simple_spinner_item
+            android.R.layout.simple_spinner_dropdown_item,
+            fileList()
         );
-        listAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        
+
         Spinner spinner = (Spinner)findViewById(R.id.archive_dropdown);
         spinner.setAdapter(listAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Context context = parent.getContext();
-                String message = "TODO: Show " + parent.getItemAtPosition(position).toString() + "'s interview details";
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                String directory = parent.getItemAtPosition(position).toString();
+                getDir(directory, Context.MODE_PRIVATE);
+                
+                String message = "TODO: Switch to secondary Interview detail view.";
+                Toast.makeText(parent.getContext(), message, Toast.LENGTH_SHORT).show();
             }
             
             public void onNothingSelected(AdapterView parent) {

@@ -21,32 +21,7 @@
 	        android:layout_marginLeft="10dip"
 	        android:layout_marginRight="10dip" />
 	</LinearLayout>
-    <LinearLayout
-	    android:orientation="horizontal"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content">
-	    <Button
-	        android:layout_height="wrap_content"
-	        android:layout_width="wrap_content"
-	        android:text="Text"
-	        android:onClick="takeNotes" />
-	    <Button
-	        android:layout_height="wrap_content"
-	        android:layout_width="wrap_content"
-	        android:text="Photo"
-	        android:onClick="takePhoto" />
-	    <Button
-	        android:layout_height="wrap_content"
-	        android:layout_width="wrap_content"
-	        android:text="Audio"
-	        android:onClick="recordAudio" />
-	    <Button
-	        android:layout_height="wrap_content"
-	        android:layout_width="wrap_content"
-	        android:text="Video"
-	        android:onClick="recordVideo" />
-	</LinearLayout>
-        
+
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -57,4 +32,35 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:prompt="@string/archive_prompt" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dip"
+        android:text="@string/todo_note" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Text"
+            android:onClick="takeNotes" />
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Photo"
+            android:onClick="takePhoto" />
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Audio"
+            android:onClick="recordAudio" />
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Video"
+            android:onClick="recordVideo" />
+    </LinearLayout>
  </LinearLayout>

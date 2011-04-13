@@ -40,8 +40,9 @@ public class Notepad extends Activity {
     }
     
     private void saveNotes(EditText notes) throws IOException {
-        // TODO: Unique interview note filenames
+        // TODO: Prompt for text file title
         String fileName = "InterviewNotes.txt";
+        
         FileOutputStream noteFile = openFileOutput(fileName, Context.MODE_PRIVATE);
         noteFile.write(notes.getText().toString().getBytes());
         noteFile.close();

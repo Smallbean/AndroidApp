@@ -2,18 +2,10 @@
 <resources>
     <string name="app_name">Interview</string>
     <string name="new_interview">New Interview:</string>
-    <string name="old_interviews">Archive:</string>
-    <string name="archive_prompt">Select Interview</string>
-    <string-array name="interview_list">
-        <item>Kenya</item>
-        <item>Mongolia</item>
-        <item>Uganda</item>
-        <item>Egypt</item>
-        <item>Iceland</item>
-        <item>Greenland</item>
-        <item>Amazon Forest</item>
-        <item>Arctic Circle</item>
-    </string-array>    
+    <string name="old_interviews">Select Interview:</string>
+    <string name="archive_prompt">Saved Interviews</string>
+
+    <string name="todo_note">TODO: Move buttons to interview details view.</string>
 
     <string name="notepad_title">Interview Notes</string>
     <string name="notepad_save">Save</string>
