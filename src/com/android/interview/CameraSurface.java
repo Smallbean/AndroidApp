@@ -4,27 +4,24 @@ package com.android.interview;
 import java.io.File;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.view.Display;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class CameraSurface extends Activity {
+public class CameraSurface extends Activity {	
+	private ImageView img;
+	private Intent cameraIntent;
 	private int CAMERA_RESULT = 0;
 	private int displayWidth;
 	private int displayHeight;
-	private ImageView img;	
 	private String imageFilePath;
 	
 	
@@ -72,8 +69,8 @@ public class CameraSurface extends Activity {
     	BitmapFactory.Options bmpFactoryOptions = new BitmapFactory.Options();
     	bmpFactoryOptions.inJustDecodeBounds = true;
     	
-    	
-    	Bitmap bmp = BitmapFactory.decodeFile(imageFilePath, bmpFactoryOptions);
+    
+		Bitmap bmp = BitmapFactory.decodeFile(imageFilePath, bmpFactoryOptions);
     	
     	int heightRatio = (int)Math.ceil(bmpFactoryOptions.outHeight/(float)displayHeight);
     	int widthRatio = (int)Math.ceil(bmpFactoryOptions.outWidth/(float)displayWidth);

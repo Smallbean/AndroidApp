@@ -3,6 +3,8 @@
       package="com.android.interview"
       android:versionCode="1"
       android:versionName="1.0">
+
+
     <application android:icon="@drawable/icon" android:label="@string/app_name">
         <activity android:name=".Interview"
                   android:label="@string/app_name">
@@ -11,12 +13,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CameraSurface">
-			 <intent-filter>
-                <action android:name="android.intent.action.IMAGE_CAPTURE" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>        
-        </activity>
-        <activity android:name=".Notepad"/>		
+        <activity android:name=".CameraSurface" />
+        <activity android:name=".Notepad" />	
+      	<activity android:name=".Audio" />
     </application>
 </manifest>

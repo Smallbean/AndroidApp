@@ -1,13 +1,11 @@
 package com.android.interview;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Environment;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -16,7 +14,6 @@ import android.widget.EditText;
 
 
 public class Notepad extends Activity {
-    private static final String NOTES_DIRECTORY = "/interview/notes";
     private EditText notes;
     
     /** Called when the activity is first created. */
