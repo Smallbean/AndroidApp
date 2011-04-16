@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.Display;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -29,24 +30,28 @@ public class CameraSurface extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera);
-        
-        
-        
-
-        imageFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/image.jpg";
-        
-        showToast(this,imageFilePath);
-       
-               	
-        File imageFile = new File(this.imageFilePath);
-        Uri imageFileUri = Uri.fromFile(imageFile);
-        
-        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageFileUri);
-        startActivityForResult(intent, this.CAMERA_RESULT);
-      
     }
+	
+	
+	public void takePhoto(View view)
+	{
+	       imageFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/image.jpg";
+	       
+	       showToast(this,imageFilePath);
+	       	               
+	        File imageFile = new File(this.imageFilePath);
+	        Uri imageFileUri = Uri.fromFile(imageFile);
+	        
+	        Intent intent = new Intent(android.provider.MediaStore.INTENT_ACTION_VIDEO_CAMERA);
+	        intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageFileUri);
+	        startActivityForResult(intent, this.CAMERA_RESULT);
+		
+	}
 
+	public void recordVideo(View view)
+	{
+		
+	}
 	
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
