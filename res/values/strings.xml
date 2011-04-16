@@ -7,6 +7,7 @@
     <string name="save">Save</string>
     <string name="back">Back</string>
     <string name="view">View</string>
+    <string name="dashboard">Dashboard</string>
     
     <string name="project_new">New Project</string>
     <string name="project_existing">Existing Projects</string>
