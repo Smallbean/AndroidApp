@@ -20,5 +20,4 @@
     		android:layout_height="wrap_content"
     		android:text="Take Video"
     		android:onClick="recordVideo"/>
-    		
 </LinearLayout>

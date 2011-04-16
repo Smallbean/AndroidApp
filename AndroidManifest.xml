@@ -14,7 +14,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".CameraSurface" />
-        <activity android:name=".Notepad" />	
       	<activity android:name=".Audio" />
     </application>
 </manifest>
