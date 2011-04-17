@@ -139,6 +139,9 @@ public class Audio extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
+        mFileName += "/audiorecordtest.3gp";
+        
         LinearLayout ll = new LinearLayout(this);
         mRecordButton = new RecordButton(this);
         ll.addView(mRecordButton,

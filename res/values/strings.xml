@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Interview</string>
-    <string name="new_interview">New Interview:</string>
-    <string name="old_interviews">Select Interview:</string>
-    <string name="archive_prompt">Saved Interviews</string>
-
-    <string name="todo_note">TODO: Move buttons to interview details view.</string>
-
-    <string name="notepad_title">Interview Notes</string>
-    <string name="notepad_save">Save</string>
+    <string name="app_name_photo">Photo</string>
+    <string name="app_name_audio">Audio</string>
+    <string name="app_name_video">Video</string>
+    <string name="save">Save</string>
+    <string name="back">Back</string>
+    <string name="view">View</string>
+    <string name="dashboard">Dashboard</string>
+    
+    <string name="project_new">New Project</string>
+    <string name="project_existing">Existing Projects</string>
+    <string name="project_list_dropdown_prompt">Select Project</string>
+    <string-array name="dummy_project_list">
+        <item>Project 1</item>
+        <item>Project 2</item>
+        <item>Project 3</item>
+        <item>Project 4</item>
+        <item>Project 5</item>
+        <item>Project 6</item>
+        <item>Project 7</item>
+        <item>Project 8</item>
+    </string-array>    
 </resources>
