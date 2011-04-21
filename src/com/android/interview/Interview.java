@@ -59,7 +59,18 @@ public class Interview extends Activity {
             public void onClick(View view) {
                 EditText newSubjectField = (EditText)findViewById(R.id.subject_create_name);
                 String currentSubjectName = newSubjectField.getText().toString();
-                createSubject(currentSubjectName);
+                
+                String subjectDirectory = baseDirectory.getAbsolutePath() + File.separator + currentSubjectName;
+                currentSubjectDirectory = new File(subjectDirectory);
+                
+                if (currentSubjectDirectory.exists()) {
+                	Toast.makeText(getApplicationContext(), "Subject exits. Please pick a different name.", Toast.LENGTH_SHORT).show();
+                	return;
+                }
+
+                currentSubjectDirectory.mkdirs();
+                String message = "Subject " + currentSubjectName + " created!";
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                 
                 flipper.setDisplayedChild(Interview.SUBJECT_DETAILS_VIEW);
             }
@@ -116,13 +127,6 @@ public class Interview extends Activity {
     }
 
     public void createSubject(String currentSubjectName) {
-        String subjectDirectory = this.baseDirectory.getAbsolutePath() + File.separator + currentSubjectName;
-        this.currentSubjectDirectory = new File(subjectDirectory);
-        
-        this.currentSubjectDirectory.mkdirs();
-
-        String message = "Subject " + currentSubjectName + " created!";
-        Toast.makeText(this.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     public void takePhoto(View view) {
