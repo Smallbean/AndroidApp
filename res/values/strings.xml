@@ -9,7 +9,17 @@
     <string name="view">View</string>
     <string name="dashboard">Dashboard</string>
     
-    <string name="subject_new">New Subject</string>
-    <string name="subject_existing">Existing Subject</string>
-    <string name="subject_list_dropdown_prompt">Select Subject</string>
+    <string name="project_new">New Project</string>
+    <string name="project_existing">Existing Projects</string>
+    <string name="project_list_dropdown_prompt">Select Project</string>
+    <string-array name="dummy_project_list">
+        <item>Project 1</item>
+        <item>Project 2</item>
+        <item>Project 3</item>
+        <item>Project 4</item>
+        <item>Project 5</item>
+        <item>Project 6</item>
+        <item>Project 7</item>
+        <item>Project 8</item>
+    </string-array>    
 </resources>

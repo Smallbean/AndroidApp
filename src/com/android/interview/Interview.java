@@ -20,71 +20,77 @@ public class Interview extends Activity {
     private static final int RECORD_AUDIO = 1;
     private static final int RECORD_VIDEO = 2;
 
-    private static final int SUBJECT_DASHBOARD_VIEW = 0;
-    private static final int SUBJECT_CREATE_VIEW = 1;
-    private static final int SUBJECT_LIST_VIEW = 2;
-    private static final int SUBJECT_DETAILS_VIEW = 3;
+    private static final int PROJECT_DASHBOARD_VIEW = 0;
+    private static final int PROJECT_CREATE_VIEW = 1;
+    private static final int PROJECT_LIST_VIEW = 2;
+    private static final int PROJECT_DETAILS_VIEW = 3;
 
     private ViewFlipper flipper;
-    private File currentSubjectDirectory = null;
+    private File currentProjectDirectory = null;
     private File baseDirectory = null;
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.subject);
+        setContentView(R.layout.dashboard);
         
         this.baseDirectory = getFilesDir();
-        this.flipper = (ViewFlipper)findViewById(R.id.subject_views);
+        this.flipper = (ViewFlipper)findViewById(R.id.project_views);
 
         // Setup dashboard buttons
-        Button subjectCreateButton = (Button)findViewById(R.id.subject_create_button);
-        subjectCreateButton.setOnClickListener(new View.OnClickListener() {
+        Button projectCreateButton = (Button)findViewById(R.id.project_create_button);
+        projectCreateButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                flipper.setDisplayedChild(Interview.SUBJECT_CREATE_VIEW);
+                flipper.setDisplayedChild(Interview.PROJECT_CREATE_VIEW);
             }
         });
         
-        Button subjectListButton = (Button)findViewById(R.id.subject_list_button);
-        subjectListButton.setOnClickListener(new View.OnClickListener() {
+        Button projectListButton = (Button)findViewById(R.id.project_list_button);
+        projectListButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                flipper.setDisplayedChild(Interview.SUBJECT_LIST_VIEW);
+                flipper.setDisplayedChild(Interview.PROJECT_LIST_VIEW);
             }
         });
 
-        // Setup subject creation buttons
-        Button subjectCreateSaveButton = (Button)findViewById(R.id.subject_create_save_button);
-        subjectCreateSaveButton.setOnClickListener(new View.OnClickListener() {
+        // Setup project creation buttons
+        Button projectCreateSaveButton = (Button)findViewById(R.id.project_create_save_button);
+        projectCreateSaveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                EditText newSubjectField = (EditText)findViewById(R.id.subject_create_name);
-                String currentSubjectName = newSubjectField.getText().toString();
-                createSubject(currentSubjectName);
+                EditText newProjectField = (EditText)findViewById(R.id.project_create_name);
+                String currentProjectName = newProjectField.getText().toString();
+                createProject(currentProjectName);
                 
-                flipper.setDisplayedChild(Interview.SUBJECT_DETAILS_VIEW);
+                flipper.setDisplayedChild(Interview.PROJECT_DETAILS_VIEW);
             }
         });
         
-        Button subjectCreateBackButton = (Button)findViewById(R.id.subject_create_back_button);
-        subjectCreateBackButton.setOnClickListener(new View.OnClickListener() {
+        Button projectCreateBackButton = (Button)findViewById(R.id.project_create_back_button);
+        projectCreateBackButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                flipper.setDisplayedChild(Interview.SUBJECT_DASHBOARD_VIEW);
+                flipper.setDisplayedChild(Interview.PROJECT_DASHBOARD_VIEW);
             }
         });
         
-        // Setup subject listing buttons
-        ArrayAdapter<String> subjectListAdapter = new ArrayAdapter<String>(
+        // Setup project listing buttons
+        // TODO: Use the following pending data
+        ArrayAdapter<String> projectListAdapter = new ArrayAdapter<String>(
             this,
             android.R.layout.simple_spinner_dropdown_item,
             this.baseDirectory.list()
         );
+        /*ArrayAdapter<CharSequence> projectListAdapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.dummy_project_list,
+                android.R.layout.simple_spinner_item
+        );*/
         
-        Spinner spinner = (Spinner)findViewById(R.id.subject_list_dropdown);
-        spinner.setAdapter(subjectListAdapter);
+        Spinner spinner = (Spinner)findViewById(R.id.project_list_dropdown);
+        spinner.setAdapter(projectListAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String subjectName = parent.getItemAtPosition(position).toString();
-                currentSubjectDirectory = new File(baseDirectory.getAbsolutePath() + File.separator + subjectName);
+                String projectName = parent.getItemAtPosition(position).toString();
+                currentProjectDirectory = new File(baseDirectory.getAbsolutePath() + File.separator + projectName);
             }
             
             public void onNothingSelected(AdapterView parent) {
@@ -92,28 +98,28 @@ public class Interview extends Activity {
             }
         });
 
-        Button subjectListViewButton = (Button)findViewById(R.id.subject_list_view_button);
-        subjectListViewButton.setOnClickListener(new View.OnClickListener() {
+        Button projectListViewButton = (Button)findViewById(R.id.project_list_view_button);
+        projectListViewButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                flipper.setDisplayedChild(Interview.SUBJECT_DETAILS_VIEW);
+                flipper.setDisplayedChild(Interview.PROJECT_DETAILS_VIEW);
             }
         });
         
-        Button subjectViewBackButton = (Button)findViewById(R.id.subject_dashboard_button);
-        subjectViewBackButton.setOnClickListener(new View.OnClickListener() {
+        Button projectViewBackButton = (Button)findViewById(R.id.project_dashboard_button);
+        projectViewBackButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                flipper.setDisplayedChild(Interview.SUBJECT_DASHBOARD_VIEW);
+                flipper.setDisplayedChild(Interview.PROJECT_DASHBOARD_VIEW);
             }
         });
     }
 
-    public void createSubject(String currentSubjectName) {
-        String subjectDirectory = this.baseDirectory.getAbsolutePath() + File.separator + currentSubjectName;
-        this.currentSubjectDirectory = new File(subjectDirectory);
+    public void createProject(String currentProjectName) {
+        String projectDirectory = this.baseDirectory.getAbsolutePath() + File.separator + currentProjectName;
+        this.currentProjectDirectory = new File(projectDirectory);
         
-        this.currentSubjectDirectory.mkdirs();
+        this.currentProjectDirectory.mkdirs();
 
-        String message = "Subject " + currentSubjectName + " created!";
+        String message = "Project " + currentProjectName + " created!";
         Toast.makeText(this.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
