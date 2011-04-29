@@ -37,7 +37,7 @@ public class Interview extends Activity {
         this.baseDirectory = getFilesDir();
         this.flipper = (ViewFlipper) findViewById(R.id.subject_views);
 
-        // Setup dashboard buttons
+        // Setup dash board buttons
         Button subjectCreateButton = (Button) findViewById(R.id.subject_create_button);
         subjectCreateButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -167,7 +167,7 @@ public class Interview extends Activity {
     protected void onActivityResult(int requestCode, int resultCode,
             Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-        Bundle extras;
+        Bundle extras = null;
         if (intent != null) {
             extras = intent.getExtras();
         }

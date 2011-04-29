@@ -2,8 +2,6 @@ package com.android.interview;
 
 
 import java.io.File;
-import java.net.URI;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -12,14 +10,10 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
-import android.provider.MediaStore.Video.Media;
 import android.view.Display;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 
 public class CameraSurface extends Activity {	
