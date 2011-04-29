@@ -49,7 +49,12 @@ public class CameraSurface extends Activity {
         super.onActivityResult(requestCode, resultCode, image);
                 
         if(requestCode == this.CAMERA_RESULT){
-        	showImage();	
+        	                
+            Intent intent = new Intent(this, Gallery.class);
+            startActivityForResult(intent, 0);
+            
+        	
+        	//showImage();	
         }
                
     }
