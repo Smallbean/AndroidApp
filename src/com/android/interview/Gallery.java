@@ -9,7 +9,9 @@ import android.widget.Toast;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -36,13 +38,23 @@ public class Gallery extends Activity {
 	
 	public class ImageAdapter extends BaseAdapter {
 	    int mGalleryItemBackground;
+	    private Drawable img;
 	    private Context mContext;
 
+	    private void getDrawables()
+	    {
+	    	DrawableManager dm = new DrawableManager();	    	
+	    	String imgPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/image.jpg";
+	    	img = dm.fetchDrawable(imgPath);
+	    }
+	    
 	    private Integer[] mImageIds = {
 	          0
 	    };
 
 	    public ImageAdapter(Context c) {
+	    	getDrawables();
+	    	
 	        mContext = c;
 	        TypedArray a = obtainStyledAttributes(R.styleable.Gallery);
 	        mGalleryItemBackground = a.getResourceId(
@@ -66,7 +78,8 @@ public class Gallery extends Activity {
 	    public View getView(int position, View convertView, ViewGroup parent) {
 	        ImageView i = new ImageView(mContext);
 	        
-	        i.setImageResource(mImageIds[position]);
+	        //i.setImageResource(mImageIds[position]);
+	        i.setImageDrawable(img);
 	        i.setLayoutParams(new android.widget.Gallery.LayoutParams(150, 100));
 	        i.setScaleType(ImageView.ScaleType.FIT_XY);
 	        i.setBackgroundResource(mGalleryItemBackground);

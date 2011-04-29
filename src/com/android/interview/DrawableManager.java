@@ -28,15 +28,13 @@ public class DrawableManager {
         }
         
         try {
-            InputStream is = fetch(urlString);
-            Drawable drawable = Drawable.createFromStream(is, "src");
+            
+            Drawable drawable = Drawable.createFromPath(urlString);
             drawableMap.put(urlString, drawable);
             
             return drawable;
-        } catch (MalformedURLException e) {
-            //Log.e(this.getClass().getSimpleName(), "fetchDrawable failed", e);
-            return null;
-        } catch (IOException e) {
+        } 
+        catch (Exception e) {
             //Log.e(this.getClass().getSimpleName(), "fetchDrawable failed", e);
             return null;
         }
@@ -66,11 +64,5 @@ public class DrawableManager {
         thread.start();
     }
 
-    private InputStream fetch(String urlString) throws MalformedURLException, IOException {
-        DefaultHttpClient httpClient = new DefaultHttpClient();
-        HttpGet request = new HttpGet(urlString);
-        HttpResponse response = httpClient.execute(request);
-        return response.getEntity().getContent();
-    }
 
 }
