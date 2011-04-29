@@ -140,6 +140,12 @@
 	            		android:layout_height="wrap_content"
 	            		android:layout_width="wrap_content"
 	            		android:layout_marginTop="25dip" />
+					<Button
+	            		android:text="@string/app_name_gallery"
+	            		android:onClick="showGallery"
+	            		android:layout_height="wrap_content"
+	            		android:layout_width="wrap_content"
+	            		android:layout_marginTop="25dip" />	            		
         		</LinearLayout>
         		<Button
             		android:id="@+id/subject_dashboard_button"
