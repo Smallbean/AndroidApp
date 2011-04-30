@@ -3,6 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
+    <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Status" android:id="@+id/FilenameTextView"  ></TextView>
     <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Status" android:id="@+id/DurationTextView"  ></TextView>
 	<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Start Recording" android:id="@+id/StartRecordingButton"></Button>
 	<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Stop Recording" android:id="@+id/StopRecordingButton"></Button>
