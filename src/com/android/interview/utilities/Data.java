@@ -13,24 +13,31 @@ public class Data {
    private static String subject = null;
    
 
-   private static String root(){
-	   return Environment.getExternalStorageDirectory().getAbsolutePath() + "/SmallBean";
+   private String root(){
+	   String appPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/SmallBean";
+	   
+	   File appDir = new File(appPath);
+	   if(!appDir.exists() || !appDir.isDirectory()) {
+		   createFolder(appPath);
+	   }
+	   
+	   return appPath;
    }
    
-   private static String subjectPath(){
+   private String subjectPath(){
 	   return root() + "/" + Data.subject;
    }
       
-   private static String imageFolderPath(){
-	   return Data.subjectPath() + "/images";
+   private String imageFolderPath(){
+	   return subjectPath() + "/images";
    }
    
-   private static String videoFolderPath(){
-	   return Data.subjectPath() + "/videos";	   
+   private String videoFolderPath(){
+	   return subjectPath() + "/videos";	   
    }
    
-   private static String audioFolderPath(){
-	   return Data.subjectPath() + "/audio_files";	   
+   private String audioFolderPath(){
+	   return subjectPath() + "/audio_files";	   
    }
    
    protected Data() {
@@ -57,14 +64,14 @@ public class Data {
 	   // add the subject	   
 	   Data.subject = subject;
 	   
-	   createFolder(Data.subjectPath());
-	   createFolder(Data.imageFolderPath());
-	   createFolder(Data.videoFolderPath());
-	   createFolder(Data.audioFolderPath());	   
+	   createFolder(subjectPath());
+	   createFolder(imageFolderPath());
+	   createFolder(videoFolderPath());
+	   createFolder(audioFolderPath());	   
    }
    
    public void DeleteSubject() {	  
-	   deleteFolder(Data.subjectPath());
+	   deleteFolder(subjectPath());
    }
    
    public void SetNote(String note) {
@@ -76,27 +83,27 @@ public class Data {
    }
       
    public String GetNewPhotoURL() {
-	   return Data.imageFolderPath() + "/image_" + GetNewTimeAndUuid() + ".jpg";
+	   return imageFolderPath() + "/image_" + GetNewTimeAndUuid() + ".jpg";
    }
    
    public String GetNewAudioURL() {
-	   return Data.audioFolderPath() + "/audio_" + GetNewTimeAndUuid() + ".3gp";
+	   return audioFolderPath() + "/audio_" + GetNewTimeAndUuid() + ".3gp";
    }
    
    public String GetNewVideoURL() {
-	   return Data.videoFolderPath() + "/video_" + GetNewTimeAndUuid() + ".mp4";
+	   return videoFolderPath() + "/video_" + GetNewTimeAndUuid() + ".mp4";
    }
    
    public String[] GetPhotoURLs() {	   
-	   return GetListOfFilesInPath(Data.imageFolderPath());
+	   return GetListOfFilesInPath(imageFolderPath());
    }
       
    public String[] GetAudioURLs() {
-	   return GetListOfFilesInPath(Data.imageFolderPath());
+	   return GetListOfFilesInPath(imageFolderPath());
    }
    
    public String[] GetVideoURLs() {
-	   return GetListOfFilesInPath(Data.imageFolderPath());
+	   return GetListOfFilesInPath(imageFolderPath());
    }
    
    public void DeletePhoto(String photoUrl) {
@@ -170,4 +177,6 @@ public class Data {
 	   return files;	   
    }
    
+  
+ 
 }
