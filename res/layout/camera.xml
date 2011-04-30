@@ -37,7 +37,7 @@
         android:layout_height="10px"
         android:layout_weight="1"/>
         
-     
+     <!-- 
      <LinearLayout 
     		android:orientation="horizontal"
     		android:layout_width="fill_parent"
@@ -58,5 +58,6 @@
      		
     
     </LinearLayout>   
-    		
+    		 -->
+	<include layout="@layout/footer" />    		 
 </LinearLayout>
