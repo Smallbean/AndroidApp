@@ -1,23 +1,27 @@
 package com.android.interview;
 
-import java.io.File;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
 import android.widget.ViewFlipper;
+
+import com.android.interview.utilities.Data;
+
 
 public class Interview extends Activity {
     private static final int TAKE_PHOTO = 0;
     private static final int RECORD_AUDIO = 1;
     private static final int RECORD_VIDEO = 2;
+    private static final int SHOW_GALLERY = 3;
 
     private static final int SUBJECT_DASHBOARD_VIEW = 0;
     private static final int SUBJECT_CREATE_VIEW = 1;
@@ -25,16 +29,17 @@ public class Interview extends Activity {
     private static final int SUBJECT_DETAILS_VIEW = 3;
 
     private ViewFlipper flipper;
-    private File currentSubjectDirectory = null;
-    private File baseDirectory = null;
+    
+    private Data data = Data.getInstance();
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+                
+                    
         setContentView(R.layout.dashboard);
 
-        this.baseDirectory = getFilesDir();
         this.flipper = (ViewFlipper) findViewById(R.id.subject_views);
 
         // Setup dash board buttons
@@ -65,6 +70,12 @@ public class Interview extends Activity {
                 // Update dropdown list
                 Spinner spinner = (Spinner) findViewById(R.id.subject_list_dropdown);
                 populateSpinner(spinner);
+                
+                // Update the subject title in the subject detail view of the current subject
+                TextView subjectview = (TextView) findViewById(R.id.subjectname);
+                subjectview.setText(currentSubjectName);
+                
+                data.SetSubject(currentSubjectName);
 
                 flipper.setDisplayedChild(Interview.SUBJECT_DETAILS_VIEW);
             }
@@ -84,8 +95,14 @@ public class Interview extends Activity {
                     int position, long id) {
                 String subjectName = parent.getItemAtPosition(position)
                         .toString();
-                currentSubjectDirectory = new File(baseDirectory
-                        .getAbsolutePath() + File.separator + subjectName);
+                data.SetSubject(subjectName);
+                
+                
+                // Update the subject title in the subject detail view of the current subject
+                TextView subjectview = (TextView) findViewById(R.id.subjectname);
+                subjectview.setText(subjectName);
+                
+                data.SetSubject(subjectName);
             }
 
             public void onNothingSelected(AdapterView parent) {
@@ -117,34 +134,20 @@ public class Interview extends Activity {
     }
 
     public void populateSpinner(Spinner spinner) {
+    	String[] subjects = this.data.GetSubjects();
+    	
+    	if(subjects==null) return;
+    	
         // Setup subject listing buttons
         ArrayAdapter<String> subjectListAdapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_dropdown_item,
-                this.baseDirectory.list());
+                this, android.R.layout.simple_spinner_dropdown_item,                
+        	    subjects);
+        
         spinner.setAdapter(subjectListAdapter);
     }
 
-    public void createSubject(String currentSubjectName) {
-        String subjectDirectory = baseDirectory.getAbsolutePath()
-                + File.separator + currentSubjectName;
-        currentSubjectDirectory = new File(subjectDirectory);
-
-        if (currentSubjectDirectory.exists()) {
-            Toast.makeText(getApplicationContext(),
-                    "Subject exits. Please pick a different name.",
-                    Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (currentSubjectDirectory.mkdirs()) {
-            String message = "Subject " + currentSubjectName + " created!";
-            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT)
-                    .show();
-        } else {
-            Toast.makeText(getApplicationContext(),
-                    "Error: Could not make subject directory!",
-                    Toast.LENGTH_SHORT).show();
-        }
+    public void createSubject(String currentSubjectName) {    	
+    	data.AddSubject(currentSubjectName);    
     }
 
     public void takePhoto(View view) {
@@ -153,6 +156,12 @@ public class Interview extends Activity {
         startActivityForResult(intent, TAKE_PHOTO);
         
         
+    }
+    
+    public void showGallery(View view){
+    	
+    	Intent intent = new Intent(this, Gallery.class);
+    	startActivityForResult(intent, SHOW_GALLERY);
     }
 
     public void recordAudio(View view) {

@@ -27,17 +27,20 @@ public class DrawableManager {
             return drawableMap.get(urlString);
         }
         
-        try {
+        Drawable drawable = Drawable.createFromPath(urlString);
+        drawableMap.put(urlString, drawable);
+        
+        return drawable;
+        
+      /*  try {
             
-            Drawable drawable = Drawable.createFromPath(urlString);
-            drawableMap.put(urlString, drawable);
-            
-            return drawable;
+           
         } 
         catch (Exception e) {
-            //Log.e(this.getClass().getSimpleName(), "fetchDrawable failed", e);
+            String ex = e.toString();
             return null;
         }
+        */
     }
 
     public void fetchDrawableOnThread(final String urlString, final ImageView imageView) {
