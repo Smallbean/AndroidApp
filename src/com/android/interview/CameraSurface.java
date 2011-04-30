@@ -29,7 +29,7 @@ public class CameraSurface extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera);
                         
-        imageFilePath = Interview.data.GetPhotoURL();
+        imageFilePath = Interview.data.GetNewPhotoURL();
     }
 	
 	

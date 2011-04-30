@@ -129,18 +129,14 @@ public class Audio extends Activity {
     }
 
     public void AudioRecordTest() {
-        mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-        mFileName += "/audiorecordtest.3gp";
-        //mFileName = "c:";
-        //mFileName += "/audiorecordtest.3gp";
+        mFileName = Interview.data.GetNewAudioURL();
     }
         
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-        mFileName += "/audiorecordtest.3gp";
+        mFileName = Interview.data.GetNewAudioURL();
         
         LinearLayout ll = new LinearLayout(this);
         mRecordButton = new RecordButton(this);
