@@ -12,10 +12,20 @@ public class Data {
    private static Data instance = null;
    private static File root = null;
    private static String subject = null;
-   private static String subjectPath = null;   
-   private static String imageFolderPath = null;
-   private static String videoFolderPath = null;
-   private static String audioFolderPath = null;
+   
+   private static String subjectPath(){
+	   return root.getAbsolutePath() + "/" + Data.subject;
+   }
+      
+   private static String imageFolderPath(){
+	   return Data.subjectPath() + "/images";
+   }
+   private static String videoFolderPath(){
+	   return Data.subjectPath() + "/videos";	   
+   }
+   private static String audioFolderPath(){
+	   return Data.subjectPath() + "/audio_files";	   
+   }
    
    protected Data() {
       // Exists only to defeat instantiation.
@@ -30,10 +40,6 @@ public class Data {
    
    public void SetSubject(String subject) {
 	   Data.subject = subject;
-	   Data.subjectPath = root.getAbsolutePath() + "/" + Data.subject;
-	   Data.imageFolderPath = Data.subjectPath + "/images";
-	   Data.videoFolderPath = Data.subjectPath + "/videos";
-	   Data.audioFolderPath = Data.subjectPath + "/audio_files";
    }
    
    public void SetRoot(File root) {
@@ -47,22 +53,16 @@ public class Data {
    
    public void AddSubject(String subject) {
 	   // add the subject	   
-	   Data.subject = subject;	 
+	   Data.subject = subject;
 	   
-	   Data.subjectPath = root.getAbsolutePath() + "/" + Data.subject;
-	   Data.imageFolderPath = Data.subjectPath + "/images";
-	   Data.videoFolderPath = Data.subjectPath + "/videos";
-	   Data.audioFolderPath = Data.subjectPath + "/audio_files";
-	   
-	   createFolder(Data.subjectPath);
-	   createFolder(Data.imageFolderPath);
-	   createFolder(Data.videoFolderPath);
-	   createFolder(Data.audioFolderPath);
-	   
+	   createFolder(Data.subjectPath());
+	   createFolder(Data.imageFolderPath());
+	   createFolder(Data.videoFolderPath());
+	   createFolder(Data.audioFolderPath());	   
    }
    
    public void DeleteSubject() {	  
-	   deleteFolder(Data.subjectPath);
+	   deleteFolder(Data.subjectPath());
    }
    
    public void SetNote(String note) {
@@ -74,11 +74,11 @@ public class Data {
    }
       
    public String GetPhotoURL() {
-	   File photos = new File(Data.imageFolderPath);
+	   File photos = new File(Data.imageFolderPath());
 	   
 	   
 	   
-	   return Data.imageFolderPath + "/image_"+photos.listFiles().length+".jpg";	   
+	   return Data.imageFolderPath() + "/image_"+photos.listFiles().length+".jpg";	   
    }
          
    public String GetAudioURL() {
@@ -91,12 +91,13 @@ public class Data {
 
    
    public String[] GetPhotoURLs() {
-	   File files = new File(imageFolderPath);
+	   File files = new File(imageFolderPath());
+	   
 	   String[] photos = files.list();
 	   
 	   for(int i=0;i<photos.length;i++)
 	   {
-		   photos[i] = Data.imageFolderPath + "/" + photos[i];
+		   photos[i] = Data.imageFolderPath() + "/" + photos[i];
 	   }
 	   
 	   return photos;
@@ -154,7 +155,9 @@ public class Data {
    }
    
    private void deleteFile(String filePath) {
+	   File fileToDelete = new File(filePath);
 	   
+	   fileToDelete.delete();
    }
   
       
