@@ -6,13 +6,7 @@
     <SurfaceView android:id="@+id/surface"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
-         <Button android:id="@+id/captureVideo"
-    		android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"
-    		android:text="Start Recording"
-    		android:onClick="captureVideo" />
-        
+        android:layout_gravity="center">    
     </SurfaceView>
      
 </LinearLayout>
