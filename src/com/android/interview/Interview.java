@@ -37,7 +37,6 @@ public class Interview extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
                 
-        data.SetRoot(Environment.getExternalStorageDirectory());
                     
         setContentView(R.layout.dashboard);
 

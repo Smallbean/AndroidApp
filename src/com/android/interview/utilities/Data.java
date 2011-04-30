@@ -4,15 +4,21 @@ import java.io.File;
 import java.util.Calendar;
 import java.util.UUID;
 
+import android.os.Environment;
+
 
 public class Data {
 	
    private static Data instance = null;
-   private static File root = null;
    private static String subject = null;
    
+
+   private static String root(){
+	   return Environment.getExternalStorageDirectory().getAbsolutePath() + "/SmallBean";
+   }
+   
    private static String subjectPath(){
-	   return root.getAbsolutePath() + "/" + Data.subject;
+	   return root() + "/" + Data.subject;
    }
       
    private static String imageFolderPath(){
@@ -41,13 +47,9 @@ public class Data {
    public void SetSubject(String subject) {
 	   Data.subject = subject;
    }
-   
-   public void SetRoot(File root) {
-	   Data.root = root;
-   }
-   
+      
    public String[] GetSubjects() {	   	   	   	   	   
-	   File files = new File(root.getAbsolutePath());	 	 
+	   File files = new File(root());	 	 
 	   return files.list();
    }
    
