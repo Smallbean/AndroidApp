@@ -30,6 +30,10 @@ public class Data {
    
    public void SetSubject(String subject) {
 	   Data.subject = subject;
+	   Data.subjectPath = root.getAbsolutePath() + "/" + Data.subject;
+	   Data.imageFolderPath = Data.subjectPath + "/images";
+	   Data.videoFolderPath = Data.subjectPath + "/videos";
+	   Data.audioFolderPath = Data.subjectPath + "/audio_files";
    }
    
    public void SetRoot(File root) {

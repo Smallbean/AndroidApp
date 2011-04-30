@@ -118,7 +118,13 @@
     		<LinearLayout
         		android:orientation="vertical"
         		android:layout_width="fill_parent"
-        		android:layout_height="wrap_content">
+        		android:layout_height="wrap_content">        		
+        		<TextView android:id="@+id/subjectname"
+        				  android:text="subject"
+        				  android:layout_width="fill_parent"
+        				  android:layout_height="wrap_content"
+        				  android:textColor="#000000"        				  
+        		/>
 	    		<LinearLayout
 	        		android:layout_width="fill_parent"
 	        		android:layout_height="wrap_content">

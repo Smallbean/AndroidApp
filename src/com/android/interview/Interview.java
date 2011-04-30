@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -73,6 +74,12 @@ public class Interview extends Activity {
                 // Update dropdown list
                 Spinner spinner = (Spinner) findViewById(R.id.subject_list_dropdown);
                 populateSpinner(spinner);
+                
+                // Update the subject title in the subject detail view of the current subject
+                TextView subjectview = (TextView) findViewById(R.id.subjectname);
+                subjectview.setText(currentSubjectName);
+                
+                Interview.data.SetSubject(currentSubjectName);
 
                 flipper.setDisplayedChild(Interview.SUBJECT_DETAILS_VIEW);
             }
@@ -93,6 +100,13 @@ public class Interview extends Activity {
                 String subjectName = parent.getItemAtPosition(position)
                         .toString();
                 data.SetSubject(subjectName);
+                
+                
+                // Update the subject title in the subject detail view of the current subject
+                TextView subjectview = (TextView) findViewById(R.id.subjectname);
+                subjectview.setText(subjectName);
+                
+                Interview.data.SetSubject(subjectName);
             }
 
             public void onNothingSelected(AdapterView parent) {
