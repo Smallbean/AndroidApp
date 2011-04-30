@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:orientation="vertical"
@@ -10,8 +9,9 @@
 	    		
 	    <LinearLayout
 	    	android:orientation="horizontal"
-	    	android:layout_width="fill_parent"
-	    	android:layout_height="wrap_content"	    	
+	    	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:layout_gravity="center_horizontal"	    	
 	    	>		
 	   	<ImageView
     		android:layout_height="50px"
@@ -33,27 +33,29 @@
 		<ViewFlipper 
     		android:id = "@+id/subject_views"
     		android:layout_width="fill_parent"
-    		android:layout_height="fill_parent">
+    		android:layout_height="fill_parent"
+    		>
 
     		<!-- Dashboard -->
  			<LinearLayout
-	    		android:orientation="vertical"
-	    		android:layout_width="fill_parent"
-	    		android:layout_height="fill_parent"
-	    		android:background="#CCFFFF">
+	    		android:orientation="horizontal"
+	    		android:layout_width="wrap_content"
+	    		android:layout_height="wrap_content"
+	    		android:background="#CCFFFF"
+	    		android:layout_gravity="center_horizontal|center_vertical"
+	    		>
 	    		<Button
 	        		android:id="@+id/subject_create_button"
-	        		android:text="@string/subject_new"
 	        		android:layout_width="wrap_content"
 	        		android:layout_height="wrap_content"
-	        		android:layout_gravity="center_horizontal"
-	        		android:layout_marginTop="50dip" />
+	        		android:layout_marginRight="75dip"
+	        		android:background="@drawable/dashboard_new_subject_button"/>
 	    		<Button
 	        		android:id="@+id/subject_list_button"
-	        		android:text="@string/subject_existing" 
 	        		android:layout_width="wrap_content"
 	        		android:layout_height="wrap_content"
-	        		android:layout_gravity="center_horizontal" />        
+	        		android:background="@drawable/dashboard_library_button"
+	        		 />        
 			</LinearLayout>
 
 			<!-- Create Project -->
