@@ -2,6 +2,7 @@ package com.android.interview.utilities;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import android.os.Environment;
@@ -9,6 +10,7 @@ import android.os.Environment;
 public class Data {
 	
    private static Data instance = null;
+   private static File root = null;
    private static String subject = null;
    private static String subjectPath = null;   
    private static String imageFolderPath = null;
@@ -30,31 +32,33 @@ public class Data {
 	   Data.subject = subject;
    }
    
-   public List<String> GetSubjects() {	   	   
-	   List<String> subjects = new ArrayList<String>();
-	   
-	   File subjectDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath());
-	   
-	   for(String s : subjectDirectory.list()) {
-		   subjects.add(s);
-	   }
-	   return subjects;
+   public void SetRoot(File root) {
+	   Data.root = root;
+   }
+   
+   public String[] GetSubjects() {	   	   	   	   	   
+	   File files = new File(root.getAbsolutePath());	   	   	   	  
+	   return files.list();
    }
    
    public void AddSubject(String subject) {
 	   // add the subject	   
 	   Data.subject = subject;	 
 	   
-	   Data.subjectPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + Data.subject;
+	   Data.subjectPath = root.getAbsolutePath() + "/" + Data.subject;
 	   Data.imageFolderPath = Data.subjectPath + "/images";
 	   Data.videoFolderPath = Data.subjectPath + "/videos";
-	   Data.audioFolderPath = Data.audioFolderPath + "/audio_fiels";
+	   Data.audioFolderPath = Data.subjectPath + "/audio_files";
 	   
 	   createFolder(Data.subjectPath);
 	   createFolder(Data.imageFolderPath);
 	   createFolder(Data.videoFolderPath);
 	   createFolder(Data.audioFolderPath);
 	   
+   }
+   
+   public void DeleteSubject() {	  
+	   deleteFolder(Data.subjectPath);
    }
    
    public void SetNote(String note) {
@@ -66,10 +70,13 @@ public class Data {
    }
       
    public String GetPhotoURL() {
+	   File photos = new File(Data.imageFolderPath);
 	   
-	   return Environment.getExternalStorageDirectory().getAbsolutePath() + "/image.jpg";	   
+	   
+	   
+	   return Data.imageFolderPath + "/image_"+photos.listFiles().length+".jpg";	   
    }
-   
+         
    public String GetAudioURL() {
 	   return null;
    }
@@ -79,9 +86,16 @@ public class Data {
    }
 
    
-   public List<String> GetPhotoURLs() {
-	   // get list of phto urls
-	   return null;
+   public String[] GetPhotoURLs() {
+	   File files = new File(imageFolderPath);
+	   String[] photos = files.list();
+	   
+	   for(int i=0;i<photos.length;i++)
+	   {
+		   photos[i] = Data.imageFolderPath + "/" + photos[i];
+	   }
+	   
+	   return photos;
    }
    
    public List<String> GetAudioURLs() {
@@ -104,12 +118,37 @@ public class Data {
 	   deleteFile(videoUrl);
    }
    
-   private void createFolder(String folderPath) {
-	   
+   private void createFolder(String folderPath) {	   
+	   boolean success = (new File(folderPath)).mkdir();
    }
    private void deleteFolder(String folderPath) {
-	   
+	   File file = new File(folderPath);
+	   if(file.isDirectory() && file.list().length>0)
+	   {
+		   deleteDirectory(file);
+	   }
+	   else 
+	   {
+		   file.delete();
+	   }
+	   	
    }
+   
+   private boolean deleteDirectory(File path) {
+	    if( path.exists() ) {
+	      File[] files = path.listFiles();
+	      for(int i=0; i<files.length; i++) {
+	         if(files[i].isDirectory()) {
+	           deleteDirectory(files[i]);
+	         }
+	         else {
+	           files[i].delete();
+	         }
+	      }
+	    }
+	    return( path.delete() );
+   }
+   
    private void deleteFile(String filePath) {
 	   
    }

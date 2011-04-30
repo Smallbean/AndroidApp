@@ -5,6 +5,8 @@ import java.io.File;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.ContactsContract.Contacts.Data;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
+
 
 public class Interview extends Activity {
     private static final int TAKE_PHOTO = 0;
@@ -26,16 +29,20 @@ public class Interview extends Activity {
     private static final int SUBJECT_DETAILS_VIEW = 3;
 
     private ViewFlipper flipper;
-    private File currentSubjectDirectory = null;
-    private File baseDirectory = null;
+    
+    public static com.android.interview.utilities.Data data;
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        data = com.android.interview.utilities.Data.getInstance();
+        data.SetRoot(Environment.getExternalStorageDirectory());
+                      
+        
         setContentView(R.layout.dashboard);
 
-        this.baseDirectory = getFilesDir();
         this.flipper = (ViewFlipper) findViewById(R.id.subject_views);
 
         // Setup dash board buttons
@@ -85,8 +92,7 @@ public class Interview extends Activity {
                     int position, long id) {
                 String subjectName = parent.getItemAtPosition(position)
                         .toString();
-                currentSubjectDirectory = new File(baseDirectory
-                        .getAbsolutePath() + File.separator + subjectName);
+                data.SetSubject(subjectName);
             }
 
             public void onNothingSelected(AdapterView parent) {
@@ -120,32 +126,13 @@ public class Interview extends Activity {
     public void populateSpinner(Spinner spinner) {
         // Setup subject listing buttons
         ArrayAdapter<String> subjectListAdapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_dropdown_item,
-                this.baseDirectory.list());
+                this, android.R.layout.simple_spinner_dropdown_item,                
+        	    this.data.GetSubjects());
         spinner.setAdapter(subjectListAdapter);
     }
 
-    public void createSubject(String currentSubjectName) {
-        String subjectDirectory = baseDirectory.getAbsolutePath()
-                + File.separator + currentSubjectName;
-        currentSubjectDirectory = new File(subjectDirectory);
-
-        if (currentSubjectDirectory.exists()) {
-            Toast.makeText(getApplicationContext(),
-                    "Subject exits. Please pick a different name.",
-                    Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (currentSubjectDirectory.mkdirs()) {
-            String message = "Subject " + currentSubjectName + " created!";
-            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT)
-                    .show();
-        } else {
-            Toast.makeText(getApplicationContext(),
-                    "Error: Could not make subject directory!",
-                    Toast.LENGTH_SHORT).show();
-        }
+    public void createSubject(String currentSubjectName) {    	
+    	data.AddSubject(currentSubjectName);    
     }
 
     public void takePhoto(View view) {

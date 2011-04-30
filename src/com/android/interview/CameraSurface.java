@@ -28,8 +28,8 @@ public class CameraSurface extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera);
-        
-        imageFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/image.jpg";
+                        
+        imageFilePath = Interview.data.GetPhotoURL();
     }
 	
 	

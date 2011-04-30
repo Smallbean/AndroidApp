@@ -39,13 +39,19 @@ public class Gallery extends Activity {
 	public class ImageAdapter extends BaseAdapter {
 	    int mGalleryItemBackground;
 	    private Drawable img;
+	    private Drawable[] imgs;
 	    private Context mContext;
 
 	    private void getDrawables()
 	    {
-	    	DrawableManager dm = new DrawableManager();	    	
-	    	String imgPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/image.jpg";
-	    	img = dm.fetchDrawable(imgPath);
+	    	String[] images = Interview.data.GetPhotoURLs();
+	    	imgs = new Drawable[images.length];
+	    	
+	    	for(int i=0;i<images.length;i++)
+	    	{
+		    	DrawableManager dm = new DrawableManager();	    			    	
+		    	img = dm.fetchDrawable(images[i]);	    		
+	    	}
 	    }
 	    
 	    private Integer[] mImageIds = {
