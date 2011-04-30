@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#CCFFFF">	
+    android:background="#EDE6CE" xmlns:android="http://schemas.android.com/apk/res/android">	
   		
   	
   	<TextView
@@ -14,22 +13,31 @@
   		
   	<ImageView
   			android:id="@+id/takePhoto"
-  			android:layout_width="wrap_content"
-  			android:layout_height="wrap_content"
+  			android:layout_width="120px"
+  			android:layout_height="120px"
   			android:src="@drawable/sub_pic_wotext"
   			android:onClick="takePhoto"
   			android:layout_gravity="center_horizontal"  			
   			/>	
+    <TextView
+        android:text="Take Pic"        
+        android:layout_width="fill_parent"
+        android:layout_height="10px"
+        android:layout_weight="1"
+        android:paddingLeft="190px"
+        android:textColor="#000000"
+        android:textSize="20px"
+        />         
    
     <TextView
         android:text=""        
         android:layout_width="fill_parent"
         android:layout_height="10px"
-        android:layout_weight="1"/>		    
+        android:layout_weight="1" />		    
         		
 	<Gallery android:id="@+id/photo_gallery"
     		 android:layout_width="fill_parent"
-    		 android:layout_height="wrap_content"/>    		
+    		 android:layout_height="wrap_content" android:padding="0px"/>    		
     
     <TextView
         android:text=""        
@@ -42,21 +50,22 @@
     		android:orientation="horizontal"
     		android:layout_width="fill_parent"
     		android:layout_height="wrap_content"
-    		android:background="#CCFFFF">
+    		android:background="#85AB8F">
     
-    	<Button
-     		android:layout_height="wrap_content"
-     		android:layout_width="wrap_content"
-     		android:text="back"
-     		android:onClick="finish" />
-     		
-    	<Button
-     		android:layout_height="wrap_content"
-     		android:layout_width="wrap_content"
-     		android:text="home"
-     		android:onClick="goHome" />
-     		
-    
+    <ImageView 
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:src="@drawable/nav_back"
+            android:onClick="finish"
+            android:layout_gravity="left"
+    />  
+    <ImageView 
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:src="@drawable/nav_home"
+            android:layout_gravity="left"
+            android:onClick="goHome"
+    />     
     </LinearLayout>   
     		
 </LinearLayout>
