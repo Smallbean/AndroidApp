@@ -7,9 +7,8 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
-
-import com.android.interview.utilities.Data;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import android.app.Activity;
 import android.media.AudioFormat;
@@ -19,23 +18,27 @@ import android.media.AudioTrack;
 import android.media.MediaRecorder;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.interview.utilities.Data;
+
 public class AudioRecorder extends Activity implements OnClickListener {
 
 	RecordAudio recordTask;
 	PlayAudio playTask;
 
-	Button startRecordingButton, stopRecordingButton, startPlaybackButton,
-			stopPlaybackButton;
-	TextView statusText;
-
-    private Data data = Data.getInstance();
+	Button startRecordingButton, stopRecordingButton;
+	Button startPlaybackButton, stopPlaybackButton;
+	
+	Button photoButton;
+	
+	TextView durationText;
+	
+	private Data data = Data.getInstance();
 	File recordingFile;
 
 	boolean isRecording = false;
@@ -45,12 +48,14 @@ public class AudioRecorder extends Activity implements OnClickListener {
 	int channelConfiguration = AudioFormat.CHANNEL_CONFIGURATION_MONO;
 	int audioEncoding = AudioFormat.ENCODING_PCM_16BIT;
 
+	long startRecordTime;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.audio);
+		setContentView(R.layout.audio_recorder);
 
-		statusText = (TextView) this.findViewById(R.id.StatusTextView);
+		durationText = (TextView) this.findViewById(R.id.DurationTextView);
 
 		startRecordingButton = (Button) this
 				.findViewById(R.id.StartRecordingButton);
@@ -60,19 +65,25 @@ public class AudioRecorder extends Activity implements OnClickListener {
 				.findViewById(R.id.StartPlaybackButton);
 		stopPlaybackButton = (Button) this
 				.findViewById(R.id.StopPlaybackButton);
-
+		photoButton = (Button) this
+				.findViewById(R.id.PhotoButton);
+		
 		startRecordingButton.setOnClickListener(this);
 		stopRecordingButton.setOnClickListener(this);
 		startPlaybackButton.setOnClickListener(this);
 		stopPlaybackButton.setOnClickListener(this);
+		photoButton.setOnClickListener(this);
 
 		stopRecordingButton.setEnabled(false);
 		startPlaybackButton.setEnabled(false);
 		stopPlaybackButton.setEnabled(false);
+		photoButton.setEnabled(true);
 
 		// recordingFile = File.createTempFile("recording", ".pcm", path);
 		recordingFile = new File(data.GetNewAudioURL());
-		
+
+		startRecordTime = System.currentTimeMillis();
+		System.out.println("Current time: " + startRecordTime);
 		// Start recording
 		record();
 	}
@@ -86,6 +97,8 @@ public class AudioRecorder extends Activity implements OnClickListener {
 			play();
 		} else if (v == stopPlaybackButton) {
 			stopPlaying();
+		} else if (v == photoButton) {
+			takePhoto();
 		}
 	}
 
@@ -117,6 +130,10 @@ public class AudioRecorder extends Activity implements OnClickListener {
 
 	public void stopRecording() {
 		isRecording = false;
+	}
+	
+	public void takePhoto(){
+		
 	}
 
 	private class PlayAudio extends AsyncTask<Void, Integer, Void> {
@@ -204,7 +221,9 @@ public class AudioRecorder extends Activity implements OnClickListener {
 		}
 
 		protected void onProgressUpdate(Integer... progress) {
-			statusText.setText(progress[0].toString());
+			long duration = System.currentTimeMillis() - startRecordTime;
+			SimpleDateFormat df = new SimpleDateFormat("mm:ss");			
+			durationText.setText("Time:" + df.format(new Date(duration)));
 		}
 
 		protected void onPostExecute(Void result) {
