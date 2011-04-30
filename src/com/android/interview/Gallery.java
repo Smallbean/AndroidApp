@@ -1,5 +1,7 @@
 package com.android.interview;
 
+import com.android.interview.utilities.Data;
+
 import android.app.Activity;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -21,6 +23,9 @@ import android.view.ViewGroup;
 
 
 public class Gallery extends Activity {
+	
+
+	private Data data = Data.getInstance();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +54,7 @@ public class Gallery extends Activity {
 
 	    private void getDrawables()
 	    {
-	    	String[] images = Interview.data.GetPhotoURLs();
+	    	String[] images = data.GetPhotoURLs();
 	    	//imgs = new Drawable[images.length];
 	    	imagePaths = new String[images.length];
 	    	

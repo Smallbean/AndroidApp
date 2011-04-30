@@ -3,6 +3,8 @@ package com.android.interview;
 
 import java.io.IOException;
 
+import com.android.interview.utilities.Data;
+
 import android.app.Activity;
 import android.content.Context;
 import android.media.MediaPlayer;
@@ -25,6 +27,9 @@ public class Audio extends Activity {
 
     private PlayButton mPlayButton = null;
     private MediaPlayer mPlayer = null;
+    
+
+    private Data data = Data.getInstance();
 
     private void onRecord(boolean start) {
         if (start) {
@@ -129,14 +134,14 @@ public class Audio extends Activity {
     }
 
     public void AudioRecordTest() {
-        mFileName = Interview.data.GetNewAudioURL();
+        mFileName = data.GetNewAudioURL();
     }
         
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mFileName = Interview.data.GetNewAudioURL();
+        mFileName = data.GetNewAudioURL();
         
         LinearLayout ll = new LinearLayout(this);
         mRecordButton = new RecordButton(this);

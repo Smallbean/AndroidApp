@@ -2,6 +2,9 @@ package com.android.interview;
 
 
 import java.io.File;
+
+import com.android.interview.utilities.Data;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -23,13 +26,14 @@ public class CameraSurface extends Activity {
 	private int displayHeight;
 	private String imageFilePath;
 
+	private Data data = Data.getInstance();
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera);
                         
-        imageFilePath = Interview.data.GetNewPhotoURL();
+        imageFilePath = data.GetNewPhotoURL();
     }
 	
 	
