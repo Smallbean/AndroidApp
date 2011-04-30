@@ -24,7 +24,7 @@ public class CameraSurface extends Activity {
 	private int CAMERA_RESULT = 1;
 	private int displayWidth;
 	private int displayHeight;
-	private String imageFilePath;
+	
 
 	private Data data = Data.getInstance();
 	
@@ -32,15 +32,14 @@ public class CameraSurface extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera);
-                        
-        imageFilePath = data.GetNewPhotoURL();
+                         
     }
 	
 	
 	public void takePhoto(View view) {		    	    
-        showToast(this,imageFilePath);       	               
+        showToast(this,data.GetNewPhotoURL());       	               
                 
-        Uri imageFileUri = Uri.fromFile(new File(this.imageFilePath));
+        Uri imageFileUri = Uri.fromFile(new File(data.GetNewPhotoURL()));
         
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageFileUri);
@@ -55,43 +54,9 @@ public class CameraSurface extends Activity {
         if(requestCode == this.CAMERA_RESULT){
         	                
             Intent intent = new Intent(this, Gallery.class);
-            startActivityForResult(intent, 0);
-            
-        	
-        	//showImage();	
+            startActivityForResult(intent, 0);                    	
         }
                
-    }
-   
-
-    private void showImage() {    	
-		Display currentDisplay = getWindowManager().getDefaultDisplay();		
-		
-		this.displayWidth = currentDisplay.getWidth();
-		this.displayHeight = currentDisplay.getHeight();			
-        this.img =  (ImageView)findViewById(R.id.image);  
-        
-        
-    	BitmapFactory.Options bmpFactoryOptions = new BitmapFactory.Options();
-    	bmpFactoryOptions.inJustDecodeBounds = true;
-    	    
-		Bitmap bmp = BitmapFactory.decodeFile(imageFilePath, bmpFactoryOptions);
-    	
-    	int heightRatio = (int)Math.ceil(bmpFactoryOptions.outHeight/(float)displayHeight);
-    	int widthRatio = (int)Math.ceil(bmpFactoryOptions.outWidth/(float)displayWidth);
-    	
-    	if(heightRatio > 1 && widthRatio > 1) {
-    		if(heightRatio > widthRatio) {
-    			bmpFactoryOptions.inSampleSize = heightRatio;
-    		} else {
-    			bmpFactoryOptions.inSampleSize = widthRatio;
-    		}
-    	}
-    	
-    	bmpFactoryOptions.inJustDecodeBounds = false;
-    	bmp = BitmapFactory.decodeFile(imageFilePath, bmpFactoryOptions);
-    	
-    	img.setImageBitmap(bmp);
     }
     
     private void showToast(Context mContext, String text) {
