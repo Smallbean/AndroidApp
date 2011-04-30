@@ -47,7 +47,7 @@ public class Data {
    }
    
    public String[] GetSubjects() {	   	   	   	   	   
-	   File files = new File(root.getAbsolutePath());	   	   	   	  
+	   File files = new File(root.getAbsolutePath());	 	 
 	   return files.list();
    }
    
@@ -77,8 +77,13 @@ public class Data {
 	   File photos = new File(Data.imageFolderPath());
 	   
 	   
+	   int count = 0;
 	   
-	   return Data.imageFolderPath() + "/image_"+photos.listFiles().length+".jpg";	   
+	   if(photos!=null && photos.listFiles()!=null) 
+		   count = photos.listFiles().length;
+	   
+	   
+	   return Data.imageFolderPath() + "/image_"+count+".jpg";
    }
          
    public String GetAudioURL() {
