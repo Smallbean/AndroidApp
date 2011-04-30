@@ -46,7 +46,6 @@ public class AudioRecorder extends Activity implements OnClickListener {
 	Button photoButton;
 	
 	TextView durationText;
-	TextView filenameText;
 	
 	private Data data = Data.getInstance();
 	File recordingFile;
@@ -66,7 +65,6 @@ public class AudioRecorder extends Activity implements OnClickListener {
 		setContentView(R.layout.audio_recorder);
 
 		durationText = (TextView) this.findViewById(R.id.DurationTextView);
-		filenameText = (TextView) this.findViewById(R.id.FilenameTextView);
 		
 		startRecordingButton = (Button) this
 				.findViewById(R.id.StartRecordingButton);
@@ -91,10 +89,11 @@ public class AudioRecorder extends Activity implements OnClickListener {
 		photoButton.setEnabled(true);
 
 		// recordingFile = File.createTempFile("recording", ".pcm", path);
-		String filename = data.GetNewAudioURL();
-		recordingFile = new File(filename);
-		filenameText.setText("File: " + filename);
+		String audioFilename = data.GetNewAudioURL();
+		recordingFile = new File(audioFilename);
 
+		showToast(this,audioFilename);       	               
+        
 		startRecordTime = System.currentTimeMillis();
 		System.out.println("Current time: " + startRecordTime);
 		// Start recording
@@ -146,9 +145,11 @@ public class AudioRecorder extends Activity implements OnClickListener {
 	}
 	
 	public void takePhoto(){
-        showToast(this,data.GetNewPhotoURL());       	               
         
-        Uri imageFileUri = Uri.fromFile(new File(data.GetNewPhotoURL()));
+		String photoFilename = data.GetNewPhotoURL();
+		showToast(this,photoFilename);       	               
+        
+        Uri imageFileUri = Uri.fromFile(new File(photoFilename));
         
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageFileUri);
