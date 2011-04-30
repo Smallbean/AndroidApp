@@ -1,7 +1,9 @@
 package com.android.interview.utilities;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 
 import android.os.Environment;
@@ -156,11 +158,16 @@ public class Data {
 	   fileToDelete.delete();
    }
    
-   private String GetNewTimeAndUuid(){
+   private String GetNewTimeAndUuid()
+   {
 	   UUID uuid = UUID.randomUUID();
 	   Calendar cal = Calendar.getInstance();
-	   Long time = cal.getTimeInMillis();
-	   return time.toString() + "_" + uuid.toString();
+	
+	   Date date = cal.getTime();
+	   SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+	   
+	   String dateTimeString = df.format(date) + "_" + uuid.toString();
+	   return dateTimeString;
    }
    
 
