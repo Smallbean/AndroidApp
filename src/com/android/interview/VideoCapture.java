@@ -2,6 +2,8 @@ package com.android.interview;
 
 import java.io.IOException;
 
+import com.android.interview.utilities.Data;
+
 
 
 import android.app.Activity;
@@ -27,6 +29,8 @@ public class VideoCapture extends Activity implements OnClickListener, Callback
     private boolean recording = false;
 	private MediaRecorder recorder;
 	private SurfaceHolder holder;
+
+    private Data data = Data.getInstance();
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) 
@@ -39,7 +43,7 @@ public class VideoCapture extends Activity implements OnClickListener, Callback
         
         setContentView(R.layout.cameraview);
         
-        imageFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/SmallBeanVideo.mp4";
+        imageFilePath = data.GetNewVideoURL();
         Log.d("mdfa", imageFilePath);
         
         recorder = new MediaRecorder();

@@ -84,7 +84,7 @@ public class Data {
    }
    
    public String GetNewVideoURL() {
-	   return Data.videoFolderPath() + "/video_" + GetNewTimeAndUuid() + ".jpg";
+	   return Data.videoFolderPath() + "/video_" + GetNewTimeAndUuid() + ".mp4";
    }
    
    public String[] GetPhotoURLs() {	   
