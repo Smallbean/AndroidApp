@@ -39,6 +39,7 @@ public class Interview extends Activity {
         super.onCreate(savedInstanceState);
         
         data = com.android.interview.utilities.Data.getInstance();
+        
         data.SetRoot(Environment.getExternalStorageDirectory());
                       
         
@@ -138,10 +139,15 @@ public class Interview extends Activity {
     }
 
     public void populateSpinner(Spinner spinner) {
+    	String[] subjects = this.data.GetSubjects();
+    	
+    	if(subjects==null) return;
+    	
         // Setup subject listing buttons
         ArrayAdapter<String> subjectListAdapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_dropdown_item,                
-        	    this.data.GetSubjects());
+        	    subjects);
+        
         spinner.setAdapter(subjectListAdapter);
     }
 
