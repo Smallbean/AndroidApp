@@ -1,28 +1,34 @@
 package com.android.interview.utilities;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+import java.util.UUID;
 
 import android.os.Environment;
+
 
 public class Data {
 	
    private static Data instance = null;
-   private static File root = null;
    private static String subject = null;
    
+
+   private static String root(){
+	   return Environment.getExternalStorageDirectory().getAbsolutePath() + "/SmallBean";
+   }
+   
    private static String subjectPath(){
-	   return root.getAbsolutePath() + "/" + Data.subject;
+	   return root() + "/" + Data.subject;
    }
       
    private static String imageFolderPath(){
 	   return Data.subjectPath() + "/images";
    }
+   
    private static String videoFolderPath(){
 	   return Data.subjectPath() + "/videos";	   
    }
+   
    private static String audioFolderPath(){
 	   return Data.subjectPath() + "/audio_files";	   
    }
@@ -41,13 +47,9 @@ public class Data {
    public void SetSubject(String subject) {
 	   Data.subject = subject;
    }
-   
-   public void SetRoot(File root) {
-	   Data.root = root;
-   }
-   
+      
    public String[] GetSubjects() {	   	   	   	   	   
-	   File files = new File(root.getAbsolutePath());	 	 
+	   File files = new File(root());	 	 
 	   return files.list();
    }
    
@@ -70,50 +72,31 @@ public class Data {
    }
    
    public String GetNote() {
-	   return null;
+	   return "This is my note stub";
    }
       
-   public String GetPhotoURL() {
-	   File photos = new File(Data.imageFolderPath());
-	   
-	   
-	   int count = 0;
-	   
-	   if(photos!=null && photos.listFiles()!=null) 
-		   count = photos.listFiles().length;
-	   
-	   
-	   return Data.imageFolderPath() + "/image_"+count+".jpg";
-   }
-         
-   public String GetAudioURL() {
-	   return null;
+   public String GetNewPhotoURL() {
+	   return Data.imageFolderPath() + "/image_" + GetNewTimeAndUuid() + ".jpg";
    }
    
-   public String GetVideoURL() {
-	   return null;
-   }
-
-   
-   public String[] GetPhotoURLs() {
-	   File files = new File(imageFolderPath());
-	   
-	   String[] photos = files.list();
-	   
-	   for(int i=0;i<photos.length;i++)
-	   {
-		   photos[i] = Data.imageFolderPath() + "/" + photos[i];
-	   }
-	   
-	   return photos;
+   public String GetNewAudioURL() {
+	   return Data.audioFolderPath() + "/audio_" + GetNewTimeAndUuid() + ".3gp";
    }
    
-   public List<String> GetAudioURLs() {
-	   return null;
+   public String GetNewVideoURL() {
+	   return Data.videoFolderPath() + "/video_" + GetNewTimeAndUuid() + ".jpg";
    }
    
-   public List<String> GetVideoURLs() {
-	   return null;
+   public String[] GetPhotoURLs() {	   
+	   return GetListOfFilesInPath(Data.imageFolderPath());
+   }
+      
+   public String[] GetAudioURLs() {
+	   return GetListOfFilesInPath(Data.imageFolderPath());
+   }
+   
+   public String[] GetVideoURLs() {
+	   return GetListOfFilesInPath(Data.imageFolderPath());
    }
    
    public void DeletePhoto(String photoUrl) {
@@ -129,8 +112,9 @@ public class Data {
    }
    
    private void createFolder(String folderPath) {	   
-	   boolean success = (new File(folderPath)).mkdir();
+	   (new File(folderPath)).mkdir();
    }
+   
    private void deleteFolder(String folderPath) {
 	   File file = new File(folderPath);
 	   if(file.isDirectory() && file.list().length>0)
@@ -164,6 +148,28 @@ public class Data {
 	   
 	   fileToDelete.delete();
    }
+   
+   private String GetNewTimeAndUuid(){
+	   UUID uuid = UUID.randomUUID();
+	   Calendar cal = Calendar.getInstance();
+	   Long time = cal.getTimeInMillis();
+	   return time.toString() + "_" + uuid.toString();
+   }
+   
+
+   private String[] GetListOfFilesInPath(String path){
+	   File folder = new File(path);
+	   
+	   String[] files = folder.list();
+	   
+	   for(int i=0;i<files.length;i++)
+	   {
+		   files[i] = path + "/" + files[i];
+	   }
+	   
+	   return files;	   
+   }
+   
   
  
 }

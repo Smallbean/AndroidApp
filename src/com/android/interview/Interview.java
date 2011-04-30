@@ -1,12 +1,10 @@
 package com.android.interview;
 
-import java.io.File;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.ContactsContract.Contacts.Data;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,8 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
+
+import com.android.interview.utilities.Data;
 
 
 public class Interview extends Activity {
@@ -31,18 +30,14 @@ public class Interview extends Activity {
 
     private ViewFlipper flipper;
     
-    public static com.android.interview.utilities.Data data;
+    private Data data = Data.getInstance();
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        data = com.android.interview.utilities.Data.getInstance();
-        
-        data.SetRoot(Environment.getExternalStorageDirectory());
-                      
-        
+                
+                    
         setContentView(R.layout.dashboard);
 
         this.flipper = (ViewFlipper) findViewById(R.id.subject_views);
@@ -80,7 +75,7 @@ public class Interview extends Activity {
                 TextView subjectview = (TextView) findViewById(R.id.subjectname);
                 subjectview.setText(currentSubjectName);
                 
-                Interview.data.SetSubject(currentSubjectName);
+                data.SetSubject(currentSubjectName);
 
                 flipper.setDisplayedChild(Interview.SUBJECT_DETAILS_VIEW);
             }
@@ -107,7 +102,7 @@ public class Interview extends Activity {
                 TextView subjectview = (TextView) findViewById(R.id.subjectname);
                 subjectview.setText(subjectName);
                 
-                Interview.data.SetSubject(subjectName);
+                data.SetSubject(subjectName);
             }
 
             public void onNothingSelected(AdapterView parent) {
