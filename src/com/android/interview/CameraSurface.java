@@ -8,24 +8,14 @@ import com.android.interview.utilities.Data;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.view.Display;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 
 public class CameraSurface extends Activity {	
-	private ImageView img;	
 	private int CAMERA_RESULT = 1;
-	private int displayWidth;
-	private int displayHeight;
-	
-
 	private Data data = Data.getInstance();
 	
 	@Override
