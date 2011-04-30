@@ -1,12 +1,19 @@
 package com.android.interview.utilities;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import android.os.Environment;
 
 public class Data {
 	
    private static Data instance = null;
    private static String subject = null;
+   private static String subjectPath = null;   
+   private static String imageFolderPath = null;
+   private static String videoFolderPath = null;
+   private static String audioFolderPath = null;
    
    protected Data() {
       // Exists only to defeat instantiation.
@@ -20,20 +27,34 @@ public class Data {
    }
    
    public void SetSubject(String subject) {
-	   this.subject = subject;
+	   Data.subject = subject;
    }
    
-   public List<String> GetSubjects() {
-	   List<String> test = new ArrayList<String>();
+   public List<String> GetSubjects() {	   	   
+	   List<String> subjects = new ArrayList<String>();
 	   
-	   test.add("Noah");
-	   test.add("Sean");
+	   File subjectDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath());
 	   
-	   return test;
+	   for(String s : subjectDirectory.list()) {
+		   subjects.add(s);
+	   }
+	   return subjects;
    }
    
    public void AddSubject(String subject) {
-	   // add the subject
+	   // add the subject	   
+	   Data.subject = subject;	 
+	   
+	   Data.subjectPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + Data.subject;
+	   Data.imageFolderPath = Data.subjectPath + "/images";
+	   Data.videoFolderPath = Data.subjectPath + "/videos";
+	   Data.audioFolderPath = Data.audioFolderPath + "/audio_fiels";
+	   
+	   createFolder(Data.subjectPath);
+	   createFolder(Data.imageFolderPath);
+	   createFolder(Data.videoFolderPath);
+	   createFolder(Data.audioFolderPath);
+	   
    }
    
    public void SetNote(String note) {
@@ -45,8 +66,8 @@ public class Data {
    }
       
    public String GetPhotoURL() {
-	   // get photo url
-	   return null;	   
+	   
+	   return Environment.getExternalStorageDirectory().getAbsolutePath() + "/image.jpg";	   
    }
    
    public String GetAudioURL() {
@@ -71,18 +92,27 @@ public class Data {
 	   return null;
    }
    
-   public void DeletePhoto(String url) {
-	   //delete a photo
+   public void DeletePhoto(String photoUrl) {
+	   deleteFile(photoUrl);
    }
 
-   public void DeleteAudio(String url) {
-	   //delete a audio file
+   public void DeleteAudio(String audioUrl) {
+	   deleteFile(audioUrl);
    }
    
-   public void DeleteVideo(String url) {
-	   //delete a video 
+   public void DeleteVideo(String videoUrl) {
+	   deleteFile(videoUrl);
    }
    
+   private void createFolder(String folderPath) {
+	   
+   }
+   private void deleteFolder(String folderPath) {
+	   
+   }
+   private void deleteFile(String filePath) {
+	   
+   }
   
       
    
