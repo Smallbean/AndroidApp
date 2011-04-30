@@ -4,7 +4,7 @@
 	    android:orientation="vertical"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
-	    android:background="#CCFFFF">
+	    android:background="@color/main_background">
 	    		
 	    		
 	    <LinearLayout
@@ -41,7 +41,7 @@
 	    		android:orientation="horizontal"
 	    		android:layout_width="wrap_content"
 	    		android:layout_height="wrap_content"
-	    		android:background="#CCFFFF"
+	    		android:background="@color/main_background"
 	    		android:layout_gravity="center_horizontal|center_vertical"
 	    		>
 	    		<Button

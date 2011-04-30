@@ -2,7 +2,9 @@
 <LinearLayout android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#EDE6CE" xmlns:android="http://schemas.android.com/apk/res/android">	
+    android:background="@color/main_background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >	
   		
   	
   	<TextView
@@ -45,27 +47,6 @@
         android:layout_height="10px"
         android:layout_weight="1"/>
         
-     
-     <LinearLayout 
-    		android:orientation="horizontal"
-    		android:layout_width="fill_parent"
-    		android:layout_height="wrap_content"
-    		android:background="#85AB8F">
-    
-    <ImageView 
-            android:layout_width="80px"
-            android:layout_height="80px"
-            android:src="@drawable/nav_back"
-            android:onClick="finish"
-            android:layout_gravity="left"
-    />  
-    <ImageView 
-            android:layout_width="80px"
-            android:layout_height="80px"
-            android:src="@drawable/nav_home"
-            android:layout_gravity="left"
-            android:onClick="goHome"
-    />     
-    </LinearLayout>   
-    		
+
+	<include layout="@layout/footer" />    		 
 </LinearLayout>
