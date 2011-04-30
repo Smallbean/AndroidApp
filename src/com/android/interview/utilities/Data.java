@@ -39,7 +39,7 @@ public class Data {
    }
    
    private String audioFolderPath(){
-	   return subjectPath() + "/audio_files";	   
+	   return subjectPath() + "/audio";	   
    }
    
    protected Data() {
@@ -164,7 +164,7 @@ public class Data {
 	   Calendar cal = Calendar.getInstance();
 	
 	   Date date = cal.getTime();
-	   SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+	   SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ssZ");
 	   
 	   String dateTimeString = df.format(date) + "_" + uuid.toString();
 	   return dateTimeString;
