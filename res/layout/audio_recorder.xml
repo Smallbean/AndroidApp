@@ -8,4 +8,5 @@
 	<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Stop Recording" android:id="@+id/StopRecordingButton"></Button>
 	<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Start Playback" android:id="@+id/StartPlaybackButton"></Button>
 	<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Stop Playback" android:id="@+id/StopPlaybackButton"></Button>
+	<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Photo" android:id="@+id/PhotoButton"></Button>
 </LinearLayout>
