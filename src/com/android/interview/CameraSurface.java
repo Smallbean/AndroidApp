@@ -48,6 +48,15 @@ public class CameraSurface extends Activity {
     }
 	
 	
+	public void goHome(View view) {
+		
+	
+	}
+	
+	public void finish(View view) {		
+		this.finish();
+	}
+	
 	public void takePhoto(View view) {		    	    
         showToast(this,data.GetNewPhotoURL());       	               
                 
@@ -72,9 +81,7 @@ public class CameraSurface extends Activity {
    	    		public void onItemClick(AdapterView parent, View v, int position, long id) {
    	    			Toast.makeText(CameraSurface.this, "" + position, Toast.LENGTH_SHORT).show();
    	    		}
-   	    	});    	                
-    //        Intent intent = new Intent(this, Gallery.class);
-    //        startActivityForResult(intent, 0);                    	
+   	    	});    	                                       	
         }
     
                
@@ -131,7 +138,7 @@ public class CameraSurface extends Activity {
 	        ImageView i = new ImageView(mContext);
 	        	      
 	        i.setImageDrawable(downSampleImage(imagePaths[position]));
-	        i.setLayoutParams(new android.widget.Gallery.LayoutParams(150, 100));
+	        i.setLayoutParams(new android.widget.Gallery.LayoutParams(400, 400));
 	        i.setScaleType(ImageView.ScaleType.FIT_XY);
 	        i.setBackgroundResource(mGalleryItemBackground);
 

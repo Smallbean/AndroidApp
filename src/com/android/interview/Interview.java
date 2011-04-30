@@ -166,7 +166,7 @@ public class Interview extends Activity {
 
     public void recordAudio(View view) {
         // TODO: Check for interviewTitle (see above)
-        Intent intent = new Intent(this, Audio.class);
+        Intent intent = new Intent(this, AudioRecorder.class);
         startActivityForResult(intent, RECORD_AUDIO);
     }
 
