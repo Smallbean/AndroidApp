@@ -44,7 +44,7 @@ public class VideoCapture extends Activity implements OnClickListener, Callback
         setContentView(R.layout.cameraview);
         
         imageFilePath = data.GetNewVideoURL();
-        Log.d("mdfa", imageFilePath);
+        Log.d("VideoPath", imageFilePath);
         
         recorder = new MediaRecorder();
         initRecorder();
