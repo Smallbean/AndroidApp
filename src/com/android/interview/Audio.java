@@ -23,7 +23,7 @@ public class Audio extends Activity {
     private static String mFileName = null;
 
     private RecordButton mRecordButton = null;
-    private MediaRecorder mRecorder = null;
+    private final MediaRecorder mRecorder = new MediaRecorder();
 
     private PlayButton mPlayButton = null;
     private MediaPlayer mPlayer = null;
@@ -64,7 +64,8 @@ public class Audio extends Activity {
     }
 
     private void startRecording() {
-        mRecorder = new MediaRecorder();
+        //mRecorder = new MediaRecorder();
+        
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         mRecorder.setOutputFile(mFileName);
@@ -86,7 +87,7 @@ public class Audio extends Activity {
     private void stopRecording() {
         mRecorder.stop();
         mRecorder.release();
-        mRecorder = null;
+        //mRecorder = null;
     }
 
     class RecordButton extends Button {
@@ -164,7 +165,7 @@ public class Audio extends Activity {
         super.onPause();
         if (mRecorder != null) {
             mRecorder.release();
-            mRecorder = null;
+            //mRecorder = null;
         }
 
         if (mPlayer != null) {
