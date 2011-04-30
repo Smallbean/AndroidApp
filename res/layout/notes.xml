@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-  android:background="#CCFFFF">
-  
-  <TextView 
-  	android:id="@+id/subject"
-  	android:layout_width="fill_parent"
-  	android:layout_height="wrap_content"
-  	android:text="subject"
-  />
-  
-  
-  <EditText
-        android:id="@+id/note"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"/>
-  
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#CCFFFF"
+    >
+    
+    <TextView  
+		android:id="@+id/subjectname"
+    	android:layout_width="fill_parent" 
+    	android:layout_height="wrap_content" 
+    	android:text="Subject name"
+    	android:textSize="50px"
+    	android:textColor="#000000"
+    />
+       
+        
+	<EditText
+    	android:inputType="text|textMultiLine"
+    	android:minLines="3"
+    	android:maxLines="10"
+    	android:gravity="top"
+    	android:layout_width="fill_parent" 
+    	android:layout_height="wrap_content" 
+    />
 </LinearLayout>

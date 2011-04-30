@@ -13,4 +13,5 @@
     <string name="subject_existing">Existing Subjects</string>
     <string name="subject_list_dropdown_prompt">Select Subject</string>
     <string name="app_name_gallery">Gallery</string>
+    <string name="app_name_note">Note</string>
 </resources>

@@ -22,6 +22,7 @@ public class Interview extends Activity {
     private static final int RECORD_AUDIO = 1;
     private static final int RECORD_VIDEO = 2;
     private static final int SHOW_GALLERY = 3;
+    private static final int TAKE_NOTE = 4;
 
     private static final int SUBJECT_DASHBOARD_VIEW = 0;
     private static final int SUBJECT_CREATE_VIEW = 1;
@@ -154,6 +155,14 @@ public class Interview extends Activity {
         // TODO: Check for interviewTitle (see above)
         Intent intent = new Intent(this, CameraSurface.class);
         startActivityForResult(intent, TAKE_PHOTO);
+        
+        
+    }
+    
+    public void takeNote(View view) {
+        // TODO: Check for interviewTitle (see above)
+        Intent intent = new Intent(this, Note.class);
+        startActivityForResult(intent, TAKE_NOTE);
         
         
     }
