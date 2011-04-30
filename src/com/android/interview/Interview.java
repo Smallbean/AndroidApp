@@ -154,6 +154,8 @@ public class Interview extends Activity {
         // TODO: Check for interviewTitle (see above)
         Intent intent = new Intent(this, CameraSurface.class);
         startActivityForResult(intent, TAKE_PHOTO);
+        
+        
     }
     
     public void showGallery(View view){
@@ -170,6 +172,8 @@ public class Interview extends Activity {
 
     public void recordVideo(View view) {
         // TODO: Invoke video recording activity
+    	Intent intent = new Intent(this, VideoCapture.class);
+        startActivityForResult(intent, RECORD_VIDEO);
     }
 
     @Override

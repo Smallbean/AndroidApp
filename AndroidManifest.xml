@@ -15,9 +15,12 @@
         </activity>
         <activity android:name=".CameraSurface" />
       	<activity android:name=".Audio" />
-      	<activity android:name=".Gallery" />      	
+      	<activity android:name=".Gallery" />   
+      	<activity android:name=".VideoCapture" />   	
     </application>
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.hardware.microphone" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     
