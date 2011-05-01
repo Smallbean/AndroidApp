@@ -15,16 +15,21 @@
  			<LinearLayout
 	    		android:orientation="vertical"
 	    		android:layout_width="wrap_content"
-	    		android:layout_height="wrap_content"
+	    		android:layout_height="fill_parent"
 	    		android:background="@color/main_background"
 	    		>
-	    		
+	    	    <ImageView
+                        android:layout_height="300px"
+                        android:layout_width="400px"
+                        android:layout_gravity="center_horizontal"          
+                        android:src="@drawable/mainlogo" 
+                        android:padding="3px"/>
  				<LinearLayout
+ 				    android:layout_height="wrap_content"
 		    		android:orientation="horizontal"
 		    		android:layout_width="wrap_content"
-	    			android:layout_height="wrap_content"
 	    			android:background="@color/main_background"
-	    			android:layout_gravity="center_horizontal|center_vertical">
+	    			android:layout_gravity="center_horizontal|center_vertical">		
 	    			<Button
 	        			android:id="@+id/subject_create_button"
 	        			android:layout_width="wrap_content"
@@ -35,15 +40,8 @@
 	        			android:id="@+id/subject_list_button"
 	        			android:layout_width="wrap_content"
 	        			android:layout_height="wrap_content"
-	        			android:background="@drawable/dashboard_library_button"/>    
-	        							 						    		    	        		   
-				</LinearLayout>
-				<ImageView
-    					android:layout_height="wrap_content"
-    					android:layout_width="wrap_content"
-    					android:layout_gravity="left"    		
-    					android:src="@drawable/mainlogo" 
-    					android:padding="3px"/>				
+	        			android:background="@drawable/dashboard_library_button"/>    				 						    		    	        		   
+				</LinearLayout>				
 			</LinearLayout>
 
 			<!-- Create Project -->
@@ -84,6 +82,7 @@
               		android:drawSelectorOnTop="false"
               		android:cacheColorHint="#00000000"
        		     /> 
+                  <!-- 
         		  <LinearLayout 
             		android:layout_width="fill_parent"
             		android:layout_height="wrap_content"
@@ -102,6 +101,29 @@
             			android:layout_gravity="left"
     				/> 
     			</LinearLayout>    
+    			   -->
+    			<RelativeLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content" 
+					android:background="@color/footer_background"
+                >
+		        <ImageView 
+		            android:layout_width="80px"
+		            android:layout_height="80px"
+		            android:src="@drawable/nav_back"
+		            android:onClick="goHome"
+		            android:layout_gravity="left"
+		            android:layout_alignParentLeft="true"
+		        />  
+		        <ImageView 
+		            android:layout_width="80px"
+		            android:layout_height="80px"
+		            android:src="@drawable/nav_home"
+		            android:onClick="goHome"
+		            android:layout_alignParentRight="true"
+		        />     
+                </RelativeLayout>
     	 </LinearLayout>
     
 		    <!-- View Project -->
@@ -151,8 +173,9 @@
 			    <TextView     
 			        android:layout_width="fill_parent"
 			        android:layout_height="10px"
-			        android:layout_weight="1"/>       
-		    	<LinearLayout 
+			        android:layout_weight="1"/>
+			               
+<!--  		    	<LinearLayout 
 		            android:layout_width="fill_parent"
 		            android:layout_height="wrap_content"
 		            android:background="#85AB8F">
@@ -167,7 +190,30 @@
 				            android:layout_height="80px"
 				            android:src="@drawable/nav_home"
 				            android:layout_gravity="left"/>
-			    </LinearLayout>    
+			    </LinearLayout> -->
+			    
+			   <RelativeLayout
+				xmlns:android="http://schemas.android.com/apk/res/android"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content" 
+				android:background="@color/footer_background"
+				>
+			         <ImageView 
+			            android:layout_width="80px"
+			            android:layout_height="80px"
+			            android:src="@drawable/nav_back"
+			            android:onClick="finish"
+			            android:layout_gravity="left"
+			            android:layout_alignParentLeft="true"
+			        />  
+			        <ImageView 
+			            android:layout_width="80px"
+			            android:layout_height="80px"
+			            android:src="@drawable/nav_home"
+			            android:onClick="goHome"
+			            android:layout_alignParentRight="true"
+			        />     
+                </RelativeLayout>    
         </LinearLayout>    
 	</ViewFlipper>
 </LinearLayout>
