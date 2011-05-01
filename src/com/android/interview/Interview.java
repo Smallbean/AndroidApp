@@ -4,10 +4,7 @@ package com.android.interview;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -106,7 +103,7 @@ public class Interview extends Activity {
                 data.SetSubject(subjectName);
             }
 
-            public void onNothingSelected(AdapterView parent) {
+            public void onNothingSelected(AdapterView<?> parent) {
                 // Do nothing
             }
         });
@@ -181,10 +178,6 @@ public class Interview extends Activity {
     protected void onActivityResult(int requestCode, int resultCode,
             Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-        Bundle extras = null;
-        if (intent != null) {
-            extras = intent.getExtras();
-        }
         // Bundle extras = intent.getExtras();
         switch (requestCode) {
             case TAKE_PHOTO:
