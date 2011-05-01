@@ -82,7 +82,6 @@ public class Interview extends Activity {
                 flipper.setDisplayedChild(Interview.SUBJECT_DASHBOARD_VIEW);
             }
         });
-
         ListView subjectListView = (ListView) findViewById(R.id.subject_list_view);
         populateListView(subjectListView);
         
