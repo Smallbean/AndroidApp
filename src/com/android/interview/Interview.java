@@ -127,7 +127,7 @@ public class Interview extends Activity {
         });
 
         // Setup subject view buttons
-        Button subjectViewBackButton = (Button) findViewById(R.id.subject_dashboard_button);
+        Button subjectViewBackButton = (Button) findViewById(R.id.nav_back);
         subjectViewBackButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 flipper.setDisplayedChild(Interview.SUBJECT_DASHBOARD_VIEW);

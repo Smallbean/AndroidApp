@@ -11,23 +11,32 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioRecord;
 import android.media.AudioTrack;
 import android.media.MediaRecorder;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
+import com.android.interview.CameraSurface.ImageAdapter;
 import com.android.interview.utilities.Data;
 
 public class AudioRecorder extends Activity implements OnClickListener {
 
+    private static final int CAMERA_RESULT = 1;
+	
 	RecordAudio recordTask;
 	PlayAudio playTask;
 
@@ -56,7 +65,7 @@ public class AudioRecorder extends Activity implements OnClickListener {
 		setContentView(R.layout.audio_recorder);
 
 		durationText = (TextView) this.findViewById(R.id.DurationTextView);
-
+		
 		startRecordingButton = (Button) this
 				.findViewById(R.id.StartRecordingButton);
 		stopRecordingButton = (Button) this
@@ -80,8 +89,11 @@ public class AudioRecorder extends Activity implements OnClickListener {
 		photoButton.setEnabled(true);
 
 		// recordingFile = File.createTempFile("recording", ".pcm", path);
-		recordingFile = new File(data.GetNewAudioURL());
+		String audioFilename = data.GetNewAudioURL();
+		recordingFile = new File(audioFilename);
 
+		showToast(this,audioFilename);       	               
+        
 		startRecordTime = System.currentTimeMillis();
 		System.out.println("Current time: " + startRecordTime);
 		// Start recording
@@ -133,8 +145,29 @@ public class AudioRecorder extends Activity implements OnClickListener {
 	}
 	
 	public void takePhoto(){
-		
+        
+		String photoFilename = data.GetNewPhotoURL();
+		showToast(this,photoFilename);       	               
+        
+        Uri imageFileUri = Uri.fromFile(new File(photoFilename));
+        
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageFileUri);
+        
+        startActivityForResult(intent, this.CAMERA_RESULT);               		
 	}
+
+	private void showToast(Context mContext, String text) {
+    	Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
+    }
+	
+    protected void onActivityResult(int requestCode, int resultCode, Intent image) {
+        super.onActivityResult(requestCode, resultCode, image);
+                
+       if(requestCode == this.CAMERA_RESULT){
+    	      	                                       	
+        }
+    }
 
 	private class PlayAudio extends AsyncTask<Void, Integer, Void> {
 		@Override
@@ -232,4 +265,5 @@ public class AudioRecorder extends Activity implements OnClickListener {
 			startPlaybackButton.setEnabled(true);
 		}
 	}
+	
 }

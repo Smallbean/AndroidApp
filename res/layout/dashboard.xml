@@ -1,25 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:orientation="vertical"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
-	    android:background="@color/main_background">
-	    		
-	    		
+	    android:background="@color/main_background">	    		
 	    <LinearLayout
 	    	android:orientation="horizontal"
 	    	android:layout_width="wrap_content"
 	    	android:layout_height="wrap_content"
-	    	android:layout_gravity="center_horizontal"	    	
-	    	>		
+	    	android:layout_gravity="center_horizontal">		
 	   	<ImageView
     		android:layout_height="50px"
     		android:layout_width="50px"
     		android:layout_gravity="left"    		
     		android:src="@drawable/tv" 
-    		android:padding="3px"/>
-    		
+    		android:padding="3px"/>    		
 		<TextView
     		android:layout_width="fill_parent"
     		android:layout_height="wrap_content"
@@ -27,14 +22,12 @@
     		android:textSize="40px"
     		android:typeface="monospace"
     		android:text="smallbean" /> 		    		
-    	</LinearLayout>
-    	
+    	</LinearLayout>    	
     			
 		<ViewFlipper 
     		android:id = "@+id/subject_views"
     		android:layout_width="fill_parent"
-    		android:layout_height="fill_parent"
-    		>
+    		android:layout_height="fill_parent">
 
     		<!-- Dashboard -->
  			<LinearLayout
@@ -42,8 +35,7 @@
 	    		android:layout_width="wrap_content"
 	    		android:layout_height="wrap_content"
 	    		android:background="@color/main_background"
-	    		android:layout_gravity="center_horizontal|center_vertical"
-	    		>
+	    		android:layout_gravity="center_horizontal|center_vertical">
 	    		<Button
 	        		android:id="@+id/subject_create_button"
 	        		android:layout_width="wrap_content"
@@ -54,8 +46,7 @@
 	        		android:id="@+id/subject_list_button"
 	        		android:layout_width="wrap_content"
 	        		android:layout_height="wrap_content"
-	        		android:background="@drawable/dashboard_library_button"
-	        		 />        
+	        		android:background="@drawable/dashboard_library_button"/>        
 			</LinearLayout>
 
 			<!-- Create Project -->
@@ -120,53 +111,65 @@
     		<LinearLayout
         		android:orientation="vertical"
         		android:layout_width="fill_parent"
-        		android:layout_height="wrap_content">        		
+        		android:layout_height="fill_parent">        		
         		<TextView android:id="@+id/subjectname"
         				  android:text="subject"
         				  android:layout_width="fill_parent"
         				  android:layout_height="wrap_content"
-        				  android:textColor="#000000"        				  
-        		/>
-	    		<LinearLayout
-	        		android:layout_width="fill_parent"
-	        		android:layout_height="wrap_content">
-	        		<Button
-	            		android:text="@string/app_name_photo"
-	            		android:onClick="takePhoto"
-	            		android:layout_height="wrap_content"
-	            		android:layout_width="wrap_content"
-	            		android:layout_marginTop="25dip" />
-	        		<Button
-	            		android:text="@string/app_name_audio"
-	            		android:onClick="recordAudio"
-	            		android:layout_height="wrap_content"
-	            		android:layout_width="wrap_content"
-	            		android:layout_marginTop="25dip" />
-	        		<Button
-	            		android:text="@string/app_name_video"
-	            		android:onClick="recordVideo"
-	            		android:layout_height="wrap_content"
-	            		android:layout_width="wrap_content"
-	            		android:layout_marginTop="25dip" />
-	               <Button
-	            		android:text="@string/app_name_note"
-	            		android:onClick="takeNote"
-	            		android:layout_height="wrap_content"
-	            		android:layout_width="wrap_content"
-	            		android:layout_marginTop="25dip" />
-					<Button
-	            		android:text="@string/app_name_gallery"
-	            		android:onClick="showGallery"
-	            		android:layout_height="wrap_content"
-	            		android:layout_width="wrap_content"
-	            		android:layout_marginTop="25dip" />	            		
-        		</LinearLayout>
-        		<Button
-            		android:id="@+id/subject_dashboard_button"
-            		android:text="@string/dashboard"
-            		android:layout_width="wrap_content"
-            		android:layout_height="wrap_content"
-            		android:layout_marginTop="25dip" />
+        				  android:textColor="#000000"/>
+        		<TableLayout
+        		  android:layout_width="fill_parent"
+        		  android:layout_height="wrap_content"
+        		  android:stretchColumns="1"
+        		  android:layout_marginTop="50px">
+        		  <TableRow>
+		        		<ImageView
+		        		android:layout_width="140px"
+		        		android:layout_height="140px"
+		        		android:src="@drawable/sub_pic_text"
+		        		android:onClick="takePhoto"
+		        		android:layout_marginLeft="50px"/>
+		        		<ImageView
+	                    android:layout_width="140px"
+	                    android:layout_height="140px"
+	                    android:src="@drawable/sub_vid_wtext"
+	                    android:onClick="recordVideo"
+	                    android:layout_marginLeft="50px"/>
+	              </TableRow>
+	              <TableRow>
+		        		<ImageView
+	                    android:layout_width="140px"
+	                    android:layout_height="140px"
+	                    android:src="@drawable/sub_audio_text"
+	                    android:onClick="recordAudio"
+	                    android:layout_marginLeft="50px"/>
+		        		<ImageView
+	                    android:layout_width="140px"
+	                    android:layout_height="140px"
+	                    android:src="@drawable/sub_note_text"
+	                    android:layout_marginLeft="50px"/>
+	               </TableRow>
+	        	</TableLayout>
+			    <TextView     
+			        android:layout_width="fill_parent"
+			        android:layout_height="10px"
+			        android:layout_weight="1"/>       
+		    	<LinearLayout 
+		            android:layout_width="fill_parent"
+		            android:layout_height="wrap_content"
+		            android:background="#85AB8F">
+				    <ImageView
+				    		android:id="@+id/nav_back"
+				            android:layout_width="80px"
+				            android:layout_height="80px"
+				            android:src="@drawable/nav_back"
+				            android:layout_gravity="left"/>  
+				    <ImageView 
+				            android:layout_width="80px"
+				            android:layout_height="80px"
+				            android:src="@drawable/nav_home"
+				            android:layout_gravity="left"/>
+			    </LinearLayout>      		
     		</LinearLayout>
 		</ViewFlipper>
 </LinearLayout>
