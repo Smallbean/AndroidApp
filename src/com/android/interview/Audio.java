@@ -5,9 +5,6 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
-
-import com.android.interview.CameraSurface.ImageAdapter;
 import com.android.interview.utilities.Data;
 
 import android.app.Activity;
@@ -16,12 +13,9 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
-import android.media.MediaPlayer;
-import android.media.MediaRecorder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,12 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 
@@ -59,7 +48,7 @@ public class Audio extends Activity {
         audio_gallery.setAdapter(new AudioAdapter(this));
 
         audio_gallery.setOnItemClickListener(new OnItemClickListener() {
-	        public void onItemClick(AdapterView parent, View v, int position, long id) {
+	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 	        	recordingFile = new File(audioFilePaths[position]);
 	        	playTask = new PlayAudio();
 	    		playTask.execute();
