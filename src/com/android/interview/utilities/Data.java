@@ -1,6 +1,11 @@
 package com.android.interview.utilities;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -42,6 +47,10 @@ public class Data {
 	   return subjectPath() + "/audio";	   
    }
    
+   private String noteFilePath(){
+	   return subjectPath() + "/note.txt";	   
+   }
+   
    protected Data() {
       // Exists only to defeat instantiation.
    }
@@ -77,11 +86,47 @@ public class Data {
    }
    
    public void SetNote(String note) {
-	   
+	   File f = new File(noteFilePath());
+
+	   try {
+		   if (!f.exists())
+		   {
+			   f.createNewFile();
+		   }
+		   
+	        FileWriter gpxwriter = new FileWriter(f);
+	        BufferedWriter out = new BufferedWriter(gpxwriter);
+	        out.write(note);
+	        out.close();
+		    
+		} catch (IOException e) {
+
+		}
+
    }
    
    public String GetNote() {
-	   return "This is my note stub";
+	   
+
+	   String note = "";
+	   File f = new File(noteFilePath());
+	   
+	   try {
+		   BufferedReader r = new BufferedReader(new FileReader(f));
+		   StringBuilder total = new StringBuilder();
+		   String line;
+		   while ((line = r.readLine()) != null) {
+		       total.append(line);
+		   }
+		   note = total.toString();
+	   }
+	   catch (Exception e)
+	   {
+		   
+	   }
+
+
+	   return note;
    }
       
    public String GetNewPhotoURL() {
