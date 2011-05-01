@@ -12,9 +12,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.android.interview.utilities.Data;
 
@@ -68,9 +70,9 @@ public class Interview extends Activity {
 
                 createSubject(currentSubjectName);
 
-                // Update dropdown list
-                Spinner spinner = (Spinner) findViewById(R.id.subject_list_dropdown);
-                populateSpinner(spinner);
+//                // Update dropdown list
+//                Spinner spinner = (Spinner) findViewById(R.id.subject_list_dropdown);
+//                populateSpinner(spinner);
                 
                 // Update the subject title in the subject detail view of the current subject
                 TextView subjectview = (TextView) findViewById(R.id.subjectname);
@@ -89,41 +91,60 @@ public class Interview extends Activity {
             }
         });
 
-        Spinner spinner = (Spinner) findViewById(R.id.subject_list_dropdown);
-        populateSpinner(spinner);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view,
-                    int position, long id) {
-                String subjectName = parent.getItemAtPosition(position)
-                        .toString();
-                data.SetSubject(subjectName);
-                
-                
-                // Update the subject title in the subject detail view of the current subject
-                TextView subjectview = (TextView) findViewById(R.id.subjectname);
-                subjectview.setText(subjectName);
-                
-                data.SetSubject(subjectName);
+        ListView subjectListView = (ListView) findViewById(R.id.subject_list_view);
+        populateListView(subjectListView);
+        
+        subjectListView.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                int position, long id) {
+            
+              
+              String subjectName = (String) ((TextView) view).getText();
+              data.SetSubject(subjectName);
+              
+              TextView subjectview = (TextView) findViewById(R.id.subjectname);
+              subjectview.setText(subjectName);
+              
+              flipper.setDisplayedChild(Interview.SUBJECT_DETAILS_VIEW);
+            
             }
+          });
 
-            public void onNothingSelected(AdapterView parent) {
-                // Do nothing
-            }
-        });
+//        Spinner spinner = (Spinner) findViewById(R.id.subject_list_dropdown);
+//        populateSpinner(spinner);
+//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            public void onItemSelected(AdapterView<?> parent, View view,
+//                    int position, long id) {
+//                String subjectName = parent.getItemAtPosition(position)
+//                        .toString();
+//                data.SetSubject(subjectName);
+//                
+//                
+//                // Update the subject title in the subject detail view of the current subject
+//                TextView subjectview = (TextView) findViewById(R.id.subjectname);
+//                subjectview.setText(subjectName);
+//                
+//                data.SetSubject(subjectName);
+//            }
+//
+//            public void onNothingSelected(AdapterView parent) {
+//                // Do nothing
+//            }
+//        });
 
-        Button subjectListViewButton = (Button) findViewById(R.id.subject_list_view_button);
-        subjectListViewButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                flipper.setDisplayedChild(Interview.SUBJECT_DETAILS_VIEW);
-            }
-        });
-
-        Button subjectListBackButton = (Button) findViewById(R.id.subject_list_back_button);
-        subjectListBackButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                flipper.setDisplayedChild(Interview.SUBJECT_DASHBOARD_VIEW);
-            }
-        });
+//        Button subjectListViewButton = (Button) findViewById(R.id.subject_list_view_button);
+//        subjectListViewButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                flipper.setDisplayedChild(Interview.SUBJECT_DETAILS_VIEW);
+//            }
+//        });
+//
+//        Button subjectListBackButton = (Button) findViewById(R.id.subject_list_back_button);
+//        subjectListBackButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                flipper.setDisplayedChild(Interview.SUBJECT_DASHBOARD_VIEW);
+//            }
+//        });
 
         // Setup subject view buttons
         Button subjectViewBackButton = (Button) findViewById(R.id.subject_dashboard_button);
@@ -134,17 +155,31 @@ public class Interview extends Activity {
         });
     }
 
-    public void populateSpinner(Spinner spinner) {
+//    public void populateSpinner(Spinner spinner) {
+//    	String[] subjects = this.data.GetSubjects();
+//    	
+//    	if(subjects==null) return;
+//    	
+//        // Setup subject listing buttons
+//        ArrayAdapter<String> subjectListAdapter = new ArrayAdapter<String>(
+//                this, android.R.layout.simple_spinner_dropdown_item,                
+//        	    subjects);
+//        
+//        spinner.setAdapter(subjectListAdapter);
+//    }
+    
+    public void populateListView(ListView subjectListView) 
+    {
     	String[] subjects = this.data.GetSubjects();
     	
     	if(subjects==null) return;
     	
         // Setup subject listing buttons
         ArrayAdapter<String> subjectListAdapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_dropdown_item,                
+                this, R.layout.subject_list_item_view,                
         	    subjects);
         
-        spinner.setAdapter(subjectListAdapter);
+        subjectListView.setAdapter(subjectListAdapter);
     }
 
     public void createSubject(String currentSubjectName) {    	
