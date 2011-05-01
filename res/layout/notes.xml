@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
@@ -26,25 +25,3 @@
     	android:layout_height="wrap_content" 
     />
 </LinearLayout>
-=======
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-  android:background="@color/main_background">
-  
-  <TextView 
-  	android:id="@+id/subject"
-  	android:layout_width="fill_parent"
-  	android:layout_height="wrap_content"
-  	android:text="subject"
-  />
-  
-  
-  <EditText
-        android:id="@+id/note"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"/>
-  
-</LinearLayout>
->>>>>>> b802ac1a873d9530fa9b15447e64cc25fd22ad64
