@@ -7,6 +7,6 @@
   android:textColor="#000000"
   android:textSize="40px"
   android:typeface="monospace"
-  android:gravity="center_horizontal|center_vertical"
+  android:gravity="center_horizontal"
   >
 </TextView>
