@@ -25,7 +25,8 @@
       	<activity android:name=".AudioRecorder" />
       	<activity android:name=".Audio" />
       	<activity android:name=".Gallery" />   
-      	<activity android:name=".VideoCapture" />   	
+      	<activity android:name=".VideoCapture" />
+      	<activity android:name=".VideoGallery" />   	
       	<activity android:name=".Note" />   	
     </application>
     <uses-permission android:name="android.permission.RECORD_AUDIO" />

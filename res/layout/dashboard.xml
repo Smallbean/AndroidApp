@@ -147,6 +147,7 @@
 	                    android:layout_width="140px"
 	                    android:layout_height="140px"
 	                    android:src="@drawable/sub_note_text"
+	                    android:onClick="takeNote"
 	                    android:layout_marginLeft="50px"/>
 	               </TableRow>
 	        	</TableLayout>

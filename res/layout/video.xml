@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/main_background">
+    
+      	<TextView
+        	android:text=""        
+        	android:layout_width="fill_parent"
+        	android:layout_height="10px"
+        	android:layout_weight="1"/>
+        
+        <ImageView
+  			android:id="@+id/recordVideo"
+  			android:layout_width="wrap_content"
+  			android:layout_height="wrap_content"
+  			android:src="@drawable/sub_vid_wotext"
+  			android:onClick="recordVideo"
+  			android:layout_gravity="center_horizontal"  			
+  			/>	
+		
+		<TextView
+        	android:text=""        
+        	android:layout_width="fill_parent"
+        	android:layout_height="10px"
+        	android:layout_weight="1"/>
+        
+      	<Gallery android:id="@+id/video_gallery"
+    		 android:layout_width="fill_parent"
+    		 android:layout_height="wrap_content"/>
+    		 
+    	<TextView
+        	android:text=""        
+        	android:layout_width="fill_parent"
+        	android:layout_height="10px"
+        	android:layout_weight="1"/>		 
+</LinearLayout>
