@@ -79,33 +79,33 @@
         		android:orientation="vertical"
         		android:layout_width="fill_parent"
         		android:layout_height="fill_parent">
-        		<TextView
-            		android:text="@string/subject_existing"
-            		android:layout_width="wrap_content"
-            		android:layout_height="wrap_content"
-            		android:layout_marginTop="25dip" />
-        		<Spinner
-            		android:prompt="@string/subject_list_dropdown_prompt"
-            		android:id="@+id/subject_list_dropdown"
+				
+				<ListView android:id="@+id/subject_list_view"
+               		android:layout_width="fill_parent" 
+               		android:layout_height="fill_parent"
+               		android:layout_weight="1"
+              		android:drawSelectorOnTop="false"
+              		android:cacheColorHint="#00000000"
+       		     /> 
+        		  <LinearLayout 
             		android:layout_width="fill_parent"
-            		android:layout_height="wrap_content" />
-	    		<LinearLayout
-	        		android:layout_width="fill_parent"
-	        		android:layout_height="fill_parent">
-	        		<Button
-	            		android:id="@+id/subject_list_view_button"
-	            		android:text="@string/view"
-	            		android:layout_width="wrap_content"
-	            		android:layout_height="wrap_content"
-	            		android:gravity="right" />
-	        		<Button
-	            		android:id="@+id/subject_list_back_button"
-	            		android:text="@string/back"
-	            		android:layout_width="wrap_content"
-	            		android:layout_height="wrap_content"
-	            		android:gravity="right" />
-	    		</LinearLayout>
-    		</LinearLayout>
+            		android:layout_height="wrap_content"
+            		android:background="#85AB8F"
+					>
+        			<ImageView 
+           			  android:layout_width="80px"
+            		  android:layout_height="80px"
+                      android:src="@drawable/nav_back"
+            		  android:layout_gravity="left"
+    				/>  
+    				<ImageView 
+            			android:layout_width="80px"
+            			android:layout_height="80px"
+            			android:src="@drawable/nav_home"
+            			android:layout_gravity="left"
+    				/> 
+    			</LinearLayout>    
+    	 </LinearLayout>
     
 		    <!-- View Project -->
     		<LinearLayout
