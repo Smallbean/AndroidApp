@@ -4,11 +4,13 @@ import java.io.File;
 import com.android.interview.utilities.Data;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,9 +40,23 @@ public class VideoGallery extends Activity{
         video_gallery.setAdapter(new VideoAdapter(this));
 
         video_gallery.setOnItemClickListener(new OnItemClickListener() {
-	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-	        //	videoFile = new File(videoFilePaths[position]);
-	        	
+	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
+	        {
+	        	//videoFile = new File(videoFilePaths[position]);
+	        	String videoPath = videoFilePaths[position];
+	        	Intent intent = new Intent(android.content.Intent.ACTION_VIEW); 
+	            Uri data = Uri.parse(videoPath); 
+	            intent.setDataAndType(data,"video/mp4"); 
+	            try 
+	            { 
+	                      startActivity(intent); 
+	               
+	            } 
+	            catch (ActivityNotFoundException e) 
+	            { 
+	                e.printStackTrace(); 
+	            }
+
 	        }
 	    });
 	    
