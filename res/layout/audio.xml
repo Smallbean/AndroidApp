@@ -11,14 +11,14 @@
         	android:layout_height="10px"
         	android:layout_weight="1"/>
         
-        <ImageView
+  		<ImageView
   			android:id="@+id/recordAudio"
-  			android:layout_width="wrap_content"
-  			android:layout_height="wrap_content"
-  			android:src="@drawable/sub_audio_wotext"
+  			android:layout_width="120px"
+  			android:layout_height="120px"
+  			android:src="@drawable/takeaudio"
   			android:onClick="recordAudio"
   			android:layout_gravity="center_horizontal"  			
-  			/>	
+  			/>	  			
 		
 		<TextView
         	android:text=""        

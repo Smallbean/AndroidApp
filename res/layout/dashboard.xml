@@ -4,49 +4,46 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:background="@color/main_background">	    		
-	    <LinearLayout
-	    	android:orientation="horizontal"
-	    	android:layout_width="wrap_content"
-	    	android:layout_height="wrap_content"
-	    	android:layout_gravity="center_horizontal">		
-	   	<ImageView
-    		android:layout_height="50px"
-    		android:layout_width="50px"
-    		android:layout_gravity="left"    		
-    		android:src="@drawable/tv" 
-    		android:padding="3px"/>    		
-		<TextView
-    		android:layout_width="fill_parent"
-    		android:layout_height="wrap_content"
-    		android:textColor="#666666"
-    		android:textSize="40px"
-    		android:typeface="monospace"
-    		android:text="smallbean" /> 		    		
-    	</LinearLayout>    	
+  	
     			
 		<ViewFlipper 
     		android:id = "@+id/subject_views"
     		android:layout_width="fill_parent"
     		android:layout_height="fill_parent">
 
-    		<!-- dashboard -->
+    		<!-- Dashboard -->
  			<LinearLayout
-	    		android:orientation="horizontal"
+	    		android:orientation="vertical"
 	    		android:layout_width="wrap_content"
 	    		android:layout_height="wrap_content"
 	    		android:background="@color/main_background"
-	    		android:layout_gravity="center_horizontal|center_vertical">
-	    		<Button
-	        		android:id="@+id/subject_create_button"
-	        		android:layout_width="wrap_content"
-	        		android:layout_height="wrap_content"
-	        		android:layout_marginRight="75dip"
-	        		android:background="@drawable/dashboard_new_subject_button"/>
-	    		<Button
-	        		android:id="@+id/subject_list_button"
-	        		android:layout_width="wrap_content"
-	        		android:layout_height="wrap_content"
-	        		android:background="@drawable/dashboard_library_button"/>        
+	    		>
+	    		
+ 				<LinearLayout
+		    		android:orientation="horizontal"
+		    		android:layout_width="wrap_content"
+	    			android:layout_height="wrap_content"
+	    			android:background="@color/main_background"
+	    			android:layout_gravity="center_horizontal|center_vertical">
+	    			<Button
+	        			android:id="@+id/subject_create_button"
+	        			android:layout_width="wrap_content"
+	        			android:layout_height="wrap_content"
+	        			android:layout_marginRight="75dip"
+	        			android:background="@drawable/dashboard_new_subject_button"/>
+	    			<Button
+	        			android:id="@+id/subject_list_button"
+	        			android:layout_width="wrap_content"
+	        			android:layout_height="wrap_content"
+	        			android:background="@drawable/dashboard_library_button"/>    
+	        							 						    		    	        		   
+				</LinearLayout>
+				<ImageView
+    					android:layout_height="wrap_content"
+    					android:layout_width="wrap_content"
+    					android:layout_gravity="left"    		
+    					android:src="@drawable/mainlogo" 
+    					android:padding="3px"/>				
 			</LinearLayout>
 
 			<!-- Create Project -->
