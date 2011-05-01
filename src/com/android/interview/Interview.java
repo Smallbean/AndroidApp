@@ -103,12 +103,12 @@ public class Interview extends Activity {
 
 
         // Setup subject view buttons
-        ImageView subjectViewBackButton = (ImageView) findViewById(R.id.nav_back);
-        subjectViewBackButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                flipper.setDisplayedChild(Interview.SUBJECT_DASHBOARD_VIEW);
-            }
-        });
+//        ImageView subjectViewBackButton = (ImageView) findViewById(R.id.nav_back);
+//        subjectViewBackButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                flipper.setDisplayedChild(Interview.SUBJECT_DASHBOARD_VIEW);
+//            }
+//        });
     }    
 
     
@@ -173,8 +173,7 @@ public class Interview extends Activity {
         }
 	
 	public void goHome(View view) {
-		
-		
+		flipper.setDisplayedChild(Interview.SUBJECT_DASHBOARD_VIEW); 
 	}
 
     @Override
