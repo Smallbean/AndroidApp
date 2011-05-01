@@ -29,7 +29,7 @@
     		android:layout_width="fill_parent"
     		android:layout_height="fill_parent">
 
-    		<!-- Dashboard -->
+    		<!-- dashboard -->
  			<LinearLayout
 	    		android:orientation="horizontal"
 	    		android:layout_width="wrap_content"
@@ -170,6 +170,7 @@
 				            android:layout_height="80px"
 				            android:src="@drawable/nav_home"
 				            android:layout_gravity="left"/>
-			    </LinearLayout>      		
-		</ViewFlipper>
+			    </LinearLayout>    
+        </LinearLayout>    
+	</ViewFlipper>
 </LinearLayout>
