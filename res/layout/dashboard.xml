@@ -122,7 +122,7 @@
         		  android:layout_height="wrap_content"
         		  android:stretchColumns="1"
         		  android:layout_marginTop="50px">
-        		  <TableRow>
+        		  <TableRow  android:layout_marginBottom="100dip">
 		        		<ImageView
 		        		android:layout_width="140px"
 		        		android:layout_height="140px"
