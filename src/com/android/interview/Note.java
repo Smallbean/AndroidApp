@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Note extends Activity {
 	
@@ -28,6 +29,7 @@ public class Note extends Activity {
             public void onClick(View view) {
             	EditText note = (EditText) findViewById(R.id.note_text);
                 data.SetNote(note.getText().toString());
+            	Toast.makeText(view.getContext(), "Text Saved", Toast.LENGTH_SHORT).show();                
             }
         });
         
