@@ -45,7 +45,7 @@ public class VideoCapture extends Activity implements OnClickListener, Callback
         imageFilePath = data.GetNewVideoURL();
         Log.d("VideoPath", imageFilePath);
         
-        recorder = new MediaRecorder();
+        
         initRecorder();
         SurfaceView cameraView = (SurfaceView) findViewById(R.id.surface);
         holder = cameraView.getHolder();
@@ -59,12 +59,14 @@ public class VideoCapture extends Activity implements OnClickListener, Callback
 
 	private void initRecorder()
 	{
+		recorder = new MediaRecorder();
+		
 		recorder.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
 		recorder.setVideoSource(MediaRecorder.VideoSource.DEFAULT);
 		
 		recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
 		recorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
-		recorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
+		recorder.setVideoEncoder(MediaRecorder.VideoEncoder.DEFAULT);
 		recorder.setOutputFile(imageFilePath);
 		
 		recorder.setMaxDuration(50000);
