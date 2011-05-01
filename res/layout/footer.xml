@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<RelativeLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="fill_parent"
-android:layout_height="wrap_content" 
-android:background="@color/footer_background"
->
-         <ImageView 
-            android:layout_width="80px"
-            android:layout_height="80px"
-            android:src="@drawable/nav_back"
-            android:onClick="finish"
-            android:layout_gravity="left"
-            android:layout_alignParentLeft="true"
-        />  
-        <ImageView 
-            android:layout_width="80px"
-            android:layout_height="80px"
-            android:src="@drawable/nav_home"
-            android:onClick="goHome"
-            android:layout_alignParentRight="true"
-        />     
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content"
+	android:background="@color/footer_background">
+	<ImageView android:layout_marginTop="5px"
+		android:layout_width="80px" android:layout_height="80px" android:src="@drawable/nav_back"
+		android:onClick="finish" android:layout_gravity="left"
+		android:layout_alignParentLeft="true" />
+	<ImageView android:layout_marginTop="5px"
+		android:layout_width="80px" android:layout_height="80px" android:src="@drawable/nav_home"
+		android:onClick="goHome" android:layout_alignParentRight="true" />
 </RelativeLayout>

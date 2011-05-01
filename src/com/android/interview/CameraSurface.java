@@ -5,6 +5,7 @@ import java.io.File;
 
 import com.android.interview.utilities.Data;
 
+import android.R.layout;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -48,8 +50,6 @@ public class CameraSurface extends Activity {
 	
 	
 	public void goHome(View view) {
-		
-	
 	}
 	
 	public void finish(View view) {		

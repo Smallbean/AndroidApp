@@ -35,11 +35,13 @@
 	        			android:layout_width="wrap_content"
 	        			android:layout_height="wrap_content"
 	        			android:layout_marginRight="75dip"
+	        			android:layout_marginLeft="20dip"
 	        			android:background="@drawable/dashboard_new_subject_button"/>
 	    			<Button
 	        			android:id="@+id/subject_list_button"
 	        			android:layout_width="wrap_content"
 	        			android:layout_height="wrap_content"
+	        			android:layout_marginRight="20dip"
 	        			android:background="@drawable/dashboard_library_button"/>    				 						    		    	        		   
 				</LinearLayout>				
 			</LinearLayout>
@@ -109,6 +111,7 @@
 					android:background="@color/footer_background"
                 >
 		        <ImageView 
+		            android:layout_marginTop="5px"
 		            android:layout_width="80px"
 		            android:layout_height="80px"
 		            android:src="@drawable/nav_back"
@@ -116,7 +119,8 @@
 		            android:layout_gravity="left"
 		            android:layout_alignParentLeft="true"
 		        />  
-		        <ImageView 
+		        <ImageView
+		            android:layout_marginTop="5px"   
 		            android:layout_width="80px"
 		            android:layout_height="80px"
 		            android:src="@drawable/nav_home"
@@ -133,9 +137,13 @@
         		android:layout_height="fill_parent">        		
         		<TextView android:id="@+id/subjectname"
         				  android:text="subject"
-        				  android:layout_width="fill_parent"
+        				  android:layout_width="wrap_content"
         				  android:layout_height="wrap_content"
-        				  android:textColor="#000000"/>
+        				  android:textSize="60px"
+        				  android:layout_gravity="center_horizontal|center_vertical"
+        				  android:layout_marginTop="10px"
+        				  android:textColor="#F4A83D"
+        				  />
         		<TableLayout
         		  android:layout_width="fill_parent"
         		  android:layout_height="wrap_content"
@@ -199,6 +207,7 @@
 				android:background="@color/footer_background"
 				>
 			         <ImageView 
+			            android:layout_marginTop="5px"
 			            android:layout_width="80px"
 			            android:layout_height="80px"
 			            android:src="@drawable/nav_back"
@@ -206,7 +215,8 @@
 			            android:layout_gravity="left"
 			            android:layout_alignParentLeft="true"
 			        />  
-			        <ImageView 
+			        <ImageView
+			            android:layout_marginTop="5px" 
 			            android:layout_width="80px"
 			            android:layout_height="80px"
 			            android:src="@drawable/nav_home"
