@@ -24,13 +24,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-
-import com.android.interview.CameraSurface.ImageAdapter;
 import com.android.interview.utilities.Data;
 
 public class AudioRecorder extends Activity implements OnClickListener {
@@ -134,7 +130,7 @@ public class AudioRecorder extends Activity implements OnClickListener {
 		stopRecordingButton.setEnabled(true);
 
 		// For Fun
-		startPlaybackButton.setEnabled(true);
+		//startPlaybackButton.setEnabled(true);
 
 		recordTask = new RecordAudio();
 		recordTask.execute();
@@ -154,7 +150,7 @@ public class AudioRecorder extends Activity implements OnClickListener {
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageFileUri);
         
-        startActivityForResult(intent, this.CAMERA_RESULT);               		
+        startActivityForResult(intent, AudioRecorder.CAMERA_RESULT);               		
 	}
 
 	private void showToast(Context mContext, String text) {
@@ -164,7 +160,7 @@ public class AudioRecorder extends Activity implements OnClickListener {
     protected void onActivityResult(int requestCode, int resultCode, Intent image) {
         super.onActivityResult(requestCode, resultCode, image);
                 
-       if(requestCode == this.CAMERA_RESULT){
+       if(requestCode == AudioRecorder.CAMERA_RESULT){
     	      	                                       	
         }
     }

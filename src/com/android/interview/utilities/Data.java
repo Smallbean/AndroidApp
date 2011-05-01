@@ -101,11 +101,11 @@ public class Data {
    }
       
    public String[] GetAudioURLs() {
-	   return GetListOfFilesInPath(imageFolderPath());
+	   return GetListOfFilesInPath(audioFolderPath());
    }
    
    public String[] GetVideoURLs() {
-	   return GetListOfFilesInPath(imageFolderPath());
+	   return GetListOfFilesInPath(videoFolderPath());
    }
    
    public void DeletePhoto(String photoUrl) {
