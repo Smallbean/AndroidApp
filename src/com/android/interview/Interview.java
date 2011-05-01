@@ -160,7 +160,11 @@ public class Interview extends Activity {
 
     public void recordVideo(View view) {
         // TODO: Invoke video recording activity
-    	Intent intent = new Intent(this, VideoCapture.class);
+    	
+    	//Intent intent = new Intent(this, VideoCapture.class);
+        //startActivityForResult(intent, RECORD_VIDEO);
+    	
+    	Intent intent = new Intent(this, VideoGallery.class);
         startActivityForResult(intent, RECORD_VIDEO);
     }
     

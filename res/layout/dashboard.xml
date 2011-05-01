@@ -1,25 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:orientation="vertical"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
-	    android:background="@color/main_background">
-	    		
-	    		
+	    android:background="@color/main_background">	    		
 	    <LinearLayout
 	    	android:orientation="horizontal"
 	    	android:layout_width="wrap_content"
 	    	android:layout_height="wrap_content"
-	    	android:layout_gravity="center_horizontal"	    	
-	    	>		
+	    	android:layout_gravity="center_horizontal">		
 	   	<ImageView
     		android:layout_height="50px"
     		android:layout_width="50px"
     		android:layout_gravity="left"    		
     		android:src="@drawable/tv" 
-    		android:padding="3px"/>
-    		
+    		android:padding="3px"/>    		
 		<TextView
     		android:layout_width="fill_parent"
     		android:layout_height="wrap_content"
@@ -27,14 +22,12 @@
     		android:textSize="40px"
     		android:typeface="monospace"
     		android:text="smallbean" /> 		    		
-    	</LinearLayout>
-    	
+    	</LinearLayout>    	
     			
 		<ViewFlipper 
     		android:id = "@+id/subject_views"
     		android:layout_width="fill_parent"
-    		android:layout_height="fill_parent"
-    		>
+    		android:layout_height="fill_parent">
 
     		<!-- Dashboard -->
  			<LinearLayout
@@ -42,8 +35,7 @@
 	    		android:layout_width="wrap_content"
 	    		android:layout_height="wrap_content"
 	    		android:background="@color/main_background"
-	    		android:layout_gravity="center_horizontal|center_vertical"
-	    		>
+	    		android:layout_gravity="center_horizontal|center_vertical">
 	    		<Button
 	        		android:id="@+id/subject_create_button"
 	        		android:layout_width="wrap_content"
@@ -54,8 +46,7 @@
 	        		android:id="@+id/subject_list_button"
 	        		android:layout_width="wrap_content"
 	        		android:layout_height="wrap_content"
-	        		android:background="@drawable/dashboard_library_button"
-	        		 />        
+	        		android:background="@drawable/dashboard_library_button"/>        
 			</LinearLayout>
 
 			<!-- Create Project -->
@@ -88,34 +79,33 @@
         		android:orientation="vertical"
         		android:layout_width="fill_parent"
         		android:layout_height="fill_parent">
-        		<TextView
-            		android:text="@string/subject_existing"
-            		android:layout_width="wrap_content"
-            		android:layout_height="wrap_content"
-            		android:layout_marginTop="25dip" />
-        		<Spinner
-            		android:prompt="@string/subject_list_dropdown_prompt"
-            		android:id="@+id/subject_list_dropdown"
+				
+				<ListView android:id="@+id/subject_list_view"
+               		android:layout_width="fill_parent" 
+               		android:layout_height="fill_parent"
+               		android:layout_weight="1"
+              		android:drawSelectorOnTop="false"
+              		android:cacheColorHint="#00000000"
+       		     /> 
+        		  <LinearLayout 
             		android:layout_width="fill_parent"
-            		android:layout_height="wrap_content" />
-	    		<LinearLayout
-	        		android:layout_width="fill_parent"
-	        		android:layout_height="wrap_content">
-	        		<Button
-	            		android:id="@+id/subject_list_view_button"
-	            		android:text="@string/view"
-	            		android:layout_width="wrap_content"
-	            		android:layout_height="wrap_content"
-	            		android:gravity="right" />
-	        		<Button
-	            		android:id="@+id/subject_list_back_button"
-	            		android:text="@string/back"
-	            		android:layout_width="wrap_content"
-	            		android:layout_height="wrap_content"
-	            		android:gravity="right" />
-	    		</LinearLayout>
-	    		 <include layout="@layout/footer" />          
-    		</LinearLayout>
+            		android:layout_height="wrap_content"
+            		android:background="#85AB8F"
+					>
+        			<ImageView 
+           			  android:layout_width="80px"
+            		  android:layout_height="80px"
+                      android:src="@drawable/nav_back"
+            		  android:layout_gravity="left"
+    				/>  
+    				<ImageView 
+            			android:layout_width="80px"
+            			android:layout_height="80px"
+            			android:src="@drawable/nav_home"
+            			android:layout_gravity="left"
+    				/> 
+    			</LinearLayout>    
+    	 </LinearLayout>
     
 		    <!-- View Project -->
     		<LinearLayout
@@ -126,28 +116,25 @@
         				  android:text="subject"
         				  android:layout_width="fill_parent"
         				  android:layout_height="wrap_content"
-        				  android:textColor="#000000"        				  
-        		/>
+        				  android:textColor="#000000"/>
         		<TableLayout
         		  android:layout_width="fill_parent"
         		  android:layout_height="wrap_content"
         		  android:stretchColumns="1"
         		  android:layout_marginTop="50px">
-        		  <TableRow >
+        		  <TableRow  android:layout_marginBottom="100dip">
 		        		<ImageView
 		        		android:layout_width="140px"
 		        		android:layout_height="140px"
 		        		android:src="@drawable/sub_pic_text"
 		        		android:onClick="takePhoto"
-		        		android:layout_marginLeft="50px"
-		        		/>
+		        		android:layout_marginLeft="50px"/>
 		        		<ImageView
 	                    android:layout_width="140px"
 	                    android:layout_height="140px"
 	                    android:src="@drawable/sub_vid_wtext"
 	                    android:onClick="recordVideo"
-	                    android:layout_marginLeft="50px"
-	                    />
+	                    android:layout_marginLeft="50px"/>
 	              </TableRow>
 	              <TableRow>
 		        		<ImageView
@@ -155,31 +142,34 @@
 	                    android:layout_height="140px"
 	                    android:src="@drawable/sub_audio_text"
 	                    android:onClick="recordAudio"
-	                    android:layout_marginLeft="50px"
-	                    />
+	                    android:layout_marginLeft="50px"/>
 		        		<ImageView
 	                    android:layout_width="140px"
 	                    android:layout_height="140px"
 	                    android:src="@drawable/sub_note_text"
-	                    android:layout_marginLeft="50px"
-	                    />
+	                    android:onClick="takeNote"
+	                    android:layout_marginLeft="50px"/>
 	               </TableRow>
-	               </TableLayout>
-        	  	<Button
-            		android:id="@+id/subject_dashboard_button"
-            		android:text="@string/dashboard"
-            		android:layout_width="wrap_content"
-            		android:layout_height="wrap_content"
-            		android:layout_marginTop="25dip" /> 
-         	  
-    <TextView
-        android:text=""        
-        android:layout_width="fill_parent"
-        android:layout_height="10px"
-        android:layout_weight="1"/>       
-
-        <include layout="@layout/footer" />          
-   
-    </LinearLayout>      		
+	        	</TableLayout>
+			    <TextView     
+			        android:layout_width="fill_parent"
+			        android:layout_height="10px"
+			        android:layout_weight="1"/>       
+		    	<LinearLayout 
+		            android:layout_width="fill_parent"
+		            android:layout_height="wrap_content"
+		            android:background="#85AB8F">
+				    <ImageView
+				    		android:id="@+id/nav_back"
+				            android:layout_width="80px"
+				            android:layout_height="80px"
+				            android:src="@drawable/nav_back"
+				            android:layout_gravity="left"/>  
+				    <ImageView 
+				            android:layout_width="80px"
+				            android:layout_height="80px"
+				            android:src="@drawable/nav_home"
+				            android:layout_gravity="left"/>
+			    </LinearLayout>      		
 		</ViewFlipper>
 </LinearLayout>
