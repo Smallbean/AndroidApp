@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 import android.widget.AdapterView.OnItemClickListener;
@@ -97,7 +96,8 @@ public class Interview extends Activity {
               subjectview.setText(subjectName);
               
               flipper.setDisplayedChild(Interview.SUBJECT_DETAILS_VIEW);
-            
+            }
+        });    
 
 
         // Setup subject view buttons
