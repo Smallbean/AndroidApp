@@ -17,7 +17,7 @@
   			android:id="@+id/takePhoto"
   			android:layout_width="120px"
   			android:layout_height="120px"
-  			android:src="@drawable/sub_pic_wotext"
+  			android:src="@drawable/takephoto"
   			android:onClick="takePhoto"
   			android:layout_gravity="center_horizontal"  			
   			/>	
