@@ -133,7 +133,7 @@ public class Interview extends Activity {
                 flipper.setDisplayedChild(Interview.SUBJECT_DASHBOARD_VIEW);
             }
         });
-    }
+    }    
 
     public void populateSpinner(Spinner spinner) {
     	String[] subjects = this.data.GetSubjects();
