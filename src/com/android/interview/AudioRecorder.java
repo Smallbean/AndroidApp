@@ -24,13 +24,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-
-import com.android.interview.CameraSurface.ImageAdapter;
 import com.android.interview.utilities.Data;
 
 public class AudioRecorder extends Activity implements OnClickListener {
@@ -46,7 +42,6 @@ public class AudioRecorder extends Activity implements OnClickListener {
 	Button photoButton;
 	
 	TextView durationText;
-	TextView filenameText;
 	
 	private Data data = Data.getInstance();
 	File recordingFile;
@@ -66,7 +61,6 @@ public class AudioRecorder extends Activity implements OnClickListener {
 		setContentView(R.layout.audio_recorder);
 
 		durationText = (TextView) this.findViewById(R.id.DurationTextView);
-		filenameText = (TextView) this.findViewById(R.id.FilenameTextView);
 		
 		startRecordingButton = (Button) this
 				.findViewById(R.id.StartRecordingButton);
@@ -91,10 +85,11 @@ public class AudioRecorder extends Activity implements OnClickListener {
 		photoButton.setEnabled(true);
 
 		// recordingFile = File.createTempFile("recording", ".pcm", path);
-		String filename = data.GetNewAudioURL();
-		recordingFile = new File(filename);
-		filenameText.setText("File: " + filename);
+		String audioFilename = data.GetNewAudioURL();
+		recordingFile = new File(audioFilename);
 
+		showToast(this,audioFilename);       	               
+        
 		startRecordTime = System.currentTimeMillis();
 		System.out.println("Current time: " + startRecordTime);
 		// Start recording
@@ -146,14 +141,16 @@ public class AudioRecorder extends Activity implements OnClickListener {
 	}
 	
 	public void takePhoto(){
-        showToast(this,data.GetNewPhotoURL());       	               
         
-        Uri imageFileUri = Uri.fromFile(new File(data.GetNewPhotoURL()));
+		String photoFilename = data.GetNewPhotoURL();
+		showToast(this,photoFilename);       	               
+        
+        Uri imageFileUri = Uri.fromFile(new File(photoFilename));
         
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageFileUri);
         
-        startActivityForResult(intent, this.CAMERA_RESULT);               		
+        startActivityForResult(intent, AudioRecorder.CAMERA_RESULT);               		
 	}
 
 	private void showToast(Context mContext, String text) {
@@ -163,7 +160,7 @@ public class AudioRecorder extends Activity implements OnClickListener {
     protected void onActivityResult(int requestCode, int resultCode, Intent image) {
         super.onActivityResult(requestCode, resultCode, image);
                 
-       if(requestCode == this.CAMERA_RESULT){
+       if(requestCode == AudioRecorder.CAMERA_RESULT){
     	      	                                       	
         }
     }

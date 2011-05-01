@@ -3,7 +3,6 @@ package com.android.interview;
 
 import java.io.File;
 
-import com.android.interview.Gallery.ImageAdapter;
 import com.android.interview.utilities.Data;
 
 import android.app.Activity;
@@ -40,7 +39,7 @@ public class CameraSurface extends Activity {
 	    camera_gallery.setAdapter(new ImageAdapter(this));
 
 	    camera_gallery.setOnItemClickListener(new OnItemClickListener() {
-	        public void onItemClick(AdapterView parent, View v, int position, long id) {
+	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 	            Toast.makeText(CameraSurface.this, "" + position, Toast.LENGTH_SHORT).show();
 	        }
 	    });
@@ -78,7 +77,7 @@ public class CameraSurface extends Activity {
     	    camera_gallery.setAdapter(new ImageAdapter(this));
 
    	    	camera_gallery.setOnItemClickListener(new OnItemClickListener() {
-   	    		public void onItemClick(AdapterView parent, View v, int position, long id) {
+   	    		public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
    	    			Toast.makeText(CameraSurface.this, "" + position, Toast.LENGTH_SHORT).show();
    	    		}
    	    	});    	                                       	
@@ -103,8 +102,7 @@ public class CameraSurface extends Activity {
 	    	imagePaths = new String[images.length];
 	    	
 	    	for(int i=0;i<images.length;i++)
-	    	{
-		    	DrawableManager dm = new DrawableManager();	    			    	
+	    	{    			    	
 		    	imagePaths[i] = images[i];
 	    	}
 	    }

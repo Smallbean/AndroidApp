@@ -9,15 +9,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -38,7 +34,7 @@ public class Gallery extends Activity {
 	    g.setAdapter(new ImageAdapter(this));
 
 	    g.setOnItemClickListener(new OnItemClickListener() {
-	        public void onItemClick(AdapterView parent, View v, int position, long id) {
+	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 	            Toast.makeText(Gallery.this, "" + position, Toast.LENGTH_SHORT).show();
 	        }
 	    });
@@ -47,22 +43,16 @@ public class Gallery extends Activity {
 	
 	public class ImageAdapter extends BaseAdapter {
 	    int mGalleryItemBackground;
-	   // private Drawable img;
-	   // private Drawable[] imgs;
 	    private String[] imagePaths;
 	    private Context mContext;
 
 	    private void getDrawables()
 	    {
 	    	String[] images = data.GetPhotoURLs();
-	    	//imgs = new Drawable[images.length];
 	    	imagePaths = new String[images.length];
 	    	
 	    	for(int i=0;i<images.length;i++)
 	    	{
-		    	DrawableManager dm = new DrawableManager();	    			    	
-		    	//img = dm.fetchDrawable(images[i]);
-		    	//imgs[i] = dm.fetchDrawable(images[i]);
 		    	imagePaths[i] = images[i];
 	    	}
 	    }
