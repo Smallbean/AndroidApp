@@ -134,7 +134,7 @@ public class AudioRecorder extends Activity implements OnClickListener {
 		stopRecordingButton.setEnabled(true);
 
 		// For Fun
-		startPlaybackButton.setEnabled(true);
+		//startPlaybackButton.setEnabled(true);
 
 		recordTask = new RecordAudio();
 		recordTask.execute();

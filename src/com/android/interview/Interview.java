@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -127,7 +128,7 @@ public class Interview extends Activity {
         });
 
         // Setup subject view buttons
-        Button subjectViewBackButton = (Button) findViewById(R.id.nav_back);
+        ImageView subjectViewBackButton = (ImageView) findViewById(R.id.nav_back);
         subjectViewBackButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 flipper.setDisplayedChild(Interview.SUBJECT_DASHBOARD_VIEW);
