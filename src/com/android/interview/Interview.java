@@ -176,6 +176,15 @@ public class Interview extends Activity {
     	Intent intent = new Intent(this, VideoCapture.class);
         startActivityForResult(intent, RECORD_VIDEO);
     }
+    
+	public void finish(View view) {		
+        flipper.setDisplayedChild(Interview.SUBJECT_LIST_VIEW);	
+        }
+	
+	public void goHome(View view) {
+		
+		
+	}
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode,

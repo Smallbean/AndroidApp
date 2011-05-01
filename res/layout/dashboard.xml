@@ -100,7 +100,7 @@
             		android:layout_height="wrap_content" />
 	    		<LinearLayout
 	        		android:layout_width="fill_parent"
-	        		android:layout_height="fill_parent">
+	        		android:layout_height="wrap_content">
 	        		<Button
 	            		android:id="@+id/subject_list_view_button"
 	            		android:text="@string/view"
@@ -114,6 +114,7 @@
 	            		android:layout_height="wrap_content"
 	            		android:gravity="right" />
 	    		</LinearLayout>
+	    		 <include layout="@layout/footer" />          
     		</LinearLayout>
     
 		    <!-- View Project -->
@@ -176,27 +177,9 @@
         android:layout_width="fill_parent"
         android:layout_height="10px"
         android:layout_weight="1"/>       
-            		 <LinearLayout 
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="#85AB8F"
->
-    
-    <ImageView 
-    
-            android:layout_width="80px"
-            android:layout_height="80px"
-            android:src="@drawable/nav_back"
-            android:layout_gravity="left"
-    />  
-    <ImageView 
-            android:layout_width="80px"
-            android:layout_height="80px"
-            android:src="@drawable/nav_home"
-            android:layout_gravity="left"
-    />     
-    
+
+        <include layout="@layout/footer" />          
+   
     </LinearLayout>      		
-    		</LinearLayout>
 		</ViewFlipper>
 </LinearLayout>
