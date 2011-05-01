@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -103,12 +102,12 @@ public class Interview extends Activity {
 
 
         // Setup subject view buttons
-        ImageView subjectViewBackButton = (ImageView) findViewById(R.id.nav_back);
-        subjectViewBackButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                flipper.setDisplayedChild(Interview.SUBJECT_DASHBOARD_VIEW);
-            }
-        });
+//        ImageView subjectViewBackButton = (ImageView) findViewById(R.id.nav_back);
+//        subjectViewBackButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                flipper.setDisplayedChild(Interview.SUBJECT_DASHBOARD_VIEW);
+//            }
+//        });
     }    
 
     
@@ -173,8 +172,7 @@ public class Interview extends Activity {
         }
 	
 	public void goHome(View view) {
-		
-		
+		flipper.setDisplayedChild(Interview.SUBJECT_DASHBOARD_VIEW); 
 	}
 
     @Override

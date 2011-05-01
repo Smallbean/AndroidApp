@@ -36,10 +36,8 @@ public class AudioRecorder extends Activity implements OnClickListener {
 	RecordAudio recordTask;
 	PlayAudio playTask;
 
-	Button startRecordingButton, stopRecordingButton;
+	Button startRecordingButton;
 	Button startPlaybackButton, stopPlaybackButton;
-	
-	Button photoButton;
 	
 	TextView durationText;
 	
@@ -64,25 +62,17 @@ public class AudioRecorder extends Activity implements OnClickListener {
 		
 		startRecordingButton = (Button) this
 				.findViewById(R.id.StartRecordingButton);
-		stopRecordingButton = (Button) this
-				.findViewById(R.id.StopRecordingButton);
 		startPlaybackButton = (Button) this
 				.findViewById(R.id.StartPlaybackButton);
 		stopPlaybackButton = (Button) this
 				.findViewById(R.id.StopPlaybackButton);
-		photoButton = (Button) this
-				.findViewById(R.id.PhotoButton);
 		
 		startRecordingButton.setOnClickListener(this);
-		stopRecordingButton.setOnClickListener(this);
 		startPlaybackButton.setOnClickListener(this);
 		stopPlaybackButton.setOnClickListener(this);
-		photoButton.setOnClickListener(this);
 
-		stopRecordingButton.setEnabled(false);
 		startPlaybackButton.setEnabled(false);
 		stopPlaybackButton.setEnabled(false);
-		photoButton.setEnabled(true);
 
 		// recordingFile = File.createTempFile("recording", ".pcm", path);
 		String audioFilename = data.GetNewAudioURL();
@@ -99,14 +89,10 @@ public class AudioRecorder extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		if (v == startRecordingButton) {
 			record();
-		} else if (v == stopRecordingButton) {
-			stopRecording();
 		} else if (v == startPlaybackButton) {
 			play();
 		} else if (v == stopPlaybackButton) {
 			stopPlaying();
-		} else if (v == photoButton) {
-			takePhoto();
 		}
 	}
 
@@ -127,10 +113,6 @@ public class AudioRecorder extends Activity implements OnClickListener {
 
 	public void record() {
 		startRecordingButton.setEnabled(false);
-		stopRecordingButton.setEnabled(true);
-
-		// For Fun
-		//startPlaybackButton.setEnabled(true);
 
 		recordTask = new RecordAudio();
 		recordTask.execute();
@@ -140,6 +122,13 @@ public class AudioRecorder extends Activity implements OnClickListener {
 		isRecording = false;
 	}
 	
+	public void stopRecording(View view) {
+		this.stopRecording();
+	}
+	
+	public void takePhoto(View view) {		
+		this.takePhoto();
+	}	
 	public void takePhoto(){
         
 		String photoFilename = data.GetNewPhotoURL();
@@ -257,7 +246,6 @@ public class AudioRecorder extends Activity implements OnClickListener {
 
 		protected void onPostExecute(Void result) {
 			startRecordingButton.setEnabled(true);
-			stopRecordingButton.setEnabled(false);
 			startPlaybackButton.setEnabled(true);
 		}
 	}

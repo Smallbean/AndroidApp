@@ -20,17 +20,7 @@
   			android:src="@drawable/takephoto"
   			android:onClick="takePhoto"
   			android:layout_gravity="center_horizontal"  			
-  			/>	
-    <TextView
-        android:text="Take Pic"        
-        android:layout_width="fill_parent"
-        android:layout_height="10px"
-        android:layout_weight="1"
-        android:paddingLeft="190px"
-        android:textColor="#000000"
-        android:textSize="20px"
-        />         
-   
+  			/>	   
     <TextView
         android:text=""        
         android:layout_width="fill_parent"
