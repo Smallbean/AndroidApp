@@ -1,6 +1,5 @@
 package org.smallbean.interview;
 
-
 import org.smallbean.interview.utilities.Data;
 
 import android.app.Activity;
@@ -8,13 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class Interview extends Activity {
     private static final int TAKE_PHOTO = 0;
@@ -29,125 +27,91 @@ public class Interview extends Activity {
     private static final int SUBJECT_DETAILS_VIEW = 3;
 
     private ViewFlipper flipper;
-    
-    
+    private ListView subjectListView;
+
     private Data data = Data.getInstance();
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
         setContentView(R.layout.dashboard);
-
         this.flipper = (ViewFlipper) findViewById(R.id.subject_views);
 
-        // Setup dash board buttons
-        Button subjectCreateButton = (Button) findViewById(R.id.subject_create_button);
-        subjectCreateButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                flipper.setDisplayedChild(Interview.SUBJECT_CREATE_VIEW);
-            }
-        });
+        // Construct list of subjects
+        this.subjectListView = (ListView) findViewById(R.id.subject_list_view);
+        this.populateListView(this.subjectListView);
 
-        Button subjectListButton = (Button) findViewById(R.id.subject_list_button);
-        subjectListButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                flipper.setDisplayedChild(Interview.SUBJECT_LIST_VIEW);
-            }
-        });
+        subjectListView.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                    int position, long id) {
 
-        // Setup subject creation buttons
-        Button subjectCreateSaveButton = (Button) findViewById(R.id.subject_create_save_button);
-        subjectCreateSaveButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                EditText newSubjectField = (EditText) findViewById(R.id.subject_create_name);
-                String currentSubjectName = newSubjectField.getText()
-                        .toString();
+                String subjectName = (String) ((TextView) view).getText();
+                data.SetSubject(subjectName);
 
-                createSubject(currentSubjectName);
-                TextView subjectview = (TextView) findViewById(R.id.subjectname);
-                subjectview.setText(currentSubjectName);
-                
-                data.SetSubject(currentSubjectName);
+                TextView subjectview = (TextView) findViewById(R.id.subjectTitle);
+                subjectview.setText(subjectName);
 
                 flipper.setDisplayedChild(Interview.SUBJECT_DETAILS_VIEW);
             }
         });
+    }
 
-        Button subjectCreateBackButton = (Button) findViewById(R.id.subject_create_back_button);
-        subjectCreateBackButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                flipper.setDisplayedChild(Interview.SUBJECT_DASHBOARD_VIEW);
-            }
-        });
-        ListView subjectListView = (ListView) findViewById(R.id.subject_list_view);
-        populateListView(subjectListView);
-        
-        subjectListView.setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view,
-                int position, long id) {
-            
-              
-              String subjectName = (String) ((TextView) view).getText();
-              data.SetSubject(subjectName);
-              
-              TextView subjectview = (TextView) findViewById(R.id.subjectname);
-              subjectview.setText(subjectName);
-              
-              flipper.setDisplayedChild(Interview.SUBJECT_DETAILS_VIEW);
-            }
-        });    
+    public void populateListView(ListView subjectListView) {
+        String[] subjects = this.data.GetSubjects();
 
+        if (subjects == null)
+            return;
 
-        // Setup subject view buttons
-//        ImageView subjectViewBackButton = (ImageView) findViewById(R.id.nav_back);
-//        subjectViewBackButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View view) {
-//                flipper.setDisplayedChild(Interview.SUBJECT_DASHBOARD_VIEW);
-//            }
-//        });
-    }    
-
-    
-    public void populateListView(ListView subjectListView) 
-    {
-    	String[] subjects = this.data.GetSubjects();
-    	
-    	if(subjects==null) return;
-    	
-        // Setup subject listing buttons
         ArrayAdapter<String> subjectListAdapter = new ArrayAdapter<String>(
-                this, R.layout.subject_list_item_view,                
-        	    subjects);
-        
+                this, R.layout.subject_list_item_view, subjects);
         subjectListView.setAdapter(subjectListAdapter);
     }
 
-    public void createSubject(String currentSubjectName) {    	
-    	data.AddSubject(currentSubjectName);    
+    public void createSubject(View view) {
+        // TODO: Remove keyboard after subject creation
+        EditText newSubjectField = (EditText) findViewById(R.id.subject_create_name);
+        String currentSubjectName = newSubjectField.getText().toString();
+
+        data.AddSubject(currentSubjectName);
+        TextView subjectview = (TextView) findViewById(R.id.subjectTitle);
+        subjectview.setText(currentSubjectName);
+        data.SetSubject(currentSubjectName);
+
+        this.populateListView(this.subjectListView);
+        flipper.setDisplayedChild(Interview.SUBJECT_DETAILS_VIEW);
+    }
+
+    public void newSubject(View view) {
+        flipper.setDisplayedChild(Interview.SUBJECT_CREATE_VIEW);
+    }
+
+    public void listSubjects(View view) {
+        flipper.setDisplayedChild(Interview.SUBJECT_LIST_VIEW);
+    }
+
+    public void backToDashboard(View view) {
+        flipper.setDisplayedChild(Interview.SUBJECT_DASHBOARD_VIEW);
     }
 
     public void takePhoto(View view) {
         // TODO: Check for interviewTitle (see above)
         Intent intent = new Intent(this, CameraSurface.class);
         startActivityForResult(intent, TAKE_PHOTO);
-        
-        
+
     }
-    
+
     public void takeNote(View view) {
         // TODO: Check for interviewTitle (see above)
         Intent intent = new Intent(this, Note.class);
         startActivityForResult(intent, TAKE_NOTE);
-        
-        
+
     }
-    
-    public void showGallery(View view){
-    	
-    	Intent intent = new Intent(this, Gallery.class);
-    	startActivityForResult(intent, SHOW_GALLERY);
+
+    public void showGallery(View view) {
+
+        Intent intent = new Intent(this, Gallery.class);
+        startActivityForResult(intent, SHOW_GALLERY);
     }
 
     public void recordAudio(View view) {
@@ -158,21 +122,21 @@ public class Interview extends Activity {
 
     public void recordVideo(View view) {
         // TODO: Invoke video recording activity
-    	
-    	//Intent intent = new Intent(this, VideoCapture.class);
-        //startActivityForResult(intent, RECORD_VIDEO);
-    	
-    	Intent intent = new Intent(this, VideoGallery.class);
+
+        // Intent intent = new Intent(this, VideoCapture.class);
+        // startActivityForResult(intent, RECORD_VIDEO);
+
+        Intent intent = new Intent(this, VideoGallery.class);
         startActivityForResult(intent, RECORD_VIDEO);
     }
-    
-	public void finish(View view) {		
-        flipper.setDisplayedChild(Interview.SUBJECT_LIST_VIEW);	
-        }
-	
-	public void goHome(View view) {
-		flipper.setDisplayedChild(Interview.SUBJECT_DASHBOARD_VIEW); 
-	}
+
+    public void finish(View view) {
+        flipper.setDisplayedChild(Interview.SUBJECT_LIST_VIEW);
+    }
+
+    public void goHome(View view) {
+        flipper.setDisplayedChild(Interview.SUBJECT_DASHBOARD_VIEW);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
