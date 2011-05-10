@@ -57,7 +57,7 @@ public class Interview extends Activity {
         });
     }
 
-    public void populateListView(ListView subjectListView) {
+    private void populateListView(ListView subjectListView) {
         String[] subjects = this.data.GetSubjects();
 
         if (subjects == null)
@@ -88,10 +88,6 @@ public class Interview extends Activity {
 
     public void listSubjects(View view) {
         flipper.setDisplayedChild(Interview.SUBJECT_LIST_VIEW);
-    }
-
-    public void backToDashboard(View view) {
-        flipper.setDisplayedChild(Interview.SUBJECT_DASHBOARD_VIEW);
     }
 
     public void takePhoto(View view) {
