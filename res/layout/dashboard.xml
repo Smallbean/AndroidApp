@@ -16,8 +16,7 @@
 	    		android:orientation="vertical"
 	    		android:layout_width="wrap_content"
 	    		android:layout_height="fill_parent"
-	    		android:background="@color/main_background"
-	    		>
+	    		android:background="@color/main_background">
 	    	    <ImageView
                         android:layout_height="300px"
                         android:layout_width="400px"
@@ -36,13 +35,15 @@
 	        			android:layout_height="wrap_content"
 	        			android:layout_marginRight="75dip"
 	        			android:layout_marginLeft="20dip"
-	        			android:background="@drawable/dashboard_new_subject_button"/>
+	        			android:onClick="newSubject"
+	        			android:background="@drawable/dashboard_new_subject_button" />
 	    			<Button
 	        			android:id="@+id/subject_list_button"
 	        			android:layout_width="wrap_content"
 	        			android:layout_height="wrap_content"
 	        			android:layout_marginRight="20dip"
-	        			android:background="@drawable/dashboard_library_button"/>    				 						    		    	        		   
+	        			android:onClick="listSubjects"
+	        			android:background="@drawable/dashboard_library_button" />
 				</LinearLayout>				
 			</LinearLayout>
 
@@ -50,48 +51,43 @@
 			<LinearLayout
 	    		android:layout_width="fill_parent"
 	    		android:layout_height="wrap_content"
-	    		android:orientation="horizontal"
-	    		>
+	    		android:orientation="horizontal">
 	    		<LinearLayout
 	             android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                 <ImageView 
-                    android:paddingTop="25px"
-                    android:layout_width="100px" 
-                    android:layout_height="100px" 
-                    android:src="@drawable/entertext"
-                    android:layout_gravity="left"
-                />
-	    		<EditText
-	        		android:id="@+id/subject_create_name"
-	        		android:layout_width="fill_parent"
-	        		android:layout_height="75px"
-	        		android:layout_marginTop="25px"
-	        		android:layout_weight="1" 
-	        		/>
-	    		<Button
-	        		android:id="@+id/subject_create_save_button"
-	        		android:text="@string/save"
-	        		android:onClick="createProject"
-	        		android:layout_marginTop="25px"
-	        		android:layout_width="wrap_content"
-	        		android:layout_height="wrap_content" />
-	        		
-        		<Button
-            		android:id="@+id/subject_create_back_button"
-            		android:text="@string/back"
-            		android:layout_marginTop="25px"
-            		android:layout_width="wrap_content"
-            		android:layout_height="wrap_content" />  
-            	
+                android:orientation="horizontal">
+	                 <ImageView 
+	                    android:paddingTop="25px"
+	                    android:layout_width="100px" 
+	                    android:layout_height="100px" 
+	                    android:src="@drawable/entertext"
+	                    android:layout_gravity="left" />
+		    		<EditText
+		        		android:id="@+id/subject_create_name"
+		        		android:layout_width="fill_parent"
+		        		android:layout_height="75px"
+		        		android:layout_marginTop="25px"
+		        		android:layout_weight="1" />
+		    		<Button
+		        		android:id="@+id/subject_create_save_button"
+		        		android:text="@string/save"
+		        		android:onClick="createSubject"
+		        		android:layout_marginTop="25px"
+		        		android:layout_width="wrap_content"
+		        		android:layout_height="wrap_content" />
+	        		<Button
+	            		android:id="@+id/subject_create_back_button"
+	            		android:text="@string/back"
+	            		android:onClick="backToDashboard"
+	            		android:layout_marginTop="25px"
+	            		android:layout_width="wrap_content"
+	            		android:layout_height="wrap_content" />  
             	</LinearLayout>
                 <RelativeLayout 
                         android:layout_width="fill_parent" 
                         android:layout_height="wrap_content"
                         android:background="@color/footer_background">
-                         <ImageView 
+                        <ImageView
                             android:layout_marginTop="5px"
 					        android:layout_width="80px" 
 					        android:layout_height="80px" 
@@ -99,7 +95,7 @@
 					        android:onClick="finish" 
 					        android:layout_gravity="left"
 					        android:layout_alignParentLeft="true" />
-                        <ImageView 
+                        <ImageView
                             android:layout_marginTop="5px"
                             android:layout_width="80px" 
                             android:layout_height="80px" 
@@ -108,86 +104,62 @@
                             android:layout_alignParentRight="true" />
                </RelativeLayout>
 			</LinearLayout>
-	
+
 			<!-- Project List -->
     		<LinearLayout
         		android:orientation="vertical"
         		android:layout_width="fill_parent"
         		android:layout_height="fill_parent">
-				
 				<ListView android:id="@+id/subject_list_view"
                		android:layout_width="fill_parent" 
                		android:layout_height="fill_parent"
                		android:layout_weight="1"
               		android:drawSelectorOnTop="false"
-              		android:cacheColorHint="#00000000"
-       		     /> 
-                  <!-- 
-        		  <LinearLayout 
-            		android:layout_width="fill_parent"
-            		android:layout_height="wrap_content"
-            		android:background="#85AB8F"
-					>
-        			<ImageView 
-           			  android:layout_width="80px"
-            		  android:layout_height="80px"
-                      android:src="@drawable/nav_back"
-            		  android:layout_gravity="left"
-    				/>  
-    				<ImageView 
-            			android:layout_width="80px"
-            			android:layout_height="80px"
-            			android:src="@drawable/nav_home"
-            			android:layout_gravity="left"
-    				/> 
-    			</LinearLayout>    
-    			   -->
+              		android:cacheColorHint="#00000000" /> 
     			<RelativeLayout
                     xmlns:android="http://schemas.android.com/apk/res/android"
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content" 
-					android:background="@color/footer_background"
-                >
-		        <ImageView 
+					android:background="@color/footer_background">
+		        <ImageView
 		            android:layout_marginTop="5px"
 		            android:layout_width="80px"
 		            android:layout_height="80px"
 		            android:src="@drawable/nav_back"
 		            android:onClick="goHome"
 		            android:layout_gravity="left"
-		            android:layout_alignParentLeft="true"
-		        />  
+		            android:layout_alignParentLeft="true" />  
 		        <ImageView
 		            android:layout_marginTop="5px"   
 		            android:layout_width="80px"
 		            android:layout_height="80px"
 		            android:src="@drawable/nav_home"
 		            android:onClick="goHome"
-		            android:layout_alignParentRight="true"
-		        />     
+		            android:layout_alignParentRight="true" />     
                 </RelativeLayout>
-    	 </LinearLayout>
+    		 </LinearLayout>
     
 		    <!-- View Project -->
     		<LinearLayout
         		android:orientation="vertical"
         		android:layout_width="fill_parent"
         		android:layout_height="fill_parent">        		
-        		<TextView android:id="@+id/subjectname"
-        				  android:text="subject"
-        				  android:layout_width="wrap_content"
-        				  android:layout_height="wrap_content"
-        				  android:textSize="60px"
-        				  android:layout_gravity="center_horizontal|center_vertical"
-        				  android:layout_marginTop="10px"
-        				  android:textColor="#F4A83D"
-        				  />
+                <TextView 
+                    android:id="@+id/subjectTitle"
+      				android:text="subject"
+      				android:layout_width="wrap_content"
+      				android:layout_height="wrap_content"
+      				android:textSize="60px"
+      				android:layout_gravity="center_horizontal|center_vertical"
+      				android:layout_marginTop="10px"
+      				android:textColor="#F4A83D" />
         		<TableLayout
-        		  android:layout_width="fill_parent"
-        		  android:layout_height="wrap_content"
-        		  android:stretchColumns="1"
-        		  android:layout_marginTop="50px">
-        		  <TableRow  android:layout_marginBottom="100dip">
+        		    android:layout_width="fill_parent"
+        		    android:layout_height="wrap_content"
+        		    android:stretchColumns="1"
+        		    android:layout_marginTop="50px">
+        		<TableRow
+        		    android:layout_marginBottom="100dip">
 		        		<ImageView
 		        		android:layout_width="140px"
 		        		android:layout_height="140px"
@@ -220,23 +192,6 @@
 			        android:layout_width="fill_parent"
 			        android:layout_height="10px"
 			        android:layout_weight="1"/>
-			               
-<!--  		    	<LinearLayout 
-		            android:layout_width="fill_parent"
-		            android:layout_height="wrap_content"
-		            android:background="#85AB8F">
-				    <ImageView
-				    		android:id="@+id/nav_back"
-				            android:layout_width="80px"
-				            android:layout_height="80px"
-				            android:src="@drawable/nav_back"
-				            android:layout_gravity="left"/>  
-				    <ImageView 
-				            android:layout_width="80px"
-				            android:layout_height="80px"
-				            android:src="@drawable/nav_home"
-				            android:layout_gravity="left"/>
-			    </LinearLayout> -->
 			    
 			   <RelativeLayout
 				xmlns:android="http://schemas.android.com/apk/res/android"
