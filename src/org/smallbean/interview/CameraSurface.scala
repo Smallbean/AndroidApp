@@ -1,152 +1,126 @@
-package org.smallbean.interview;
+package org.smallbean.interview
 
 
-import java.io.File;
+import java.io.File
 
-import org.smallbean.interview.utilities.Data;
+import org.smallbean.interview.utilities.Data
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.content.res.TypedArray
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
+import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.BaseAdapter
+import android.widget.ImageView
+import android.widget.Toast
+import android.widget.AdapterView.OnItemClickListener
 
 
-public class CameraSurface extends Activity {	
-	private int CAMERA_RESULT = 1;
+class CameraSurface extends Activity {	
+	val CAMERA_RESULT = 1
 	
-	@Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.camera);
+	override def onCreate(savedInstanceState:Bundle) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.camera)
         
-        android.widget.Gallery camera_gallery = (android.widget.Gallery)findViewById(R.id.photo_gallery);
+        val camera_gallery = findViewById(R.id.photo_gallery).asInstanceOf[android.widget.Gallery]
         
-	    camera_gallery.setAdapter(new ImageAdapter(this));
+	    camera_gallery.setAdapter(new ImageAdapter(this))
 
 	    camera_gallery.setOnItemClickListener(new OnItemClickListener() {
-	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-	            Toast.makeText(CameraSurface.this, "" + position, Toast.LENGTH_SHORT).show();
+            def onItemClick(parent:AdapterView[_], view:View, position:Int, id:Long) { 
+	            Toast.makeText(CameraSurface.this, "" + position, Toast.LENGTH_SHORT).show()
 	        }
-	    });
+	    })
                          
     }
 	
 	
-	public void goHome(View view) {
+	def goHome(view:View) {
 	}
 	
-	public void finish(View view) {		
-		this.finish();
+	def finish(view:View) {		
+		this.finish()
 	}
 	
-	public void takePhoto(View view) {		    	    
-        showToast(this,Data.GetNewPhotoURL());       	               
+	def takePhoto(view:View) {		    	    
+        showToast(this,Data.GetNewPhotoURL())       	               
                 
-        Uri imageFileUri = Uri.fromFile(new File(Data.GetNewPhotoURL()));
+        val imageFileUri = Uri.fromFile(new File(Data.GetNewPhotoURL()))
         
-        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageFileUri);
+        var intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
+        intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageFileUri)
         
-        startActivityForResult(intent, this.CAMERA_RESULT);               		
+        startActivityForResult(intent, this.CAMERA_RESULT)               		
 	}
 
 	
-    protected void onActivityResult(int requestCode, int resultCode, Intent image) {
-        super.onActivityResult(requestCode, resultCode, image);
+    def onActivityResult(requestCode:Int, resultCode:Int, image:Intent) {
+        super.onActivityResult(requestCode, resultCode, image)
                 
-       if(requestCode == this.CAMERA_RESULT){
-    	    android.widget.Gallery camera_gallery = (android.widget.Gallery)findViewById(R.id.photo_gallery);
+       if(requestCode == CAMERA_RESULT){
+    	    val camera_gallery = findViewById(R.id.photo_gallery).asInstanceOf[android.widget.Gallery]
     	   
-    	    camera_gallery.setAdapter(new ImageAdapter(this));
+    	    camera_gallery.setAdapter(new ImageAdapter(this))
 
    	    	camera_gallery.setOnItemClickListener(new OnItemClickListener() {
-   	    		public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-   	    			Toast.makeText(CameraSurface.this, "" + position, Toast.LENGTH_SHORT).show();
+   	    		def onItemClick(parent:AdapterView[_], view:View, position:Int, id:Long) { 
+   	    			Toast.makeText(CameraSurface.this, "" + position, Toast.LENGTH_SHORT).show()
    	    		}
-   	    	});    	                                       	
+   	    	})    	                                       	
         }
     
                
     }
     
-    private void showToast(Context mContext, String text) {
-    	Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
+    private def showToast(mContext:Context, text:String) {
+    	Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show()
     }
     
     
-    public class ImageAdapter extends BaseAdapter {
-	    int mGalleryItemBackground;
-	    private String[] imagePaths;
-	    private Context mContext;
+    class ImageAdapter extends BaseAdapter {
+	    val mGalleryItemBackground:Int = null
+	    val imagePaths:Array[String] = Data.GetPhotoURLs()
+	    val mContext:Context = null
 
-	    private void getDrawables()
-	    {
-	    	String[] images = Data.GetPhotoURLs();
-	    	imagePaths = new String[images.length];
-	    	
-	    	for(int i=0;i<images.length;i++)
-	    	{    			    	
-		    	imagePaths[i] = images[i];
-	    	}
-	    }
-	    
-	    
-
-	    public ImageAdapter(Context c) {
-	    	getDrawables();
-	    	
-	        mContext = c;
-	        TypedArray a = obtainStyledAttributes(R.styleable.Gallery);
+	    def ImageAdapter(c:Context) {
+	        mContext = c
+	        val a = obtainStyledAttributes(R.styleable.Gallery)
 	        mGalleryItemBackground = a.getResourceId(
-	                R.styleable.Gallery_android_galleryItemBackground, 0);
-	        a.recycle();
+	                R.styleable.Gallery_android_galleryItemBackground, 0)
+	        a.recycle()
 	    }
 
-	    public int getCount() {
-	        return imagePaths.length;
-	    }
 
-	    public Object getItem(int position) {
-	        return position;
-	    }
+	    def getCount:Int = imagePaths.length
 
-	    public long getItemId(int position) {
-	        return position;
-	    }
+	    def getItem(position:Int):Object = position
 
-	    @Override	
-	    public View getView(int position, View convertView, ViewGroup parent) {
-	        ImageView i = new ImageView(mContext);
+	    def getItemId(position:Int) = position
+
+	    override def getView(position:Int, convertView:View, parent:ViewGroup):View = {
+	        var i = new ImageView(mContext)
 	        	      
-	        i.setImageDrawable(downSampleImage(imagePaths[position]));
-	        i.setLayoutParams(new android.widget.Gallery.LayoutParams(400, 400));
-	        i.setScaleType(ImageView.ScaleType.FIT_XY);
-	        i.setBackgroundResource(mGalleryItemBackground);
+	        i.setImageDrawable(downSampleImage(imagePaths[position]))
+	        i.setLayoutParams(new android.widget.Gallery.LayoutParams(400, 400))
+	        i.setScaleType(ImageView.ScaleType.FIT_XY)
+	        i.setBackgroundResource(mGalleryItemBackground)
 
-	        return i;
+	        i
 	    }
 	    
-	    private BitmapDrawable downSampleImage(String imgPath)
-	    {
-	    	BitmapFactory.Options options = new BitmapFactory.Options();
-	        options.inSampleSize = 2;
-	    	Bitmap bmp = BitmapFactory.decodeFile(imgPath, options);	    
-	    	
-	    	BitmapDrawable rbmd = new BitmapDrawable(bmp);
-	    	
-	    	return rbmd;
+	    private def downSampleImage(imgPath:String):BitmapDrawable = {
+	    	var options = new BitmapFactory.Options()
+	        options.inSampleSize = 2
+	    	var bmp = BitmapFactory.decodeFile(imgPath, options)	    
+	    	new BitmapDrawable(bmp)
 	    }
 
 	}

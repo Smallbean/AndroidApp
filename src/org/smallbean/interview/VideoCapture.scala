@@ -1,155 +1,129 @@
-package org.smallbean.interview;
+package org.smallbean.interview
 
-import java.io.IOException;
+import java.io.IOException
 
-import org.smallbean.interview.utilities.Data;
+import org.smallbean.interview.utilities.Data
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.pm.ActivityInfo;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.view.Window;
-import android.view.WindowManager;
-import android.media.MediaRecorder;
-import android.view.View;
-import android.view.SurfaceHolder.Callback;
-import android.view.View.OnClickListener;
-import android.widget.Toast;
+import android.app.Activity
+import android.content.Context
+import android.content.pm.ActivityInfo
+import android.os.Bundle
+import android.util.Log
+import android.view.SurfaceHolder
+import android.view.SurfaceView
+import android.view.Window
+import android.view.WindowManager
+import android.media.MediaRecorder
+import android.view.View
+import android.view.SurfaceHolder.Callback
+import android.view.View.OnClickListener
+import android.widget.Toast
 
-public class VideoCapture extends Activity implements OnClickListener, Callback 
+class VideoCapture extends Activity with OnClickListener with Callback 
 {
-	private String imageFilePath;
+    var recording = false
+	var recorder:MediaRecorder = null
+	var holder:SurfaceHolderm = null
 	
-    private boolean recording = false;
-	private MediaRecorder recorder;
-	private SurfaceHolder holder;
-	
-	@Override
-    public void onCreate(Bundle savedInstanceState) 
+	override def onCreate(savedInstanceState:Bundle) 
 	{
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState)
         
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
         
-        setContentView(R.layout.cameraview);
+        setContentView(R.layout.cameraview)
         
-        imageFilePath = Data.GetNewVideoURL();
-        Log.d("VideoPath", imageFilePath);
+        val imageFilePath = Data.GetNewVideoURL()
+        Log.d("VideoPath", imageFilePath)
         
         
-        initRecorder();
-        SurfaceView cameraView = (SurfaceView) findViewById(R.id.surface);
-        holder = cameraView.getHolder();
-        holder.addCallback(this);
-        holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+        initRecorder()
+        val cameraView = findViewById(R.id.surface).asInstanceOf[SurfaceView]
+        holder = cameraView.getHolder()
+        holder.addCallback(this)
+        holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS)
 
-        cameraView.setClickable(true);
-        cameraView.setOnClickListener(this);
+        cameraView.setClickable(true)
+        cameraView.setOnClickListener(this)
          
     }
 
-	private void initRecorder()
+	private def initRecorder
 	{
-		recorder = new MediaRecorder();
+		recorder = new MediaRecorder()
 		
-		recorder.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
-		recorder.setVideoSource(MediaRecorder.VideoSource.DEFAULT);
+		recorder.setAudioSource(MediaRecorder.AudioSource.DEFAULT)
+		recorder.setVideoSource(MediaRecorder.VideoSource.DEFAULT)
 		
-		recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-		recorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
-		recorder.setVideoEncoder(MediaRecorder.VideoEncoder.DEFAULT);
-		recorder.setOutputFile(imageFilePath);
+		recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
+		recorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT)
+		recorder.setVideoEncoder(MediaRecorder.VideoEncoder.DEFAULT)
+		recorder.setOutputFile(imageFilePath)
 		
-		recorder.setMaxDuration(50000);
-		recorder.setMaxFileSize(5000000);
+		recorder.setMaxDuration(50000)
+		recorder.setMaxFileSize(5000000)
 	}
 	
-	@Override
-	public void onClick(View v)
+	override def onClick(v:View)
 	{
 		if(recording)
 		{
 			
-			recorder.stop();
-			showToast(this,"Recording stopped");
-			recording = false;
-			finish();
-			//initRecorder();
-			//prepareRecorder();
+			recorder.stop()
+			showToast(this,"Recording stopped")
+			recording = false
+			finish()
 		}
 		else
 		{
-			recording = true;
-			recorder.start();
+			recording = true
+			recorder.start()
 			
-			showToast(this,"Recording started");
+			showToast(this,"Recording started")
 		}
 	}
 
-	@Override
-	public void surfaceChanged(SurfaceHolder holder, int format, int width,
-			int height) {
+	override def surfaceChanged(holder:SurfaceHolder, format:Int, width:Int, height:Int) {
 		// TODO Auto-generated method stub
 
 	}
 
-	private void prepareRecorder()
+	private def prepareRecorder
 	{
 		
-		recorder.setPreviewDisplay(holder.getSurface());
+		recorder.setPreviewDisplay(holder.getSurface())
 		try
 		{
 			
-			recorder.prepare();
+			recorder.prepare()
 		}
-		catch(IllegalStateException e)
+		catch
 		{
-			
-			e.printStackTrace();
-			finish();
-		}
-		catch(IOException e)
-		{
-		    e.printStackTrace();
-		    finish();
+			case _ => finish()
 		}
 	}
-	@Override
-	public void surfaceCreated(SurfaceHolder holder) 
-	{
-		
-		prepareRecorder();
+	
+	override def surfaceCreated(holder:SurfaceHolder) 
+	{		
+		prepareRecorder()
 	}
 
-	@Override
-	public void surfaceDestroyed(SurfaceHolder holder)
+	override def surfaceDestroyed(holder:SurfaceHolder)
 	{
 		if(recording)
 		{
-			recorder.stop();
-			recording = false;
+			recorder.stop()
+			recording = false
 		}
-		recorder.release();
-		finish();
+		recorder.release()
+		finish()
 	}
 	
-	
-
-  	public void captureVideo(View view) 
-  	{		    	    
-          showToast(this,imageFilePath);       	               
-                  
-  		
-  	}
-
-  
-  private void showToast(Context mContext, String text) {
-  	Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
+	  
+  private def showToast(mContext:Context, text:String) {
+  	Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show()
   }
 
 }

@@ -1,126 +1,96 @@
-package org.smallbean.interview;
+package org.smallbean.interview
 
-import java.io.File;
+import java.io.File
 
-import org.smallbean.interview.utilities.Data;
+import org.smallbean.interview.utilities.Data
 
-import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.Intent
+import android.content.res.TypedArray
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.BaseAdapter
+import android.widget.ImageView
+import android.widget.AdapterView.OnItemClickListener
 
 
-public class VideoGallery extends Activity{
+class VideoGallery extends Activity {
 
-    private String[] videoFilePaths;
-    
-    
-    File videoFile;
-   
+    var videoFilePaths:Array[String] = null
+    var videoFile:File = null   
         
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.video);
+    override def onCreate(savedInstanceState:Bundle) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.video)
         
-        android.widget.Gallery video_gallery = (android.widget.Gallery)findViewById(R.id.video_gallery);
+        val video_gallery = findViewById(R.id.video_gallery).asInstanceOf[android.widget.Gallery]
         
-        video_gallery.setAdapter(new VideoAdapter(this));
+        video_gallery.setAdapter(new VideoAdapter(this))
 
         video_gallery.setOnItemClickListener(new OnItemClickListener() {
-	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
-	        {
-	        	//videoFile = new File(videoFilePaths[position]);
-	        	String videoPath = videoFilePaths[position];
-	        	Intent intent = new Intent(android.content.Intent.ACTION_VIEW); 
-	            Uri data = Uri.parse(videoPath); 
-	            intent.setDataAndType(data,"video/mp4"); 
-	            try 
-	            { 
-	                      startActivity(intent); 
-	               
-	            } 
-	            catch (ActivityNotFoundException e) 
-	            { 
-	                e.printStackTrace(); 
-	            }
-
+            def onItemClick(parent:AdapterView[_], view:View, position:Int, id:Long) {  
+	        	//videoFile = new File(videoFilePaths[position])
+	        	String videoPath = videoFilePaths[position]
+	        	Intent intent = new Intent(android.content.Intent.ACTION_VIEW) 
+	            Uri data = Uri.parse(videoPath) 
+	            intent.setDataAndType(data,"video/mp4") 
+	            startActivity(intent)
 	        }
-	    });
+	    })
 	    
     }
     
-    public void recordVideo(View view) {
-        Intent intent = new Intent(this, VideoCapture.class);
-        startActivityForResult(intent, 0);
+    def recordVideo(view:View) {
+        val intent = new Intent(this, classOf[VideoCapture])
+        startActivityForResult(intent, 0)
     	
     }
       
      
     
-    public class VideoAdapter extends BaseAdapter {
-	    int mGalleryItemBackground;
-	    
-	    private Context mContext;
+    class VideoAdapter extends BaseAdapter {
+	    var mGalleryItemBackground:Int = null
+	    var mContext:Context = null
 
-	    private void getVideoPaths()
+	    private def getVideoPaths
 	    {
-	    	String[] videoFiles = Data.GetVideoURLs();
-	    	videoFilePaths = new String[videoFiles.length];
-	    	
-	    	for(int i=0;i<videoFiles.length;i++)
-	    	{		    	   			    
-	    		videoFilePaths[i] = videoFiles[i];
-	    	}
+	    	videoFilePaths = Data.GetVideoURLs
 	    }
-	    
-	    
 
-	    public VideoAdapter(Context c) {
-	    	getVideoPaths();
+	    def VideoAdapter(c:Context) {
+	    	getVideoPaths()
 	    	
-	        mContext = c;
-	        TypedArray a = obtainStyledAttributes(R.styleable.Gallery);
+	        mContext = c
+	        val a = obtainStyledAttributes(R.styleable.Gallery)
 	        mGalleryItemBackground = a.getResourceId(
-	                R.styleable.Gallery_android_galleryItemBackground, 0);
-	        a.recycle();
+	                R.styleable.Gallery_android_galleryItemBackground, 0)
+	        a.recycle()
 	    }
 
-	    public int getCount() {
-	        return videoFilePaths.length;
-	    }
+	    def getCount:Int = videoFilePaths.length
 
-	    public Object getItem(int position) {
-	        return position;
-	    }
+	    def getItem(position:Int):Object = position
 
-	    public long getItemId(int position) {
-	        return position;
-	    }
+	    def getItemId(position:Int) = position
 
-	    @Override	
-	    public View getView(int position, View convertView, ViewGroup parent) {
+	    override def getView(position:Int, convertView:View, parent:ViewGroup): View = {
 	    	
-	    	ImageView videoThumbNail = new ImageView(mContext);
-	    	Bitmap mBitmap = BitmapFactory.decodeResource(getResources(),
-	    			   R.drawable.sub_vid_wotext);
+	    	val videoThumbNail = new ImageView(mContext)
+	    	val mBitmap = BitmapFactory.decodeResource(getResources(),
+	    			   R.drawable.sub_vid_wotext)
 	    	
-	    	videoThumbNail.setLayoutParams(new android.widget.Gallery.LayoutParams(250, 250));	    	
-	    	videoThumbNail.setBackgroundResource(mGalleryItemBackground);
-	    	videoThumbNail.setImageBitmap(mBitmap);
+	    	videoThumbNail.setLayoutParams(new android.widget.Gallery.LayoutParams(250, 250))	    	
+	    	videoThumbNail.setBackgroundResource(mGalleryItemBackground)
+	    	videoThumbNail.setImageBitmap(mBitmap)
 	    	
-	        return videoThumbNail;
+	        videoThumbNail
 	    }	   	   
 
 	}    

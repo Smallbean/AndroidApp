@@ -1,126 +1,79 @@
-package org.smallbean.interview;
+package org.smallbean.interview
 
-import org.smallbean.interview.utilities.Data;
+import org.smallbean.interview.utilities.Data
 
-import android.app.Activity;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.Toast;
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
+import android.app.Activity
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemClickListener
+import android.widget.BaseAdapter
+import android.widget.ImageView
+import android.widget.Toast
+import android.content.Context
+import android.content.res.TypedArray
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
 
 
-public class Gallery extends Activity {
+class Gallery extends Activity {
 	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
-	    setContentView(R.layout.image_gallery);
+	override def onCreate(savedInstanceState:Bundle) {
+	    super.onCreate(savedInstanceState)
+	    setContentView(R.layout.image_gallery)
 	    
-	    android.widget.Gallery g = (android.widget.Gallery)findViewById(R.id.gallery_layout);
-	    	   
+	    val g = findViewById(R.id.gallery_layout).asInstanceOf[android.widget.Gallery]	    	   
 	    
-	    g.setAdapter(new ImageAdapter(this));
+	    g.setAdapter(new ImageAdapter(this))
 
 	    g.setOnItemClickListener(new OnItemClickListener() {
-	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-	            Toast.makeText(Gallery.this, "" + position, Toast.LENGTH_SHORT).show();
+            def onItemClick(parent:AdapterView[_], view:View, position:Int, id:Long) { 
+	            Toast.makeText(Gallery.this, "" + position, Toast.LENGTH_SHORT).show()
 	        }
-	    });
+	    })
 	}
 	
 	
-	public class ImageAdapter extends BaseAdapter {
-	    int mGalleryItemBackground;
-	    private String[] imagePaths;
-	    private Context mContext;
+	class ImageAdapter extends BaseAdapter {
+	    var imagePaths:Array[String] = Data.GetPhotoURLs()	    
+	    var mGalleryItemBackground:Int = null
+	    var mContext:Context = null
 
-	    private void getDrawables()
-	    {
-	    	String[] images = Data.GetPhotoURLs();
-	    	imagePaths = new String[images.length];
-	    	
-	    	for(int i=0;i<images.length;i++)
-	    	{
-		    	imagePaths[i] = images[i];
-	    	}
-	    }
-	    
-	    
-
-	    public ImageAdapter(Context c) {
-	    	getDrawables();
-	    	
-	        mContext = c;
-	        TypedArray a = obtainStyledAttributes(R.styleable.Gallery);
+	    def ImageAdapter(c:Context) {
+	        mContext = c
+	        val a = obtainStyledAttributes(R.styleable.Gallery)
 	        mGalleryItemBackground = a.getResourceId(
-	                R.styleable.Gallery_android_galleryItemBackground, 0);
-	        a.recycle();
+	                R.styleable.Gallery_android_galleryItemBackground, 0)
+	        a.recycle()
 	    }
 
-	    public int getCount() {
-	        return imagePaths.length;
-	    }
+	    def getCount:Int = imagePaths.length
 
-	    public Object getItem(int position) {
-	        return position;
-	    }
+	    def getItem(position:Int):Object = position
 
-	    public long getItemId(int position) {
-	        return position;
-	    }
+	    def getItemId(position:Int) = position
 
-	    @Override	
-	    public View getView(int position, View convertView, ViewGroup parent) {
-	        ImageView i = new ImageView(mContext);
+	    override def getView(position:Int, convertView:View, parent:ViewGroup):View = {
+	        val i = new ImageView(mContext)
 	        
-	        //i.setImageResource(mImageIds[position]);
-	        //downSampleImage(imagePaths[position]);
-	        //i.setImageDrawable(imgs[position]);
-	        i.setImageDrawable(downSampleImage(imagePaths[position]));
-	        i.setLayoutParams(new android.widget.Gallery.LayoutParams(150, 100));
-	        i.setScaleType(ImageView.ScaleType.FIT_XY);
-	        i.setBackgroundResource(mGalleryItemBackground);
+	        i.setImageDrawable(downSampleImage(imagePaths[position]))
+	        i.setLayoutParams(new android.widget.Gallery.LayoutParams(150, 100))
+	        i.setScaleType(ImageView.ScaleType.FIT_XY)
+	        i.setBackgroundResource(mGalleryItemBackground)
 
-	        return i;
+	        i
 	    }
 	    
-	    private BitmapDrawable downSampleImage(String imgPath)
-	    {
-	    	BitmapFactory.Options options = new BitmapFactory.Options();
-	        options.inSampleSize = 2;
-	    	Bitmap bmp = BitmapFactory.decodeFile(imgPath, options);
+	    private def downSampleImage(imgPath:String):BitmapDrawable = {
+	    	val options = new BitmapFactory.Options()
+	        options.inSampleSize = 2
+	    	val bmp = BitmapFactory.decodeFile(imgPath, options)
 	    	
-	    	//BitmapDrawable bmd = new BitmapDrawable(imgPath);
-	    	//Bitmap bmp = bmd.getBitmap();
+	    	val rbmd = new BitmapDrawable(bmp)
 	    	
-	 /*   	int width = bmp.getWidth();
-	    	int height = bmp.getHeight();
-	    	int newWidth = 50;
-	    	int newHeight = 50;
-	    	
-	    	float scaleWidth = ((float)newWidth) / width;
-	    	float scaleHeight = ((float)newHeight) / height;
-	    	
-	    	Matrix matrix = new Matrix();
-	    	matrix.postScale(scaleWidth, scaleHeight);
-	    	matrix.postRotate(45);
-	    	
-	    	Bitmap resizedBmp = Bitmap.createBitmap(bmp, 0, 0, width, height, matrix, true);
-	    	
-	    	*/
-	    	
-	    	BitmapDrawable rbmd = new BitmapDrawable(bmp);
-	    	
-	    	return rbmd;
+	    	return rbmd
 	    }
 
 	}

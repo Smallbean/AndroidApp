@@ -7,13 +7,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.TextView
-import android.widget.ViewFlipper
+import android.widget._
 import android.widget.AdapterView.OnItemClickListener
 
 class Interview extends Activity {
@@ -81,8 +75,7 @@ class Interview extends Activity {
         var subjectListView = findViewById(R.id.subject_list_view).asInstanceOf[ListView]
         populateListView(subjectListView)
         subjectListView.setOnItemClickListener(new OnItemClickListener() {
-            def onItemClick(parent:AdapterView[_], view:View,
-                position:Int, id:Long) {            
+            def onItemClick(parent:AdapterView[_], view:View, position:Int, id:Long) {            
               
               val subjectName = view.asInstanceOf[TextView].getText().asInstanceOf[String]
               Data.SetSubject(subjectName)

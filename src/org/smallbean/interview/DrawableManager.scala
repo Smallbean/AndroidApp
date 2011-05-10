@@ -1,63 +1,45 @@
-package org.smallbean.interview;
+package org.smallbean.interview
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashMap
+import java.util.Map
 
-import android.graphics.drawable.Drawable;
-import android.os.Handler;
-import android.os.Message;
-import android.widget.ImageView;
+import android.graphics.drawable.Drawable
+import android.os.Handler
+import android.os.Message
+import android.widget.ImageView
 
-public class DrawableManager {
-    private final Map<String, Drawable> drawableMap;
+class DrawableManager {
 
-    public DrawableManager() {
-        drawableMap = new HashMap<String, Drawable>();
+	val drawableMap:Map[String, Drawable]= new HashMap[String, Drawable]
+
+    def  fetchDrawable(urlString:String):Drawable = {
+        if (!drawableMap.containsKey(urlString)) {
+            val drawable = Drawable.createFromPath(urlString)
+            drawableMap.put(urlString, drawable)
+        }        
+        drawableMap.get(urlString)
     }
 
-    public Drawable fetchDrawable(String urlString) {
+    def fetchDrawableOnThread(urlString:String, imageView:ImageView) {
         if (drawableMap.containsKey(urlString)) {
-            return drawableMap.get(urlString);
-        }
-        
-        Drawable drawable = Drawable.createFromPath(urlString);
-        drawableMap.put(urlString, drawable);
-        
-        return drawable;
-        
-      /*  try {
-            
-           
-        } 
-        catch (Exception e) {
-            String ex = e.toString();
-            return null;
-        }
-        */
-    }
-
-    public void fetchDrawableOnThread(final String urlString, final ImageView imageView) {
-        if (drawableMap.containsKey(urlString)) {
-            imageView.setImageDrawable(drawableMap.get(urlString));
+            imageView.setImageDrawable(drawableMap.get(urlString))
         }
 
-        final Handler handler = new Handler() {
-            @Override
-            public void handleMessage(Message message) {
-                imageView.setImageDrawable((Drawable) message.obj);
+        var handler = new Handler() {
+            override def handleMessage(message:Message) {
+                imageView.setImageDrawable(message.obj.asInstanceOf[Drawable])
             }
-        };
+        }
 
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
+        var thread = new Thread() {
+            override def run() {
                 //TODO : set imageView to a "pending" image
-                Drawable drawable = fetchDrawable(urlString);
-                Message message = handler.obtainMessage(1, drawable);
-                handler.sendMessage(message);
+                val drawable = fetchDrawable(urlString)
+                val message = handler.obtainMessage(1, drawable)
+                handler.sendMessage(message)
             }
-        };
-        thread.start();
+        }
+        thread.start()
     }
 
 

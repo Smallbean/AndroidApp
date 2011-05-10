@@ -1,253 +1,237 @@
-package org.smallbean.interview;
+package org.smallbean.interview
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.BufferedInputStream
+import java.io.BufferedOutputStream
+import java.io.DataInputStream
+import java.io.DataOutputStream
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.Date
 
-import org.smallbean.interview.utilities.Data;
+import org.smallbean.interview.utilities.Data
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.media.AudioFormat;
-import android.media.AudioManager;
-import android.media.AudioRecord;
-import android.media.AudioTrack;
-import android.media.MediaRecorder;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.media.AudioFormat
+import android.media.AudioManager
+import android.media.AudioRecord
+import android.media.AudioTrack
+import android.media.MediaRecorder
+import android.net.Uri
+import android.os.AsyncTask
+import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.view.View.OnClickListener
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 
 
-public class AudioRecorder extends Activity implements OnClickListener {
+class AudioRecorder extends Activity with OnClickListener {
 
-    private static final int CAMERA_RESULT = 1;
+    val CAMERA_RESULT = 1
 	
-	RecordAudio recordTask;
-	PlayAudio playTask;
-
-	Button startRecordingButton;
-	Button startPlaybackButton, stopPlaybackButton;
+	val recordTask:RecordAudio = null
+	val playTask:PlayAudio = null
 	
-	TextView durationText;
+	val startRecordingButton = findViewById(R.id.StartRecordingButton).asInstanceOf[Button]
+	val startPlaybackButton = findViewById(R.id.StartPlaybackButton).asInstanceOf[Button]
+	val stopPlaybackButton = findViewById(R.id.StopPlaybackButton).asInstanceOf[Button]
 	
-	File recordingFile;
+	val durationText:TextView = findViewById(R.id.DurationTextView).asInstanceOf[TextView]
+	
+	var recordingFile:File = null
 
-	boolean isRecording = false;
-	boolean isPlaying = false;
+	var isRecording = false
+	var isPlaying = false
 
-	int frequency = 11025;
-	int channelConfiguration = AudioFormat.CHANNEL_CONFIGURATION_MONO;
-	int audioEncoding = AudioFormat.ENCODING_PCM_16BIT;
+	var frequency = 11025
+	var channelConfiguration = AudioFormat.CHANNEL_CONFIGURATION_MONO
+	var audioEncoding = AudioFormat.ENCODING_PCM_16BIT
 
-	long startRecordTime;
+	var startRecordTime:Long = null
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.audio_recorder);
+	override def onCreate(savedInstanceState:Bundle) {
+		super.onCreate(savedInstanceState)
+		setContentView(R.layout.audio_recorder)
 
-		durationText = (TextView) this.findViewById(R.id.DurationTextView);
-		
-		startRecordingButton = (Button) this
-				.findViewById(R.id.StartRecordingButton);
-		startPlaybackButton = (Button) this
-				.findViewById(R.id.StartPlaybackButton);
-		stopPlaybackButton = (Button) this
-				.findViewById(R.id.StopPlaybackButton);
-		
-		startRecordingButton.setOnClickListener(this);
-		startPlaybackButton.setOnClickListener(this);
-		stopPlaybackButton.setOnClickListener(this);
+		startRecordingButton.setOnClickListener(this)
+		startPlaybackButton.setOnClickListener(this)
+		stopPlaybackButton.setOnClickListener(this)
 
-		startPlaybackButton.setEnabled(false);
-		stopPlaybackButton.setEnabled(false);
+		startPlaybackButton.setEnabled(false)
+		stopPlaybackButton.setEnabled(false)
 
-		// recordingFile = File.createTempFile("recording", ".pcm", path);
-		String audioFilename = Data.GetNewAudioURL();
-		recordingFile = new File(audioFilename);
+		val audioFilename = Data.GetNewAudioURL()
+		recordingFile = new File(audioFilename)
 
-		showToast(this,audioFilename);       	               
+		showToast(this,audioFilename)       	               
         
-		startRecordTime = System.currentTimeMillis();
-		System.out.println("Current time: " + startRecordTime);
+		startRecordTime = System.currentTimeMillis()
 		// Start recording
-		record();
+		record()
 	}
 
-	public void onClick(View v) {
+	def onClick(v:View) {
 		if (v == startRecordingButton) {
-			record();
+			record
 		} else if (v == startPlaybackButton) {
-			play();
+			play
 		} else if (v == stopPlaybackButton) {
-			stopPlaying();
+			stopPlaying
 		}
 	}
 
-	public void play() {
-		startPlaybackButton.setEnabled(true);
+	def play {
+		startPlaybackButton.setEnabled(true)
 
-		playTask = new PlayAudio();
-		playTask.execute();
+		playTask = new PlayAudio()
+		playTask.execute()
 
-		stopPlaybackButton.setEnabled(true);
+		stopPlaybackButton.setEnabled(true)
 	}
 
-	public void stopPlaying() {
-		isPlaying = false;
-		stopPlaybackButton.setEnabled(false);
-		startPlaybackButton.setEnabled(true);
+	def stopPlaying() {
+		isPlaying = false
+		stopPlaybackButton.setEnabled(false)
+		startPlaybackButton.setEnabled(true)
 	}
 
-	public void record() {
-		startRecordingButton.setEnabled(false);
+	def record() {
+		startRecordingButton.setEnabled(false)
 
-		recordTask = new RecordAudio();
-		recordTask.execute();
+		recordTask = new RecordAudio()
+		recordTask.execute()
 	}
 
-	public void stopRecording() {
-		isRecording = false;
-	}
-	
-	public void stopRecording(View view) {
-		this.stopRecording();
+	def stopRecording() {
+		isRecording = false
 	}
 	
-	public void takePhoto(View view) {		
-		this.takePhoto();
+	def stopRecording(view:View) {
+		stopRecording()
+	}
+	
+	def takePhoto(view:View) {		
+		takePhoto()
 	}	
-	public void takePhoto(){
+	def takePhoto{
         
-		String photoFilename = Data.GetNewPhotoURL();
-		showToast(this,photoFilename);       	               
+		val photoFilename = Data.GetNewPhotoURL()
+		showToast(this,photoFilename)       	               
         
-        Uri imageFileUri = Uri.fromFile(new File(photoFilename));
+        val imageFileUri = Uri.fromFile(new File(photoFilename))
         
-        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageFileUri);
+        val intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
+        intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageFileUri)
         
-        startActivityForResult(intent, AudioRecorder.CAMERA_RESULT);               		
+        startActivityForResult(intent, CAMERA_RESULT)               		
 	}
 
-	private void showToast(Context mContext, String text) {
-    	Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
+	def showToast(mContext:Context, text:String) {
+    	Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show()
     }
 	
-    protected void onActivityResult(int requestCode, int resultCode, Intent image) {
-        super.onActivityResult(requestCode, resultCode, image);
-                
-       if(requestCode == AudioRecorder.CAMERA_RESULT){
-    	      	                                       	
-        }
+    def onActivityResult(requestCode:Int, resultCode:Int, image:Intent) {
+        super.onActivityResult(requestCode, resultCode, image)
     }
 
-	private class PlayAudio extends AsyncTask<Void, Integer, Void> {
-		@Override
-		protected Void doInBackground(Void... params) {
-			isPlaying = true;
+	class PlayAudio extends AsyncTask[Unit, Integer, Unit] {
+		override protected def doInBackground {
+			isPlaying = true
 
-			int bufferSize = AudioTrack.getMinBufferSize(frequency,
-					channelConfiguration, audioEncoding);
-			short[] audiodata = new short[bufferSize / 4];
+			var bufferSize = AudioTrack.getMinBufferSize(frequency,
+					channelConfiguration, audioEncoding)
+			val size:Int = bufferSize / 4
+			var audiodata = new short[size]
 
 			try {
-				DataInputStream dis = new DataInputStream(
+				var dis = new DataInputStream(
 						new BufferedInputStream(new FileInputStream(
-								recordingFile)));
+								recordingFile)))
 
-				AudioTrack audioTrack = new AudioTrack(
+				var audioTrack = new AudioTrack(
 						AudioManager.STREAM_MUSIC, frequency,
 						channelConfiguration, audioEncoding, bufferSize,
-						AudioTrack.MODE_STREAM);
+						AudioTrack.MODE_STREAM)
 
-				audioTrack.play();
+				audioTrack.play()
 
 				while (isPlaying && dis.available() > 0) {
-					int i = 0;
+					var i = 0
 					while (dis.available() > 0 && i < audiodata.length) {
-						audiodata[i] = dis.readShort();
-						i++;
+						audiodata[i] = dis.readShort()
+						i++
 					}
-					audioTrack.write(audiodata, 0, audiodata.length);
+					audioTrack.write(audiodata, 0, audiodata.length)
 				}
 
-				dis.close();
+				dis.close()
 
-				startPlaybackButton.setEnabled(false);
-				stopPlaybackButton.setEnabled(true);
+				startPlaybackButton.setEnabled(false)
+				stopPlaybackButton.setEnabled(true)
 
-			} catch (Throwable t) {
-				Log.e("AudioTrack", "Playback Failed");
+			} catch {
+				case _ => Log.e("AudioRecord", "Playback Failed")
 			}
 
-			return null;
+			return null
 		}
 	}
 
-	private class RecordAudio extends AsyncTask<Void, Integer, Void> {
-		@Override
-		protected Void doInBackground(Void... params) {
-			isRecording = true;
+	class RecordAudio extends AsyncTask[Unit, Integer, Void] {
+		override protected def doInBackground(params:Unit*) {
+			isRecording = true
 
 			try {
-				DataOutputStream dos = new DataOutputStream(
+				var dos = new DataOutputStream(
 						new BufferedOutputStream(new FileOutputStream(
-								recordingFile)));
+								recordingFile)))
 
-				int bufferSize = AudioRecord.getMinBufferSize(frequency,
-						channelConfiguration, audioEncoding);
+				var bufferSize = AudioRecord.getMinBufferSize(frequency,
+						channelConfiguration, audioEncoding)
 
-				AudioRecord audioRecord = new AudioRecord(
+				var audioRecord = new AudioRecord(
 						MediaRecorder.AudioSource.MIC, frequency,
-						channelConfiguration, audioEncoding, bufferSize);
+						channelConfiguration, audioEncoding, bufferSize)
 
-				short[] buffer = new short[bufferSize];
-				audioRecord.startRecording();
+				var buffer = new short[bufferSize]
+				audioRecord.startRecording()
 
-				int r = 0;
+				var r = 0
 				while (isRecording) {
-					int bufferReadResult = audioRecord.read(buffer, 0,
-							bufferSize);
-					for (int i = 0; i < bufferReadResult; i++) {
-						dos.writeShort(buffer[i]);
+					var bufferReadResult = audioRecord.read(buffer, 0,
+							bufferSize)
+					for (i <- 0 until bufferReadResult)
+						dos.writeShort(buffer[i])
 					}
 
-					publishProgress(new Integer(r));
-					r++;
+					publishProgress(new Integer(r))
+					r++
 				}
 
-				audioRecord.stop();
-				dos.close();
-			} catch (Throwable t) {
-				Log.e("AudioRecord", "Recording Failed");
+				audioRecord.stop()
+				dos.close()
+			} catch {
+				case _ => Log.e("AudioRecord", "Recording Failed")
 			}
 
-			return null;
+			return null
 		}
 
-		protected void onProgressUpdate(Integer... progress) {
-			long duration = System.currentTimeMillis() - startRecordTime;
-			SimpleDateFormat df = new SimpleDateFormat("mm:ss");			
-			durationText.setText("Time:" + df.format(new Date(duration)));
+		def onProgressUpdate(progress:Int*) {
+			var duration = System.currentTimeMillis() - startRecordTime
+			var df = new SimpleDateFormat("mm:ss")			
+			durationText.setText("Time:" + df.format(new Date(duration)))
 		}
 
-		protected void onPostExecute(Void result) {
-			startRecordingButton.setEnabled(true);
-			startPlaybackButton.setEnabled(true);
+		def onPostExecute(result:Unit) {
+			startRecordingButton.setEnabled(true)
+			startPlaybackButton.setEnabled(true)
 		}
 	}
 	
