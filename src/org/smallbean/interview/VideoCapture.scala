@@ -26,8 +26,6 @@ public class VideoCapture extends Activity implements OnClickListener, Callback
     private boolean recording = false;
 	private MediaRecorder recorder;
 	private SurfaceHolder holder;
-
-    private Data data = Data.getInstance();
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) 
@@ -40,7 +38,7 @@ public class VideoCapture extends Activity implements OnClickListener, Callback
         
         setContentView(R.layout.cameraview);
         
-        imageFilePath = data.GetNewVideoURL();
+        imageFilePath = Data.GetNewVideoURL();
         Log.d("VideoPath", imageFilePath);
         
         

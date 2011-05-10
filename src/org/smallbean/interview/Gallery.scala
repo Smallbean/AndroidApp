@@ -20,9 +20,6 @@ import android.view.ViewGroup;
 
 public class Gallery extends Activity {
 	
-
-	private Data data = Data.getInstance();
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
@@ -48,7 +45,7 @@ public class Gallery extends Activity {
 
 	    private void getDrawables()
 	    {
-	    	String[] images = data.GetPhotoURLs();
+	    	String[] images = Data.GetPhotoURLs();
 	    	imagePaths = new String[images.length];
 	    	
 	    	for(int i=0;i<images.length;i++)

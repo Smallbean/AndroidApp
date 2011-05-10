@@ -23,8 +23,6 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class VideoGallery extends Activity{
 
-    
-    private Data data = Data.getInstance();
     private String[] videoFilePaths;
     
     
@@ -78,7 +76,7 @@ public class VideoGallery extends Activity{
 
 	    private void getVideoPaths()
 	    {
-	    	String[] videoFiles = data.GetVideoURLs();
+	    	String[] videoFiles = Data.GetVideoURLs();
 	    	videoFilePaths = new String[videoFiles.length];
 	    	
 	    	for(int i=0;i<videoFiles.length;i++)

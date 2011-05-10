@@ -29,8 +29,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 
 public class Audio extends Activity {
-      
-    private Data data = Data.getInstance();
+          
     private String[] audioFilePaths;
 
     boolean isPlaying = false;
@@ -43,6 +42,8 @@ public class Audio extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.audio);
+        
+        
         
         android.widget.Gallery audio_gallery = (android.widget.Gallery)findViewById(R.id.audio_gallery);
         
@@ -71,7 +72,7 @@ public class Audio extends Activity {
 
 	    private void getAudioPaths()
 	    {
-	    	String[] audioFiles = data.GetAudioURLs();
+	    	String[] audioFiles = Data.GetAudioURLs();
 	    	audioFilePaths = new String[audioFiles.length];
 	    	
 	    	for(int i=0;i<audioFiles.length;i++)

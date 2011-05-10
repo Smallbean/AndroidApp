@@ -25,7 +25,6 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class CameraSurface extends Activity {	
 	private int CAMERA_RESULT = 1;
-	private Data data = Data.getInstance();	
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,9 +52,9 @@ public class CameraSurface extends Activity {
 	}
 	
 	public void takePhoto(View view) {		    	    
-        showToast(this,data.GetNewPhotoURL());       	               
+        showToast(this,Data.GetNewPhotoURL());       	               
                 
-        Uri imageFileUri = Uri.fromFile(new File(data.GetNewPhotoURL()));
+        Uri imageFileUri = Uri.fromFile(new File(Data.GetNewPhotoURL()));
         
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageFileUri);
@@ -94,7 +93,7 @@ public class CameraSurface extends Activity {
 
 	    private void getDrawables()
 	    {
-	    	String[] images = data.GetPhotoURLs();
+	    	String[] images = Data.GetPhotoURLs();
 	    	imagePaths = new String[images.length];
 	    	
 	    	for(int i=0;i<images.length;i++)

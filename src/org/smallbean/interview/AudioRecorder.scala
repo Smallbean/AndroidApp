@@ -43,7 +43,6 @@ public class AudioRecorder extends Activity implements OnClickListener {
 	
 	TextView durationText;
 	
-	private Data data = Data.getInstance();
 	File recordingFile;
 
 	boolean isRecording = false;
@@ -77,7 +76,7 @@ public class AudioRecorder extends Activity implements OnClickListener {
 		stopPlaybackButton.setEnabled(false);
 
 		// recordingFile = File.createTempFile("recording", ".pcm", path);
-		String audioFilename = data.GetNewAudioURL();
+		String audioFilename = Data.GetNewAudioURL();
 		recordingFile = new File(audioFilename);
 
 		showToast(this,audioFilename);       	               
@@ -133,7 +132,7 @@ public class AudioRecorder extends Activity implements OnClickListener {
 	}	
 	public void takePhoto(){
         
-		String photoFilename = data.GetNewPhotoURL();
+		String photoFilename = Data.GetNewPhotoURL();
 		showToast(this,photoFilename);       	               
         
         Uri imageFileUri = Uri.fromFile(new File(photoFilename));
