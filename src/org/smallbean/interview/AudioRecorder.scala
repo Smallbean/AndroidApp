@@ -15,11 +15,8 @@ import org.smallbean.interview.utilities.Data
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.media.AudioFormat
-import android.media.AudioManager
-import android.media.AudioRecord
-import android.media.AudioTrack
-import android.media.MediaRecorder
+import android.media._
+import android.media.MediaRecorder._
 import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
@@ -35,8 +32,8 @@ class AudioRecorder extends Activity with OnClickListener {
 
     val CAMERA_RESULT = 1
 	
-	val recordTask:RecordAudio = null
-	val playTask:PlayAudio = null
+	var recordTask:RecordAudio = null
+	var playTask:PlayAudio = null
 	
 	val startRecordingButton = findViewById(R.id.StartRecordingButton).asInstanceOf[Button]
 	val startPlaybackButton = findViewById(R.id.StartPlaybackButton).asInstanceOf[Button]
@@ -53,8 +50,8 @@ class AudioRecorder extends Activity with OnClickListener {
 	var channelConfiguration = AudioFormat.CHANNEL_CONFIGURATION_MONO
 	var audioEncoding = AudioFormat.ENCODING_PCM_16BIT
 
-	var startRecordTime:Long = null
-
+	var startRecordTime:Long = 0
+		
 	override def onCreate(savedInstanceState:Bundle) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.audio_recorder)
@@ -66,7 +63,7 @@ class AudioRecorder extends Activity with OnClickListener {
 		startPlaybackButton.setEnabled(false)
 		stopPlaybackButton.setEnabled(false)
 
-		val audioFilename = Data.GetNewAudioURL()
+		val audioFilename = Data.GetNewAudioURL
 		recordingFile = new File(audioFilename)
 
 		showToast(this,audioFilename)       	               
@@ -113,15 +110,15 @@ class AudioRecorder extends Activity with OnClickListener {
 	}
 	
 	def stopRecording(view:View) {
-		stopRecording()
+		stopRecording
 	}
 	
 	def takePhoto(view:View) {		
-		takePhoto()
+		takePhoto
 	}	
 	def takePhoto{
         
-		val photoFilename = Data.GetNewPhotoURL()
+		val photoFilename = Data.GetNewPhotoURL
 		showToast(this,photoFilename)       	               
         
         val imageFileUri = Uri.fromFile(new File(photoFilename))
@@ -132,22 +129,23 @@ class AudioRecorder extends Activity with OnClickListener {
         startActivityForResult(intent, CAMERA_RESULT)               		
 	}
 
-	def showToast(mContext:Context, text:String) {
-    	Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show()
-    }
+	def showToast(mContext:Context, text:String){
+		Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show()
+	}
+    
 	
     def onActivityResult(requestCode:Int, resultCode:Int, image:Intent) {
         super.onActivityResult(requestCode, resultCode, image)
     }
 
-	class PlayAudio extends AsyncTask[Unit, Integer, Unit] {
+	class PlayAudio extends AsyncTask[AnyRef, Integer, AnyRef] {
 		override protected def doInBackground {
 			isPlaying = true
 
 			var bufferSize = AudioTrack.getMinBufferSize(frequency,
 					channelConfiguration, audioEncoding)
-			val size:Int = bufferSize / 4
-			var audiodata = new short[size]
+			
+			var audiodata = new Array[Short](bufferSize / 4)
 
 			try {
 				var dis = new DataInputStream(
@@ -164,8 +162,8 @@ class AudioRecorder extends Activity with OnClickListener {
 				while (isPlaying && dis.available() > 0) {
 					var i = 0
 					while (dis.available() > 0 && i < audiodata.length) {
-						audiodata[i] = dis.readShort()
-						i++
+						audiodata(i) = dis.readShort
+						i = i + 1
 					}
 					audioTrack.write(audiodata, 0, audiodata.length)
 				}
@@ -182,36 +180,36 @@ class AudioRecorder extends Activity with OnClickListener {
 			return null
 		}
 	}
-
+	
 	class RecordAudio extends AsyncTask[Unit, Integer, Void] {
 		override protected def doInBackground(params:Unit*) {
 			isRecording = true
 
+			var dos = new DataOutputStream(
+					new BufferedOutputStream(new FileOutputStream(
+							recordingFile)))
+
+			var bufferSize = AudioRecord.getMinBufferSize(frequency,
+					channelConfiguration, audioEncoding)
+
+			var audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, frequency,
+					channelConfiguration, audioEncoding, bufferSize)
+
 			try {
-				var dos = new DataOutputStream(
-						new BufferedOutputStream(new FileOutputStream(
-								recordingFile)))
-
-				var bufferSize = AudioRecord.getMinBufferSize(frequency,
-						channelConfiguration, audioEncoding)
-
-				var audioRecord = new AudioRecord(
-						MediaRecorder.AudioSource.MIC, frequency,
-						channelConfiguration, audioEncoding, bufferSize)
-
-				var buffer = new short[bufferSize]
+				var buffer = new Array[Short](bufferSize)
 				audioRecord.startRecording()
 
+				
 				var r = 0
 				while (isRecording) {
 					var bufferReadResult = audioRecord.read(buffer, 0,
 							bufferSize)
-					for (i <- 0 until bufferReadResult)
-						dos.writeShort(buffer[i])
+					for (i <- 0 until bufferReadResult){
+						dos.writeShort(buffer(i))
 					}
 
 					publishProgress(new Integer(r))
-					r++
+					r = r + 1
 				}
 
 				audioRecord.stop()

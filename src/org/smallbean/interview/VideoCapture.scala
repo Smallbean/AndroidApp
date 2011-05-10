@@ -17,13 +17,15 @@ import android.media.MediaRecorder
 import android.view.View
 import android.view.SurfaceHolder.Callback
 import android.view.View.OnClickListener
-import android.widget.Toast
+import android.widget.ToastB
+
 
 class VideoCapture extends Activity with OnClickListener with Callback 
 {
     var recording = false
 	var recorder:MediaRecorder = null
-	var holder:SurfaceHolderm = null
+	var holder:SurfaceHolder = null
+	var imageFilePath = ""
 	
 	override def onCreate(savedInstanceState:Bundle) 
 	{
@@ -35,11 +37,11 @@ class VideoCapture extends Activity with OnClickListener with Callback
         
         setContentView(R.layout.cameraview)
         
-        val imageFilePath = Data.GetNewVideoURL()
+        imageFilePath = Data.GetNewVideoURL
         Log.d("VideoPath", imageFilePath)
         
         
-        initRecorder()
+        initRecorder
         val cameraView = findViewById(R.id.surface).asInstanceOf[SurfaceView]
         holder = cameraView.getHolder()
         holder.addCallback(this)
@@ -107,7 +109,7 @@ class VideoCapture extends Activity with OnClickListener with Callback
 	
 	override def surfaceCreated(holder:SurfaceHolder) 
 	{		
-		prepareRecorder()
+		prepareRecorder
 	}
 
 	override def surfaceDestroyed(holder:SurfaceHolder)

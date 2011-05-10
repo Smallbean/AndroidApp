@@ -36,29 +36,24 @@ class Gallery extends Activity {
 	}
 	
 	
-	class ImageAdapter extends BaseAdapter {
-	    var imagePaths:Array[String] = Data.GetPhotoURLs()	    
-	    var mGalleryItemBackground:Int = null
-	    var mContext:Context = null
-
-	    def ImageAdapter(c:Context) {
-	        mContext = c
-	        val a = obtainStyledAttributes(R.styleable.Gallery)
-	        mGalleryItemBackground = a.getResourceId(
-	                R.styleable.Gallery_android_galleryItemBackground, 0)
-	        a.recycle()
-	    }
+	class ImageAdapter(c:Context) extends BaseAdapter {
+        val mContext = c
+        val a = obtainStyledAttributes(R.styleable.Gallery)
+        val mGalleryItemBackground = a.getResourceId(
+                R.styleable.Gallery_android_galleryItemBackground, 0)
+        a.recycle()
+	    var imagePaths:Array[String] = Data.GetPhotoURLs
 
 	    def getCount:Int = imagePaths.length
 
-	    def getItem(position:Int):Object = position
+	    def getItem(position:Int):Object = position.asInstanceOf[Object]
 
 	    def getItemId(position:Int) = position
 
 	    override def getView(position:Int, convertView:View, parent:ViewGroup):View = {
 	        val i = new ImageView(mContext)
 	        
-	        i.setImageDrawable(downSampleImage(imagePaths[position]))
+	        i.setImageDrawable(downSampleImage(imagePaths(position)))
 	        i.setLayoutParams(new android.widget.Gallery.LayoutParams(150, 100))
 	        i.setScaleType(ImageView.ScaleType.FIT_XY)
 	        i.setBackgroundResource(mGalleryItemBackground)

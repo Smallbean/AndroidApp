@@ -51,9 +51,9 @@ class CameraSurface extends Activity {
 	}
 	
 	def takePhoto(view:View) {		    	    
-        showToast(this,Data.GetNewPhotoURL())       	               
+        showToast(this,Data.GetNewPhotoURL)       	               
                 
-        val imageFileUri = Uri.fromFile(new File(Data.GetNewPhotoURL()))
+        val imageFileUri = Uri.fromFile(new File(Data.GetNewPhotoURL))
         
         var intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
         intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageFileUri)
@@ -85,30 +85,24 @@ class CameraSurface extends Activity {
     }
     
     
-    class ImageAdapter extends BaseAdapter {
-	    val mGalleryItemBackground:Int = null
-	    val imagePaths:Array[String] = Data.GetPhotoURLs()
-	    val mContext:Context = null
-
-	    def ImageAdapter(c:Context) {
-	        mContext = c
-	        val a = obtainStyledAttributes(R.styleable.Gallery)
-	        mGalleryItemBackground = a.getResourceId(
-	                R.styleable.Gallery_android_galleryItemBackground, 0)
-	        a.recycle()
-	    }
-
+    class ImageAdapter(c:Context) extends BaseAdapter {
+        val mContext = c
+        val a = obtainStyledAttributes(R.styleable.Gallery)
+        val mGalleryItemBackground = a.getResourceId(
+                R.styleable.Gallery_android_galleryItemBackground, 0)
+        a.recycle()
+	    val imagePaths:Array[String] = Data.GetPhotoURLs
 
 	    def getCount:Int = imagePaths.length
 
-	    def getItem(position:Int):Object = position
+	    def getItem(position:Int):Object = position.asInstanceOf[Object]
 
 	    def getItemId(position:Int) = position
 
 	    override def getView(position:Int, convertView:View, parent:ViewGroup):View = {
 	        var i = new ImageView(mContext)
 	        	      
-	        i.setImageDrawable(downSampleImage(imagePaths[position]))
+	        i.setImageDrawable(downSampleImage(imagePaths(position)))
 	        i.setLayoutParams(new android.widget.Gallery.LayoutParams(400, 400))
 	        i.setScaleType(ImageView.ScaleType.FIT_XY)
 	        i.setBackgroundResource(mGalleryItemBackground)

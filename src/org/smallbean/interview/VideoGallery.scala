@@ -37,9 +37,9 @@ class VideoGallery extends Activity {
         video_gallery.setOnItemClickListener(new OnItemClickListener() {
             def onItemClick(parent:AdapterView[_], view:View, position:Int, id:Long) {  
 	        	//videoFile = new File(videoFilePaths[position])
-	        	String videoPath = videoFilePaths[position]
-	        	Intent intent = new Intent(android.content.Intent.ACTION_VIEW) 
-	            Uri data = Uri.parse(videoPath) 
+	        	val videoPath = videoFilePaths(position)
+	        	var intent = new Intent(android.content.Intent.ACTION_VIEW) 
+	            val data = Uri.parse(videoPath) 
 	            intent.setDataAndType(data,"video/mp4") 
 	            startActivity(intent)
 	        }
@@ -55,28 +55,17 @@ class VideoGallery extends Activity {
       
      
     
-    class VideoAdapter extends BaseAdapter {
-	    var mGalleryItemBackground:Int = null
-	    var mContext:Context = null
-
-	    private def getVideoPaths
-	    {
-	    	videoFilePaths = Data.GetVideoURLs
-	    }
-
-	    def VideoAdapter(c:Context) {
-	    	getVideoPaths()
-	    	
-	        mContext = c
-	        val a = obtainStyledAttributes(R.styleable.Gallery)
-	        mGalleryItemBackground = a.getResourceId(
-	                R.styleable.Gallery_android_galleryItemBackground, 0)
-	        a.recycle()
-	    }
+    class VideoAdapter(c:Context) extends BaseAdapter {
+        val mContext = c
+        val a = obtainStyledAttributes(R.styleable.Gallery)
+        val mGalleryItemBackground = a.getResourceId(
+                R.styleable.Gallery_android_galleryItemBackground, 0)
+        a.recycle()
+        val videoFilePaths = Data.GetVideoURLs
 
 	    def getCount:Int = videoFilePaths.length
 
-	    def getItem(position:Int):Object = position
+	    def getItem(position:Int):Object = position.asInstanceOf[Object]
 
 	    def getItemId(position:Int) = position
 

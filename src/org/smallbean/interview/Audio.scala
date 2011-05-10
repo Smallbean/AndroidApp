@@ -30,7 +30,7 @@ import android.widget.AdapterView.OnItemClickListener
 
 class Audio extends Activity {
           
-    var audioFilePaths = Data.GetAudioURLs()
+    var audioFilePaths = Data.GetAudioURLs
 
     var isPlaying = false
     var playTask:PlayAudio = null
@@ -46,7 +46,7 @@ class Audio extends Activity {
 
         audio_gallery.setOnItemClickListener(new OnItemClickListener() {
             def onItemClick(parent:AdapterView[_], view:View, position:Int, id:Long) { 
-	        	recordingFile = new File(audioFilePaths[position])
+	        	recordingFile = new File(audioFilePaths(position))
 	        	playTask = new PlayAudio()
 	    		playTask.execute()
 	        }
@@ -60,22 +60,17 @@ class Audio extends Activity {
         startActivityForResult(intent, 0)
     }
     
-    class AudioAdapter extends BaseAdapter {
-	    var mGalleryItemBackground:Int = null
-	    val audioFilePaths = Data.GetAudioURLs()
-	    var mContext:Context = null
-
-	    def AudioAdapter(c:Context) {
-	        mContext = c
-	        var a = obtainStyledAttributes(R.styleable.Gallery)
-	        mGalleryItemBackground = a.getResourceId(
-	                R.styleable.Gallery_android_galleryItemBackground, 0)
-	        a.recycle()
-	    }
+    class AudioAdapter(c:Context) extends BaseAdapter {
+        var a = obtainStyledAttributes(R.styleable.Gallery)
+        var mGalleryItemBackground = a.getResourceId(
+                R.styleable.Gallery_android_galleryItemBackground, 0)
+        a.recycle()
+	    val audioFilePaths = Data.GetAudioURLs
+	    var mContext:Context = c
 
 	    def getCount:Int = audioFilePaths.length
 
-	    def getItem(position:Int):Object = position
+	    def getItem(position:Int):Object = position.asInstanceOf[Object]
 
 	    def getItemId(position:Int) = position
 
@@ -94,7 +89,7 @@ class Audio extends Activity {
 
 	}
     
-    private class PlayAudio extends AsyncTask[Unit, Integer, Unit] {
+    class PlayAudio extends AsyncTask[AnyRef, Integer, AnyRef] {
     	
     	val frequency = 11025
     	val channelConfiguration = AudioFormat.CHANNEL_CONFIGURATION_MONO
@@ -103,10 +98,10 @@ class Audio extends Activity {
 		override protected def doInBackground(params:Unit*) {
 			isPlaying = true
 
-			var bufferSize = AudioTrack.getMinBufferSize(frequency,
-					channelConfiguration, audioEncoding)
-			var audiodata = new short[bufferSize / 4]
-
+			var bufferSize:Int = AudioTrack.getMinBufferSize(frequency,	channelConfiguration, audioEncoding)
+			
+			var audiodata = new Array[Short](bufferSize / 4)
+			
 			try {
 				var dis = new DataInputStream(
 						new BufferedInputStream(new FileInputStream(
@@ -122,8 +117,8 @@ class Audio extends Activity {
 				while (isPlaying && dis.available() > 0) {
 					var i = 0
 					while (dis.available() > 0 && i < audiodata.length) {
-						audiodata[i] = dis.readShort()
-						i++
+						audiodata(i) = dis.readShort
+						i = i + 1
 					}
 					audioTrack.write(audiodata, 0, audiodata.length)
 				}
