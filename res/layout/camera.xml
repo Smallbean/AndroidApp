@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout android:orientation="vertical"
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/main_background"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >	
-  		
-  	
+    android:background="@color/main_background">	
+      		  	
   	<TextView
-        android:text=""        
+		android:text=""        
         android:layout_width="fill_parent"
         android:layout_height="10px"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
   		
   	<ImageView
   			android:id="@+id/takePhoto"
@@ -19,8 +18,8 @@
   			android:layout_height="120px"
   			android:src="@drawable/takephoto"
   			android:onClick="takePhoto"
-  			android:layout_gravity="center_horizontal"  			
-  			/>	   
+  			android:layout_gravity="center_horizontal" />	   
+    
     <TextView
         android:text=""        
         android:layout_width="fill_parent"
@@ -29,14 +28,14 @@
         		
 	<Gallery android:id="@+id/photo_gallery"
     		 android:layout_width="fill_parent"
-    		 android:layout_height="wrap_content" android:padding="0px"/>    		
+    		 android:layout_height="wrap_content" android:padding="0px" />    		
     
     <TextView
         android:text=""        
         android:layout_width="fill_parent"
         android:layout_height="10px"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
         
-
-	<include layout="@layout/footer" />    		 
+	<include layout="@layout/footer" />
+	    		 
 </LinearLayout>
