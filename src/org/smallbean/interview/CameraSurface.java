@@ -32,19 +32,15 @@ public class CameraSurface extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera);
         
-        android.widget.Gallery camera_gallery = (android.widget.Gallery)findViewById(R.id.photo_gallery);
-        
+        android.widget.Gallery camera_gallery = (android.widget.Gallery)findViewById(R.id.photo_gallery);        
 	    camera_gallery.setAdapter(new ImageAdapter(this));
-
 	    camera_gallery.setOnItemClickListener(new OnItemClickListener() {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 	            Toast.makeText(CameraSurface.this, "" + position, Toast.LENGTH_SHORT).show();
 	        }
-	    });
-                         
+	    });                         
     }
-	
-	
+		
 	public void goHome(View view) {
 	}
 	
@@ -52,9 +48,7 @@ public class CameraSurface extends Activity {
 		this.finish();
 	}
 	
-	public void takePhoto(View view) {		    	    
-        showToast(this,data.GetNewPhotoURL());       	               
-                
+	public void takePhoto(View view) {		    	           	                              
         Uri imageFileUri = Uri.fromFile(new File(data.GetNewPhotoURL()));
         
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
@@ -74,45 +68,26 @@ public class CameraSurface extends Activity {
 
    	    	camera_gallery.setOnItemClickListener(new OnItemClickListener() {
    	    		public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+   	    			//TODO: Show the image in a full screen mode once the user clicks it.
    	    			Toast.makeText(CameraSurface.this, "" + position, Toast.LENGTH_SHORT).show();
    	    		}
    	    	});    	                                       	
-        }
-    
-               
+        }                 
     }
-    
-    private void showToast(Context mContext, String text) {
-    	Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
-    }
-    
-    
+            
     public class ImageAdapter extends BaseAdapter {
 	    int mGalleryItemBackground;
 	    private String[] imagePaths;
 	    private Context mContext;
 
-	    private void getDrawables()
-	    {
-	    	String[] images = data.GetPhotoURLs();
-	    	imagePaths = new String[images.length];
-	    	
-	    	for(int i=0;i<images.length;i++)
-	    	{    			    	
-		    	imagePaths[i] = images[i];
-	    	}
-	    }
-	    
-	    
-
 	    public ImageAdapter(Context c) {
-	    	getDrawables();
-	    	
+	    	imagePaths = data.GetPhotoURLs();
 	        mContext = c;
+	        	        
 	        TypedArray a = obtainStyledAttributes(R.styleable.Gallery);
 	        mGalleryItemBackground = a.getResourceId(
 	                R.styleable.Gallery_android_galleryItemBackground, 0);
-	        a.recycle();
+	        a.recycle();	        
 	    }
 
 	    public int getCount() {
@@ -139,8 +114,7 @@ public class CameraSurface extends Activity {
 	        return i;
 	    }
 	    
-	    private BitmapDrawable downSampleImage(String imgPath)
-	    {
+	    private BitmapDrawable downSampleImage(String imgPath) {
 	    	BitmapFactory.Options options = new BitmapFactory.Options();
 	        options.inSampleSize = 2;
 	    	Bitmap bmp = BitmapFactory.decodeFile(imgPath, options);	    
@@ -149,6 +123,5 @@ public class CameraSurface extends Activity {
 	    	
 	    	return rbmd;
 	    }
-
 	}
 }

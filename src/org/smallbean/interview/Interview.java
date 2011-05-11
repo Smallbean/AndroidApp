@@ -104,12 +104,6 @@ public class Interview extends Activity {
 
     }
 
-    public void showGallery(View view) {
-
-        Intent intent = new Intent(this, Gallery.class);
-        startActivityForResult(intent, SHOW_GALLERY);
-    }
-
     public void recordAudio(View view) {
         // TODO: Check for interviewTitle (see above)
         Intent intent = new Intent(this, Audio.class);
