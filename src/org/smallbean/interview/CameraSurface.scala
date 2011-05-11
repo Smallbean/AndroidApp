@@ -62,7 +62,7 @@ class CameraSurface extends Activity {
 	}
 
 	
-    def onActivityResult(requestCode:Int, resultCode:Int, image:Intent) {
+    override def onActivityResult(requestCode:Int, resultCode:Int, image:Intent) {
         super.onActivityResult(requestCode, resultCode, image)
                 
        if(requestCode == CAMERA_RESULT){

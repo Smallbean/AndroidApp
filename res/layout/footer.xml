@@ -4,9 +4,9 @@
 	android:background="@color/footer_background">
 	<ImageView android:layout_marginTop="5px"
 		android:layout_width="80px" android:layout_height="80px" android:src="@drawable/nav_back"
-		android:onClick="finish" android:layout_gravity="left"
+		android:layout_gravity="left"
 		android:layout_alignParentLeft="true" />
 	<ImageView android:layout_marginTop="5px"
 		android:layout_width="80px" android:layout_height="80px" android:src="@drawable/nav_home"
-		android:onClick="goHome" android:layout_alignParentRight="true" />
+		android:layout_alignParentRight="true" />
 </RelativeLayout>

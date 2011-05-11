@@ -17,7 +17,7 @@ import android.media.MediaRecorder
 import android.view.View
 import android.view.SurfaceHolder.Callback
 import android.view.View.OnClickListener
-import android.widget.ToastB
+import android.widget.Toast
 
 
 class VideoCapture extends Activity with OnClickListener with Callback 
@@ -56,12 +56,11 @@ class VideoCapture extends Activity with OnClickListener with Callback
 	{
 		recorder = new MediaRecorder()
 		
-		recorder.setAudioSource(MediaRecorder.AudioSource.DEFAULT)
-		recorder.setVideoSource(MediaRecorder.VideoSource.DEFAULT)
-		
-		recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
-		recorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT)
-		recorder.setVideoEncoder(MediaRecorder.VideoEncoder.DEFAULT)
+		recorder.setAudioSource(recorder.AudioSource.DEFAULT)
+		recorder.setVideoSource(recorder.VideoSource.DEFAULT)
+		recorder.setOutputFormat(recorder.OutputFormat.MPEG_4)
+		recorder.setAudioEncoder(recorder.AudioEncoder.DEFAULT)
+		recorder.setVideoEncoder(recorder.VideoEncoder.DEFAULT)
 		recorder.setOutputFile(imageFilePath)
 		
 		recorder.setMaxDuration(50000)

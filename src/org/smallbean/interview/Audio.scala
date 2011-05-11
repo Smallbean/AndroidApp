@@ -95,7 +95,7 @@ class Audio extends Activity {
     	val channelConfiguration = AudioFormat.CHANNEL_CONFIGURATION_MONO
     	val audioEncoding = AudioFormat.ENCODING_PCM_16BIT
     	
-		override protected def doInBackground(params:Unit*) {
+		override protected def doInBackground(params:AnyRef*):AnyRef = {
 			isPlaying = true
 
 			var bufferSize:Int = AudioTrack.getMinBufferSize(frequency,	channelConfiguration, audioEncoding)
@@ -128,6 +128,7 @@ class Audio extends Activity {
 			} catch {
 				case _ => Log.e("AudioTrack", "Playback Failed")
 			}
+			return null
 		}
 	}
 }

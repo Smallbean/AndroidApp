@@ -134,12 +134,12 @@ class AudioRecorder extends Activity with OnClickListener {
 	}
     
 	
-    def onActivityResult(requestCode:Int, resultCode:Int, image:Intent) {
+    override def onActivityResult(requestCode:Int, resultCode:Int, image:Intent) {
         super.onActivityResult(requestCode, resultCode, image)
     }
 
 	class PlayAudio extends AsyncTask[AnyRef, Integer, AnyRef] {
-		override protected def doInBackground {
+		override def doInBackground(x:AnyRef*):AnyRef = {
 			isPlaying = true
 
 			var bufferSize = AudioTrack.getMinBufferSize(frequency,
@@ -181,8 +181,8 @@ class AudioRecorder extends Activity with OnClickListener {
 		}
 	}
 	
-	class RecordAudio extends AsyncTask[Unit, Integer, Void] {
-		override protected def doInBackground(params:Unit*) {
+	class RecordAudio extends AsyncTask[AnyRef, Integer, AnyRef] {
+		override protected def doInBackground(params:AnyRef*):AnyRef = {
 			isRecording = true
 
 			var dos = new DataOutputStream(
@@ -192,7 +192,8 @@ class AudioRecorder extends Activity with OnClickListener {
 			var bufferSize = AudioRecord.getMinBufferSize(frequency,
 					channelConfiguration, audioEncoding)
 
-			var audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, frequency,
+			val med = new MediaRecorder
+			var audioRecord = new AudioRecord(med.AudioSource.MIC, frequency,
 					channelConfiguration, audioEncoding, bufferSize)
 
 			try {
